@@ -14,9 +14,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Proposta AI",
+  title: {
+    default: "Proposta AI",
+    template: "%s | Proposta AI",
+  },
   description:
-    "Crie propostas comerciais profissionais para vender servicos B2B com mais clareza.",
+    "Crie propostas comerciais profissionais para vender serviços B2B com mais clareza.",
 };
 
 export default function RootLayout({
