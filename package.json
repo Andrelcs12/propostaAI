@@ -1,0 +1,33 @@
+{
+  "name": "novely-saas-template",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "npm@10.9.2",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "typecheck": "turbo typecheck",
+    "test": "turbo test",
+    "format": "prettier --write .",
+    "db:up": "docker compose up -d postgres",
+    "db:down": "docker compose down",
+    "db:logs": "docker compose logs -f postgres",
+    "db:admin": "docker compose --profile tools up -d adminer",
+    "db:generate": "npm run db:generate --workspace api",
+    "db:migrate": "npm run db:migrate --workspace api",
+    "db:deploy": "npm run db:deploy --workspace api",
+    "db:studio": "npm run db:studio --workspace api"
+  },
+  "devDependencies": {
+    "@novely/eslint-config": "*",
+    "@novely/typescript-config": "*",
+    "prettier": "^3.6.2",
+    "turbo": "^2.5.6",
+    "typescript": "^5.8.3"
+  }
+}
