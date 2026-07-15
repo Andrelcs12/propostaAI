@@ -1,10 +1,10 @@
 services:
   postgres:
     image: postgres:17-alpine
-    container_name: novely-saas-postgres
+    container_name: proposta-ai-postgres
     restart: unless-stopped
     environment:
-      POSTGRES_DB: novely_template
+      POSTGRES_DB: proposta_ai
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
@@ -12,14 +12,14 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d novely_template"]
+      test: ["CMD-SHELL", "pg_isready -U postgres -d proposta_ai"]
       interval: 10s
       timeout: 5s
       retries: 5
 
   adminer:
     image: adminer:4
-    container_name: novely-saas-adminer
+    container_name: proposta-ai-adminer
     restart: unless-stopped
     profiles:
       - tools

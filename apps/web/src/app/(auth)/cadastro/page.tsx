@@ -5,8 +5,8 @@ import { RegisterForm } from "@/features/auth/components/register-form";
 export default function RegisterPage() {
   return (
     <AuthShell
-      title="Criar conta"
-      description="Cadastre-se para validar a autenticacao do template."
+      title="Criar conta no Proposta AI"
+      description="Comece configurando a base para suas propostas comerciais."
       footer={
         <>
           Ja tem conta?{" "}

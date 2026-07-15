@@ -7,13 +7,13 @@ import { LoginForm } from "@/features/auth/components/login-form";
 export default function LoginPage() {
   return (
     <AuthShell
-      title="Entrar"
-      description="Acesse sua conta para abrir o painel protegido."
+      title="Entrar no Proposta AI"
+      description="Acesse sua conta para configurar sua empresa e preparar propostas comerciais."
       footer={
         <>
           Ainda nao tem conta?{" "}
           <Link href="/cadastro" className="font-medium text-foreground">
-            Cadastre-se
+            Criar conta
           </Link>
           <br />
           <Link href="/recuperar-senha" className="font-medium text-foreground">

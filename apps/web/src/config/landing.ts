@@ -1,66 +1,114 @@
-import { BarChart3, CheckCircle2, CreditCard, LockKeyhole, Rocket, ShieldCheck } from "lucide-react";
+import {
+  BadgeCheck,
+  BriefcaseBusiness,
+  FileText,
+  Palette,
+  Send,
+  Sparkles,
+} from "lucide-react";
 
 export const landingConfig = {
-  brand: "Novely SaaS Template",
+  brand: "Proposta AI",
   nav: [
     { label: "Beneficios", href: "#beneficios" },
-    { label: "Funcionalidades", href: "#funcionalidades" },
+    { label: "Como funciona", href: "#como-funciona" },
     { label: "Preco", href: "#preco" },
-    { label: "FAQ", href: "#faq" }
+    { label: "FAQ", href: "#faq" },
   ],
   hero: {
-    title: "Comece um MicroSaaS com a base certa.",
+    title: "Propostas comerciais profissionais em poucos minutos.",
     subtitle:
-      "Um template limpo para validar produtos da Novely com landing, autenticacao, Prisma, Supabase e estrutura inicial de billing.",
+      "Organize as informacoes da sua empresa, mantenha um padrao visual e prepare propostas mais claras para clientes B2B.",
     primaryCta: "Criar conta",
-    secondaryCta: "Ver estrutura"
+    secondaryCta: "Ver como funciona",
   },
   benefits: [
     {
-      title: "Menos setup",
-      description: "Monorepo, apps e pacotes prontos para iniciar um produto novo."
+      title: "Mais clareza na venda",
+      description:
+        "Transforme escopo, prazos e valores em uma apresentacao comercial facil de entender.",
     },
     {
-      title: "Auth real",
-      description: "Cadastro, login, Google OAuth e rota protegida usando Supabase Auth."
+      title: "Padrao profissional",
+      description:
+        "Use dados, cores e textos da sua empresa como base para propostas consistentes.",
     },
     {
-      title: "Evolucao segura",
-      description: "Stripe fica preparado, sem cobrar ou criar assinatura nesta versao."
-    }
+      title: "Menos retrabalho",
+      description:
+        "Comece com uma estrutura simples para freelancers, agencias, devs e consultores.",
+    },
   ],
   features: [
-    { title: "Next.js App Router", description: "Frontend moderno com páginas finas e componentes reutilizáveis.", icon: Rocket },
-    { title: "NestJS + Fastify", description: "API simples, validada e pronta para deploy no Render.", icon: ShieldCheck },
-    { title: "Prisma + Postgres", description: "Usuario persistido de forma idempotente pelo Supabase ID.", icon: BarChart3 },
-    { title: "Supabase Auth", description: "Sessao via cookies, sem tokens proprios no frontend.", icon: LockKeyhole },
-    { title: "Stripe estrutural", description: "Base preparada para checkout futuro, sem cobrança real.", icon: CreditCard },
-    { title: "CI inicial", description: "Lint, typecheck, testes, build e Prisma generate no GitHub Actions.", icon: CheckCircle2 }
+    {
+      title: "Cadastro da empresa",
+      description:
+        "Centralize nome, segmento, contato e apresentacao comercial.",
+      icon: BriefcaseBusiness,
+    },
+    {
+      title: "Identidade visual",
+      description:
+        "Prepare cores, logo e preferencias para manter uma proposta coerente.",
+      icon: Palette,
+    },
+    {
+      title: "Propostas guiadas",
+      description:
+        "Base pronta para evoluir para criacao de propostas por etapas.",
+      icon: FileText,
+    },
+    {
+      title: "Envio profissional",
+      description:
+        "Estrutura pensada para compartilhar propostas com mais confianca.",
+      icon: Send,
+    },
+    {
+      title: "Apoio de IA",
+      description:
+        "IA entra depois, como assistente de escrita, sem substituir seu criterio.",
+      icon: Sparkles,
+    },
+    {
+      title: "Fluxo seguro",
+      description:
+        "Autenticacao preservada e base preparada para onboarding da empresa.",
+      icon: BadgeCheck,
+    },
   ],
   steps: [
-    "Configure Supabase e variaveis de ambiente.",
-    "Execute as migrations do Prisma.",
-    "Valide cadastro, login e acesso ao painel.",
-    "Evolua o produto sem carregar complexidade desnecessaria."
+    "Crie sua conta e acesse o ambiente protegido.",
+    "Configure os dados principais da sua empresa.",
+    "Defina o kit visual que sera usado nas propostas.",
+    "Comece a montar propostas comerciais com um fluxo guiado.",
   ],
   pricing: {
-    name: "Plano Inicial",
-    price: "Ilustrativo",
-    description: "Estrutura preparada para monetizacao futura.",
-    items: ["Landing e autenticacao", "Painel protegido", "API base", "Stripe em modo estrutural"]
+    name: "Acesso inicial",
+    price: "Em breve",
+    description: "Primeira versao focada em validar o fluxo de propostas.",
+    items: [
+      "Cadastro e login",
+      "Base da empresa",
+      "Brand Kit",
+      "Painel de propostas",
+    ],
   },
   faqs: [
     {
-      question: "Este template ja cobra clientes?",
-      answer: "Nao. O Stripe esta apenas estruturado para evolucao futura."
+      question: "O Proposta AI ja gera propostas com IA?",
+      answer:
+        "Ainda nao nesta etapa. A base visual, autenticacao e dados da empresa vem primeiro.",
     },
     {
-      question: "Existe multi-tenancy?",
-      answer: "Nao. Esta versao tem somente usuario autenticado e perfil persistido."
+      question: "Serve para quem vende servicos?",
+      answer:
+        "Sim. O foco inicial e freelancer, agencia, desenvolvedor, designer, consultor e prestador B2B.",
     },
     {
-      question: "Posso usar como GitHub Template?",
-      answer: "Sim. A documentacao inclui os passos para publicar e reutilizar."
-    }
-  ]
+      question: "Preciso configurar Supabase?",
+      answer:
+        "Sim. Login por e-mail e Google dependem das chaves e provedores configurados no Supabase.",
+    },
+  ],
 };

@@ -9,7 +9,20 @@
 * 🟢 You can import this file directly.
 */
 
+export const CompanyVisualPreference = {
+  LIGHT: 'LIGHT',
+  DARK: 'DARK',
+  SYSTEM: 'SYSTEM'
+} as const
+
+export type CompanyVisualPreference = (typeof CompanyVisualPreference)[keyof typeof CompanyVisualPreference]
 
 
-// This file is empty because there are no enums in the schema.
-export {}
+export const CompanyFontPreference = {
+  INTER: 'INTER',
+  MANROPE: 'MANROPE',
+  POPPINS: 'POPPINS',
+  DM_SANS: 'DM_SANS'
+} as const
+
+export type CompanyFontPreference = (typeof CompanyFontPreference)[keyof typeof CompanyFontPreference]

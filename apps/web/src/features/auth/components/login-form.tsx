@@ -7,11 +7,24 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-import { loginSchema, type LoginInput } from "@/features/auth/schemas/auth.schema";
-import { loginWithEmail, loginWithGoogle } from "@/features/auth/services/auth.service";
+import {
+  loginSchema,
+  type LoginInput,
+} from "@/features/auth/schemas/auth.schema";
+import {
+  loginWithEmail,
+  loginWithGoogle,
+} from "@/features/auth/services/auth.service";
 
 export function LoginForm() {
   const router = useRouter();
@@ -21,8 +34,8 @@ export function LoginForm() {
     resolver: zodResolver(loginSchema),
     defaultValues: {
       email: "",
-      password: ""
-    }
+      password: "",
+    },
   });
 
   async function onSubmit(values: LoginInput) {
@@ -32,7 +45,9 @@ export function LoginForm() {
       router.push(searchParams.get("next") ?? "/painel");
       router.refresh();
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Nao foi possivel entrar.");
+      toast.error(
+        error instanceof Error ? error.message : "Nao foi possivel entrar.",
+      );
     }
   }
 
@@ -42,13 +57,23 @@ export function LoginForm() {
       await loginWithGoogle();
     } catch (error) {
       setGoogleLoading(false);
-      toast.error(error instanceof Error ? error.message : "Nao foi possivel iniciar o Google OAuth.");
+      toast.error(
+        error instanceof Error
+          ? error.message
+          : "Nao foi possivel iniciar o Google OAuth.",
+      );
     }
   }
 
   return (
     <div className="space-y-5">
-      <Button type="button" variant="outline" className="w-full" onClick={handleGoogleLogin} disabled={googleLoading}>
+      <Button
+        type="button"
+        variant="outline"
+        className="w-full"
+        onClick={handleGoogleLogin}
+        disabled={googleLoading}
+      >
         {googleLoading ? <Loader2 className="animate-spin" /> : null}
         Entrar com Google
       </Button>
@@ -66,7 +91,12 @@ export function LoginForm() {
               <FormItem>
                 <FormLabel>E-mail</FormLabel>
                 <FormControl>
-                  <Input type="email" autoComplete="email" placeholder="voce@empresa.com" {...field} />
+                  <Input
+                    type="email"
+                    autoComplete="email"
+                    placeholder="voce@empresa.com"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -79,15 +109,26 @@ export function LoginForm() {
               <FormItem>
                 <FormLabel>Senha</FormLabel>
                 <FormControl>
-                  <Input type="password" autoComplete="current-password" placeholder="Sua senha" {...field} />
+                  <Input
+                    type="password"
+                    autoComplete="current-password"
+                    placeholder="Sua senha"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
-          <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
-            {form.formState.isSubmitting ? <Loader2 className="animate-spin" /> : null}
-            Entrar
+          <Button
+            type="submit"
+            className="w-full"
+            disabled={form.formState.isSubmitting}
+          >
+            {form.formState.isSubmitting ? (
+              <Loader2 className="animate-spin" />
+            ) : null}
+            Entrar no Proposta AI
           </Button>
         </form>
       </Form>
