@@ -52,8 +52,13 @@ export type CompanyMinAggregateOutputType = {
   primaryColor: string | null
   secondaryColor: string | null
   accentColor: string | null
+  backgroundColor: string | null
+  surfaceColor: string | null
+  textColor: string | null
   visualPreference: $Enums.CompanyVisualPreference | null
   fontPreference: $Enums.CompanyFontPreference | null
+  visualStyle: $Enums.CompanyVisualStyle | null
+  borderRadius: string | null
   responsibleName: string | null
   responsibleRole: string | null
   document: string | null
@@ -85,8 +90,13 @@ export type CompanyMaxAggregateOutputType = {
   primaryColor: string | null
   secondaryColor: string | null
   accentColor: string | null
+  backgroundColor: string | null
+  surfaceColor: string | null
+  textColor: string | null
   visualPreference: $Enums.CompanyVisualPreference | null
   fontPreference: $Enums.CompanyFontPreference | null
+  visualStyle: $Enums.CompanyVisualStyle | null
+  borderRadius: string | null
   responsibleName: string | null
   responsibleRole: string | null
   document: string | null
@@ -118,8 +128,13 @@ export type CompanyCountAggregateOutputType = {
   primaryColor: number
   secondaryColor: number
   accentColor: number
+  backgroundColor: number
+  surfaceColor: number
+  textColor: number
   visualPreference: number
   fontPreference: number
+  visualStyle: number
+  borderRadius: number
   responsibleName: number
   responsibleRole: number
   document: number
@@ -161,8 +176,13 @@ export type CompanyMinAggregateInputType = {
   primaryColor?: true
   secondaryColor?: true
   accentColor?: true
+  backgroundColor?: true
+  surfaceColor?: true
+  textColor?: true
   visualPreference?: true
   fontPreference?: true
+  visualStyle?: true
+  borderRadius?: true
   responsibleName?: true
   responsibleRole?: true
   document?: true
@@ -194,8 +214,13 @@ export type CompanyMaxAggregateInputType = {
   primaryColor?: true
   secondaryColor?: true
   accentColor?: true
+  backgroundColor?: true
+  surfaceColor?: true
+  textColor?: true
   visualPreference?: true
   fontPreference?: true
+  visualStyle?: true
+  borderRadius?: true
   responsibleName?: true
   responsibleRole?: true
   document?: true
@@ -227,8 +252,13 @@ export type CompanyCountAggregateInputType = {
   primaryColor?: true
   secondaryColor?: true
   accentColor?: true
+  backgroundColor?: true
+  surfaceColor?: true
+  textColor?: true
   visualPreference?: true
   fontPreference?: true
+  visualStyle?: true
+  borderRadius?: true
   responsibleName?: true
   responsibleRole?: true
   document?: true
@@ -347,8 +377,13 @@ export type CompanyGroupByOutputType = {
   primaryColor: string
   secondaryColor: string
   accentColor: string
+  backgroundColor: string
+  surfaceColor: string
+  textColor: string
   visualPreference: $Enums.CompanyVisualPreference
   fontPreference: $Enums.CompanyFontPreference
+  visualStyle: $Enums.CompanyVisualStyle
+  borderRadius: string
   responsibleName: string | null
   responsibleRole: string | null
   document: string | null
@@ -403,8 +438,13 @@ export type CompanyWhereInput = {
   primaryColor?: Prisma.StringFilter<"Company"> | string
   secondaryColor?: Prisma.StringFilter<"Company"> | string
   accentColor?: Prisma.StringFilter<"Company"> | string
+  backgroundColor?: Prisma.StringFilter<"Company"> | string
+  surfaceColor?: Prisma.StringFilter<"Company"> | string
+  textColor?: Prisma.StringFilter<"Company"> | string
   visualPreference?: Prisma.EnumCompanyVisualPreferenceFilter<"Company"> | $Enums.CompanyVisualPreference
   fontPreference?: Prisma.EnumCompanyFontPreferenceFilter<"Company"> | $Enums.CompanyFontPreference
+  visualStyle?: Prisma.EnumCompanyVisualStyleFilter<"Company"> | $Enums.CompanyVisualStyle
+  borderRadius?: Prisma.StringFilter<"Company"> | string
   responsibleName?: Prisma.StringNullableFilter<"Company"> | string | null
   responsibleRole?: Prisma.StringNullableFilter<"Company"> | string | null
   document?: Prisma.StringNullableFilter<"Company"> | string | null
@@ -437,8 +477,13 @@ export type CompanyOrderByWithRelationInput = {
   primaryColor?: Prisma.SortOrder
   secondaryColor?: Prisma.SortOrder
   accentColor?: Prisma.SortOrder
+  backgroundColor?: Prisma.SortOrder
+  surfaceColor?: Prisma.SortOrder
+  textColor?: Prisma.SortOrder
   visualPreference?: Prisma.SortOrder
   fontPreference?: Prisma.SortOrder
+  visualStyle?: Prisma.SortOrder
+  borderRadius?: Prisma.SortOrder
   responsibleName?: Prisma.SortOrderInput | Prisma.SortOrder
   responsibleRole?: Prisma.SortOrderInput | Prisma.SortOrder
   document?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -474,8 +519,13 @@ export type CompanyWhereUniqueInput = Prisma.AtLeast<{
   primaryColor?: Prisma.StringFilter<"Company"> | string
   secondaryColor?: Prisma.StringFilter<"Company"> | string
   accentColor?: Prisma.StringFilter<"Company"> | string
+  backgroundColor?: Prisma.StringFilter<"Company"> | string
+  surfaceColor?: Prisma.StringFilter<"Company"> | string
+  textColor?: Prisma.StringFilter<"Company"> | string
   visualPreference?: Prisma.EnumCompanyVisualPreferenceFilter<"Company"> | $Enums.CompanyVisualPreference
   fontPreference?: Prisma.EnumCompanyFontPreferenceFilter<"Company"> | $Enums.CompanyFontPreference
+  visualStyle?: Prisma.EnumCompanyVisualStyleFilter<"Company"> | $Enums.CompanyVisualStyle
+  borderRadius?: Prisma.StringFilter<"Company"> | string
   responsibleName?: Prisma.StringNullableFilter<"Company"> | string | null
   responsibleRole?: Prisma.StringNullableFilter<"Company"> | string | null
   document?: Prisma.StringNullableFilter<"Company"> | string | null
@@ -508,8 +558,13 @@ export type CompanyOrderByWithAggregationInput = {
   primaryColor?: Prisma.SortOrder
   secondaryColor?: Prisma.SortOrder
   accentColor?: Prisma.SortOrder
+  backgroundColor?: Prisma.SortOrder
+  surfaceColor?: Prisma.SortOrder
+  textColor?: Prisma.SortOrder
   visualPreference?: Prisma.SortOrder
   fontPreference?: Prisma.SortOrder
+  visualStyle?: Prisma.SortOrder
+  borderRadius?: Prisma.SortOrder
   responsibleName?: Prisma.SortOrderInput | Prisma.SortOrder
   responsibleRole?: Prisma.SortOrderInput | Prisma.SortOrder
   document?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -549,8 +604,13 @@ export type CompanyScalarWhereWithAggregatesInput = {
   primaryColor?: Prisma.StringWithAggregatesFilter<"Company"> | string
   secondaryColor?: Prisma.StringWithAggregatesFilter<"Company"> | string
   accentColor?: Prisma.StringWithAggregatesFilter<"Company"> | string
+  backgroundColor?: Prisma.StringWithAggregatesFilter<"Company"> | string
+  surfaceColor?: Prisma.StringWithAggregatesFilter<"Company"> | string
+  textColor?: Prisma.StringWithAggregatesFilter<"Company"> | string
   visualPreference?: Prisma.EnumCompanyVisualPreferenceWithAggregatesFilter<"Company"> | $Enums.CompanyVisualPreference
   fontPreference?: Prisma.EnumCompanyFontPreferenceWithAggregatesFilter<"Company"> | $Enums.CompanyFontPreference
+  visualStyle?: Prisma.EnumCompanyVisualStyleWithAggregatesFilter<"Company"> | $Enums.CompanyVisualStyle
+  borderRadius?: Prisma.StringWithAggregatesFilter<"Company"> | string
   responsibleName?: Prisma.StringNullableWithAggregatesFilter<"Company"> | string | null
   responsibleRole?: Prisma.StringNullableWithAggregatesFilter<"Company"> | string | null
   document?: Prisma.StringNullableWithAggregatesFilter<"Company"> | string | null
@@ -581,8 +641,13 @@ export type CompanyCreateInput = {
   primaryColor?: string
   secondaryColor?: string
   accentColor?: string
+  backgroundColor?: string
+  surfaceColor?: string
+  textColor?: string
   visualPreference?: $Enums.CompanyVisualPreference
   fontPreference?: $Enums.CompanyFontPreference
+  visualStyle?: $Enums.CompanyVisualStyle
+  borderRadius?: string
   responsibleName?: string | null
   responsibleRole?: string | null
   document?: string | null
@@ -615,8 +680,13 @@ export type CompanyUncheckedCreateInput = {
   primaryColor?: string
   secondaryColor?: string
   accentColor?: string
+  backgroundColor?: string
+  surfaceColor?: string
+  textColor?: string
   visualPreference?: $Enums.CompanyVisualPreference
   fontPreference?: $Enums.CompanyFontPreference
+  visualStyle?: $Enums.CompanyVisualStyle
+  borderRadius?: string
   responsibleName?: string | null
   responsibleRole?: string | null
   document?: string | null
@@ -647,8 +717,13 @@ export type CompanyUpdateInput = {
   primaryColor?: Prisma.StringFieldUpdateOperationsInput | string
   secondaryColor?: Prisma.StringFieldUpdateOperationsInput | string
   accentColor?: Prisma.StringFieldUpdateOperationsInput | string
+  backgroundColor?: Prisma.StringFieldUpdateOperationsInput | string
+  surfaceColor?: Prisma.StringFieldUpdateOperationsInput | string
+  textColor?: Prisma.StringFieldUpdateOperationsInput | string
   visualPreference?: Prisma.EnumCompanyVisualPreferenceFieldUpdateOperationsInput | $Enums.CompanyVisualPreference
   fontPreference?: Prisma.EnumCompanyFontPreferenceFieldUpdateOperationsInput | $Enums.CompanyFontPreference
+  visualStyle?: Prisma.EnumCompanyVisualStyleFieldUpdateOperationsInput | $Enums.CompanyVisualStyle
+  borderRadius?: Prisma.StringFieldUpdateOperationsInput | string
   responsibleName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   responsibleRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   document?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -681,8 +756,13 @@ export type CompanyUncheckedUpdateInput = {
   primaryColor?: Prisma.StringFieldUpdateOperationsInput | string
   secondaryColor?: Prisma.StringFieldUpdateOperationsInput | string
   accentColor?: Prisma.StringFieldUpdateOperationsInput | string
+  backgroundColor?: Prisma.StringFieldUpdateOperationsInput | string
+  surfaceColor?: Prisma.StringFieldUpdateOperationsInput | string
+  textColor?: Prisma.StringFieldUpdateOperationsInput | string
   visualPreference?: Prisma.EnumCompanyVisualPreferenceFieldUpdateOperationsInput | $Enums.CompanyVisualPreference
   fontPreference?: Prisma.EnumCompanyFontPreferenceFieldUpdateOperationsInput | $Enums.CompanyFontPreference
+  visualStyle?: Prisma.EnumCompanyVisualStyleFieldUpdateOperationsInput | $Enums.CompanyVisualStyle
+  borderRadius?: Prisma.StringFieldUpdateOperationsInput | string
   responsibleName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   responsibleRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   document?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -714,8 +794,13 @@ export type CompanyCreateManyInput = {
   primaryColor?: string
   secondaryColor?: string
   accentColor?: string
+  backgroundColor?: string
+  surfaceColor?: string
+  textColor?: string
   visualPreference?: $Enums.CompanyVisualPreference
   fontPreference?: $Enums.CompanyFontPreference
+  visualStyle?: $Enums.CompanyVisualStyle
+  borderRadius?: string
   responsibleName?: string | null
   responsibleRole?: string | null
   document?: string | null
@@ -746,8 +831,13 @@ export type CompanyUpdateManyMutationInput = {
   primaryColor?: Prisma.StringFieldUpdateOperationsInput | string
   secondaryColor?: Prisma.StringFieldUpdateOperationsInput | string
   accentColor?: Prisma.StringFieldUpdateOperationsInput | string
+  backgroundColor?: Prisma.StringFieldUpdateOperationsInput | string
+  surfaceColor?: Prisma.StringFieldUpdateOperationsInput | string
+  textColor?: Prisma.StringFieldUpdateOperationsInput | string
   visualPreference?: Prisma.EnumCompanyVisualPreferenceFieldUpdateOperationsInput | $Enums.CompanyVisualPreference
   fontPreference?: Prisma.EnumCompanyFontPreferenceFieldUpdateOperationsInput | $Enums.CompanyFontPreference
+  visualStyle?: Prisma.EnumCompanyVisualStyleFieldUpdateOperationsInput | $Enums.CompanyVisualStyle
+  borderRadius?: Prisma.StringFieldUpdateOperationsInput | string
   responsibleName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   responsibleRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   document?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -779,8 +869,13 @@ export type CompanyUncheckedUpdateManyInput = {
   primaryColor?: Prisma.StringFieldUpdateOperationsInput | string
   secondaryColor?: Prisma.StringFieldUpdateOperationsInput | string
   accentColor?: Prisma.StringFieldUpdateOperationsInput | string
+  backgroundColor?: Prisma.StringFieldUpdateOperationsInput | string
+  surfaceColor?: Prisma.StringFieldUpdateOperationsInput | string
+  textColor?: Prisma.StringFieldUpdateOperationsInput | string
   visualPreference?: Prisma.EnumCompanyVisualPreferenceFieldUpdateOperationsInput | $Enums.CompanyVisualPreference
   fontPreference?: Prisma.EnumCompanyFontPreferenceFieldUpdateOperationsInput | $Enums.CompanyFontPreference
+  visualStyle?: Prisma.EnumCompanyVisualStyleFieldUpdateOperationsInput | $Enums.CompanyVisualStyle
+  borderRadius?: Prisma.StringFieldUpdateOperationsInput | string
   responsibleName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   responsibleRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   document?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -817,8 +912,13 @@ export type CompanyCountOrderByAggregateInput = {
   primaryColor?: Prisma.SortOrder
   secondaryColor?: Prisma.SortOrder
   accentColor?: Prisma.SortOrder
+  backgroundColor?: Prisma.SortOrder
+  surfaceColor?: Prisma.SortOrder
+  textColor?: Prisma.SortOrder
   visualPreference?: Prisma.SortOrder
   fontPreference?: Prisma.SortOrder
+  visualStyle?: Prisma.SortOrder
+  borderRadius?: Prisma.SortOrder
   responsibleName?: Prisma.SortOrder
   responsibleRole?: Prisma.SortOrder
   document?: Prisma.SortOrder
@@ -854,8 +954,13 @@ export type CompanyMaxOrderByAggregateInput = {
   primaryColor?: Prisma.SortOrder
   secondaryColor?: Prisma.SortOrder
   accentColor?: Prisma.SortOrder
+  backgroundColor?: Prisma.SortOrder
+  surfaceColor?: Prisma.SortOrder
+  textColor?: Prisma.SortOrder
   visualPreference?: Prisma.SortOrder
   fontPreference?: Prisma.SortOrder
+  visualStyle?: Prisma.SortOrder
+  borderRadius?: Prisma.SortOrder
   responsibleName?: Prisma.SortOrder
   responsibleRole?: Prisma.SortOrder
   document?: Prisma.SortOrder
@@ -887,8 +992,13 @@ export type CompanyMinOrderByAggregateInput = {
   primaryColor?: Prisma.SortOrder
   secondaryColor?: Prisma.SortOrder
   accentColor?: Prisma.SortOrder
+  backgroundColor?: Prisma.SortOrder
+  surfaceColor?: Prisma.SortOrder
+  textColor?: Prisma.SortOrder
   visualPreference?: Prisma.SortOrder
   fontPreference?: Prisma.SortOrder
+  visualStyle?: Prisma.SortOrder
+  borderRadius?: Prisma.SortOrder
   responsibleName?: Prisma.SortOrder
   responsibleRole?: Prisma.SortOrder
   document?: Prisma.SortOrder
@@ -946,6 +1056,10 @@ export type EnumCompanyFontPreferenceFieldUpdateOperationsInput = {
   set?: $Enums.CompanyFontPreference
 }
 
+export type EnumCompanyVisualStyleFieldUpdateOperationsInput = {
+  set?: $Enums.CompanyVisualStyle
+}
+
 export type IntFieldUpdateOperationsInput = {
   set?: number
   increment?: number
@@ -975,8 +1089,13 @@ export type CompanyCreateWithoutUserInput = {
   primaryColor?: string
   secondaryColor?: string
   accentColor?: string
+  backgroundColor?: string
+  surfaceColor?: string
+  textColor?: string
   visualPreference?: $Enums.CompanyVisualPreference
   fontPreference?: $Enums.CompanyFontPreference
+  visualStyle?: $Enums.CompanyVisualStyle
+  borderRadius?: string
   responsibleName?: string | null
   responsibleRole?: string | null
   document?: string | null
@@ -1007,8 +1126,13 @@ export type CompanyUncheckedCreateWithoutUserInput = {
   primaryColor?: string
   secondaryColor?: string
   accentColor?: string
+  backgroundColor?: string
+  surfaceColor?: string
+  textColor?: string
   visualPreference?: $Enums.CompanyVisualPreference
   fontPreference?: $Enums.CompanyFontPreference
+  visualStyle?: $Enums.CompanyVisualStyle
+  borderRadius?: string
   responsibleName?: string | null
   responsibleRole?: string | null
   document?: string | null
@@ -1055,8 +1179,13 @@ export type CompanyUpdateWithoutUserInput = {
   primaryColor?: Prisma.StringFieldUpdateOperationsInput | string
   secondaryColor?: Prisma.StringFieldUpdateOperationsInput | string
   accentColor?: Prisma.StringFieldUpdateOperationsInput | string
+  backgroundColor?: Prisma.StringFieldUpdateOperationsInput | string
+  surfaceColor?: Prisma.StringFieldUpdateOperationsInput | string
+  textColor?: Prisma.StringFieldUpdateOperationsInput | string
   visualPreference?: Prisma.EnumCompanyVisualPreferenceFieldUpdateOperationsInput | $Enums.CompanyVisualPreference
   fontPreference?: Prisma.EnumCompanyFontPreferenceFieldUpdateOperationsInput | $Enums.CompanyFontPreference
+  visualStyle?: Prisma.EnumCompanyVisualStyleFieldUpdateOperationsInput | $Enums.CompanyVisualStyle
+  borderRadius?: Prisma.StringFieldUpdateOperationsInput | string
   responsibleName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   responsibleRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   document?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1087,8 +1216,13 @@ export type CompanyUncheckedUpdateWithoutUserInput = {
   primaryColor?: Prisma.StringFieldUpdateOperationsInput | string
   secondaryColor?: Prisma.StringFieldUpdateOperationsInput | string
   accentColor?: Prisma.StringFieldUpdateOperationsInput | string
+  backgroundColor?: Prisma.StringFieldUpdateOperationsInput | string
+  surfaceColor?: Prisma.StringFieldUpdateOperationsInput | string
+  textColor?: Prisma.StringFieldUpdateOperationsInput | string
   visualPreference?: Prisma.EnumCompanyVisualPreferenceFieldUpdateOperationsInput | $Enums.CompanyVisualPreference
   fontPreference?: Prisma.EnumCompanyFontPreferenceFieldUpdateOperationsInput | $Enums.CompanyFontPreference
+  visualStyle?: Prisma.EnumCompanyVisualStyleFieldUpdateOperationsInput | $Enums.CompanyVisualStyle
+  borderRadius?: Prisma.StringFieldUpdateOperationsInput | string
   responsibleName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   responsibleRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   document?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1122,8 +1256,13 @@ export type CompanySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   primaryColor?: boolean
   secondaryColor?: boolean
   accentColor?: boolean
+  backgroundColor?: boolean
+  surfaceColor?: boolean
+  textColor?: boolean
   visualPreference?: boolean
   fontPreference?: boolean
+  visualStyle?: boolean
+  borderRadius?: boolean
   responsibleName?: boolean
   responsibleRole?: boolean
   document?: boolean
@@ -1156,8 +1295,13 @@ export type CompanySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   primaryColor?: boolean
   secondaryColor?: boolean
   accentColor?: boolean
+  backgroundColor?: boolean
+  surfaceColor?: boolean
+  textColor?: boolean
   visualPreference?: boolean
   fontPreference?: boolean
+  visualStyle?: boolean
+  borderRadius?: boolean
   responsibleName?: boolean
   responsibleRole?: boolean
   document?: boolean
@@ -1190,8 +1334,13 @@ export type CompanySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   primaryColor?: boolean
   secondaryColor?: boolean
   accentColor?: boolean
+  backgroundColor?: boolean
+  surfaceColor?: boolean
+  textColor?: boolean
   visualPreference?: boolean
   fontPreference?: boolean
+  visualStyle?: boolean
+  borderRadius?: boolean
   responsibleName?: boolean
   responsibleRole?: boolean
   document?: boolean
@@ -1224,8 +1373,13 @@ export type CompanySelectScalar = {
   primaryColor?: boolean
   secondaryColor?: boolean
   accentColor?: boolean
+  backgroundColor?: boolean
+  surfaceColor?: boolean
+  textColor?: boolean
   visualPreference?: boolean
   fontPreference?: boolean
+  visualStyle?: boolean
+  borderRadius?: boolean
   responsibleName?: boolean
   responsibleRole?: boolean
   document?: boolean
@@ -1239,7 +1393,7 @@ export type CompanySelectScalar = {
   updatedAt?: boolean
 }
 
-export type CompanyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "name" | "tradeName" | "description" | "segment" | "website" | "commercialEmail" | "whatsapp" | "instagram" | "city" | "state" | "logoUrl" | "lightLogoUrl" | "primaryColor" | "secondaryColor" | "accentColor" | "visualPreference" | "fontPreference" | "responsibleName" | "responsibleRole" | "document" | "address" | "presentationText" | "footerText" | "contactText" | "onboardingStep" | "onboardingDone" | "createdAt" | "updatedAt", ExtArgs["result"]["company"]>
+export type CompanyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "name" | "tradeName" | "description" | "segment" | "website" | "commercialEmail" | "whatsapp" | "instagram" | "city" | "state" | "logoUrl" | "lightLogoUrl" | "primaryColor" | "secondaryColor" | "accentColor" | "backgroundColor" | "surfaceColor" | "textColor" | "visualPreference" | "fontPreference" | "visualStyle" | "borderRadius" | "responsibleName" | "responsibleRole" | "document" | "address" | "presentationText" | "footerText" | "contactText" | "onboardingStep" | "onboardingDone" | "createdAt" | "updatedAt", ExtArgs["result"]["company"]>
 export type CompanyInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
@@ -1273,8 +1427,13 @@ export type $CompanyPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     primaryColor: string
     secondaryColor: string
     accentColor: string
+    backgroundColor: string
+    surfaceColor: string
+    textColor: string
     visualPreference: $Enums.CompanyVisualPreference
     fontPreference: $Enums.CompanyFontPreference
+    visualStyle: $Enums.CompanyVisualStyle
+    borderRadius: string
     responsibleName: string | null
     responsibleRole: string | null
     document: string | null
@@ -1727,8 +1886,13 @@ export interface CompanyFieldRefs {
   readonly primaryColor: Prisma.FieldRef<"Company", 'String'>
   readonly secondaryColor: Prisma.FieldRef<"Company", 'String'>
   readonly accentColor: Prisma.FieldRef<"Company", 'String'>
+  readonly backgroundColor: Prisma.FieldRef<"Company", 'String'>
+  readonly surfaceColor: Prisma.FieldRef<"Company", 'String'>
+  readonly textColor: Prisma.FieldRef<"Company", 'String'>
   readonly visualPreference: Prisma.FieldRef<"Company", 'CompanyVisualPreference'>
   readonly fontPreference: Prisma.FieldRef<"Company", 'CompanyFontPreference'>
+  readonly visualStyle: Prisma.FieldRef<"Company", 'CompanyVisualStyle'>
+  readonly borderRadius: Prisma.FieldRef<"Company", 'String'>
   readonly responsibleName: Prisma.FieldRef<"Company", 'String'>
   readonly responsibleRole: Prisma.FieldRef<"Company", 'String'>
   readonly document: Prisma.FieldRef<"Company", 'String'>

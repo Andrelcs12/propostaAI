@@ -1,8 +1,8 @@
-# Novely SaaS Template
+# Proposta AI
 
-Template simples, profissional e reutilizavel para iniciar novos MicroSaaS da Novely.
+MicroSaaS para freelancers, agencias, desenvolvedores, designers, consultores e pequenos prestadores B2B criarem propostas comerciais profissionais.
 
-Esta primeira versao entrega monorepo, landing page, cadastro, login, login com Google, Supabase Auth, usuario persistido com Prisma, rota protegida, API NestJS e estrutura inicial do Stripe sem cobranca real.
+Esta base entrega monorepo, landing page, cadastro, login, login com Google, Supabase Auth, usuario persistido com Prisma, onboarding de empresa, painel inicial, API NestJS e estrutura inicial do Stripe sem cobranca real.
 
 ## Stack
 
@@ -38,7 +38,7 @@ cp apps/api/.env.example apps/api/.env
 cp apps/web/.env.example apps/web/.env
 ```
 
-Preencha as variaveis antes de rodar login, pagamentos ou integracoes externas. Para banco local via Docker, o `DATABASE_URL` padrao ja aponta para `localhost:5432`.
+Preencha as variaveis antes de rodar login, pagamentos ou integracoes externas. Para banco local via Docker, o `DATABASE_URL` padrao ja aponta para `localhost:5438`.
 
 ## Variaveis de ambiente
 
@@ -83,11 +83,12 @@ npm run db:up
 Dados padrao:
 
 - Host: `localhost`
-- Porta: `5432`
-- Database: `novely_template`
+- Porta do host: `5438`
+- Database: `proposta_ai`
 - Usuario: `postgres`
 - Senha: `postgres`
-- URL: `postgresql://postgres:postgres@localhost:5432/novely_template`
+- Porta interna do container: `5432`
+- URL: `postgresql://postgres:postgres@localhost:5438/proposta_ai`
 
 Comandos uteis:
 
@@ -97,7 +98,7 @@ npm run db:down
 npm run db:admin
 ```
 
-O `db:admin` sobe o Adminer em `http://localhost:8080`. No Adminer, use servidor `postgres`, usuario `postgres`, senha `postgres` e database `novely_template`.
+O `db:admin` sobe o Adminer em `http://localhost:8080`. No Adminer, use servidor `postgres`, usuario `postgres`, senha `postgres` e database `proposta_ai`.
 
 ## Supabase
 
@@ -135,15 +136,15 @@ npm run dev
 ```
 
 - Web: `http://localhost:3000`
-- API: `http://localhost:3333/api`
-- Swagger: `http://localhost:3333/docs`
-- Health: `http://localhost:3333/api/health`
+- API: `http://localhost:4000/api`
+- Swagger: `http://localhost:4000/docs`
+- Health: `http://localhost:4000/api/health`
 
 ## Autenticacao
 
 Cadastro, login, recuperacao, redefinicao de senha e Google OAuth acontecem no frontend via Supabase Auth. A API nao cria login proprio. O frontend envia o access token no header `Authorization: Bearer TOKEN`, e a API valida esse token no Supabase antes de retornar dados.
 
-A rota `/painel` e protegida pelo middleware do Next.js e tambem revalida a sessao no Server Component.
+As rotas `/onboarding`, `/painel` e `/minha-empresa` sao protegidas pelo middleware do Next.js e tambem revalidam a sessao no Server Component.
 
 ## Stripe
 

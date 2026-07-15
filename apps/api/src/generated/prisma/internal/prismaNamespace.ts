@@ -623,8 +623,13 @@ export const CompanyScalarFieldEnum = {
   primaryColor: 'primaryColor',
   secondaryColor: 'secondaryColor',
   accentColor: 'accentColor',
+  backgroundColor: 'backgroundColor',
+  surfaceColor: 'surfaceColor',
+  textColor: 'textColor',
   visualPreference: 'visualPreference',
   fontPreference: 'fontPreference',
+  visualStyle: 'visualStyle',
+  borderRadius: 'borderRadius',
   responsibleName: 'responsibleName',
   responsibleRole: 'responsibleRole',
   document: 'document',
@@ -724,6 +729,20 @@ export type EnumCompanyFontPreferenceFieldRefInput<$PrismaModel> = FieldRefInput
  * Reference to a field of type 'CompanyFontPreference[]'
  */
 export type ListEnumCompanyFontPreferenceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CompanyFontPreference[]'>
+    
+
+
+/**
+ * Reference to a field of type 'CompanyVisualStyle'
+ */
+export type EnumCompanyVisualStyleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CompanyVisualStyle'>
+    
+
+
+/**
+ * Reference to a field of type 'CompanyVisualStyle[]'
+ */
+export type ListEnumCompanyVisualStyleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CompanyVisualStyle[]'>
     
 
 

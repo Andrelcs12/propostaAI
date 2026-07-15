@@ -10,7 +10,7 @@ datasource db {
 enum CompanyVisualPreference {
   LIGHT
   DARK
-  SYSTEM
+  AUTO
 }
 
 enum CompanyFontPreference {
@@ -18,6 +18,13 @@ enum CompanyFontPreference {
   MANROPE
   POPPINS
   DM_SANS
+}
+
+enum CompanyVisualStyle {
+  MINIMAL
+  MODERN
+  PREMIUM
+  BOLD
 }
 
 model User {
@@ -50,8 +57,13 @@ model Company {
   primaryColor     String                  @default("#0F766E")
   secondaryColor   String                  @default("#14B8A6")
   accentColor      String                  @default("#06B6D4")
+  backgroundColor  String                  @default("#F8FAFC")
+  surfaceColor     String                  @default("#FFFFFF")
+  textColor        String                  @default("#0F172A")
   visualPreference CompanyVisualPreference @default(LIGHT)
   fontPreference   CompanyFontPreference   @default(INTER)
+  visualStyle      CompanyVisualStyle      @default(MINIMAL)
+  borderRadius     String                  @default("MEDIUM")
   responsibleName  String?
   responsibleRole  String?
   document         String?

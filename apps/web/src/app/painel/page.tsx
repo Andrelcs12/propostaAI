@@ -1,40 +1,35 @@
-import { ArrowLeft, CreditCard, ShieldCheck } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Logo } from "@/components/layout/logo";
 import { LogoutButton } from "@/components/layout/logout-button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { getCurrentProfile } from "@/features/auth/services/profile.service";
-import { getBillingConfig } from "@/features/billing/services/billing.service";
-import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { requireOnboardingStatus } from "@/lib/auth/server";
 
 export const dynamic = "force-dynamic";
 
 export default async function DashboardPage() {
-  const supabase = await createSupabaseServerClient();
-  const {
-    data: { user }
-  } = await supabase.auth.getUser();
+  const { accessToken, companyStatus } = await requireOnboardingStatus();
 
-  if (!user) {
-    redirect("/login");
+  if (!companyStatus.onboardingDone) {
+    redirect("/onboarding");
   }
 
-  const {
-    data: { session }
-  } = await supabase.auth.getSession();
-
-  if (!session?.access_token) {
-    redirect("/login");
+  if (!companyStatus.company) {
+    redirect("/onboarding");
   }
 
-  const [profile, billingConfig] = await Promise.all([
-    getCurrentProfile(session.access_token),
-    getBillingConfig(session.access_token)
-  ]);
-
+  const profile = await getCurrentProfile(accessToken);
+  const company = companyStatus.company;
   const initials = profile.name
     .split(" ")
     .slice(0, 2)
@@ -50,7 +45,10 @@ export default async function DashboardPage() {
           <div className="flex items-center gap-3">
             <div className="hidden items-center gap-3 sm:flex">
               <Avatar>
-                <AvatarImage src={profile.avatarUrl ?? undefined} alt={profile.name} />
+                <AvatarImage
+                  src={profile.avatarUrl ?? undefined}
+                  alt={profile.name}
+                />
                 <AvatarFallback>{initials}</AvatarFallback>
               </Avatar>
               <div className="text-sm">
@@ -64,40 +62,62 @@ export default async function DashboardPage() {
       </header>
 
       <section className="container-page py-10">
-        <Button asChild variant="ghost" className="mb-6 px-0">
-          <Link href="/">
-            <ArrowLeft />
-            Voltar para landing
-          </Link>
-        </Button>
-
         <div className="mb-8">
-          <h1 className="text-3xl font-semibold tracking-normal">Bem-vindo, {profile.name}</h1>
-          <p className="mt-2 text-muted-foreground">{profile.email}</p>
+          <p className="text-sm font-medium text-primary">Painel</p>
+          <h1 className="mt-2 text-3xl font-semibold tracking-normal">
+            Configuracao concluida
+          </h1>
+          <p className="mt-2 text-muted-foreground">
+            Sua empresa esta pronta para criar propostas comerciais.
+          </p>
         </div>
 
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid gap-4 lg:grid-cols-[1.2fr_0.8fr]">
           <Card>
             <CardHeader>
-              <ShieldCheck className="size-5 text-primary" />
-              <CardTitle>Template pronto</CardTitle>
+              <CheckCircle2 className="size-5 text-primary" />
+              <CardTitle>{company.name}</CardTitle>
               <CardDescription>
-                Autenticacao, rota protegida, API e usuario persistido estao conectados.
+                Onboarding concluido. A proxima etapa sera construir o dashboard
+                completo e a primeira proposta.
               </CardDescription>
             </CardHeader>
-            <CardContent className="text-sm text-muted-foreground">
-              Esta tela existe apenas para comprovar o fluxo autenticado.
+            <CardContent>
+              <Button asChild>
+                <Link href="/minha-empresa">Ver minha empresa</Link>
+              </Button>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader>
-              <CreditCard className="size-5 text-primary" />
-              <CardTitle>Stripe estrutural</CardTitle>
-              <CardDescription>Stripe preparado para implementação futura.</CardDescription>
+              <CardTitle>Brand Kit</CardTitle>
+              <CardDescription>Cores principais configuradas.</CardDescription>
             </CardHeader>
-            <CardContent className="text-sm text-muted-foreground">
-              Status: {billingConfig.enabled ? "ativo" : "inativo"} - {billingConfig.mode}
+            <CardContent className="grid gap-3 text-sm">
+              {[
+                ["Principal", company.primaryColor],
+                ["Secundaria", company.secondaryColor],
+                ["Destaque", company.accentColor],
+              ].map(([label, color]) => (
+                <div
+                  key={label}
+                  className="flex items-center justify-between rounded-md border bg-card px-3 py-2"
+                >
+                  <span className="text-muted-foreground">{label}</span>
+                  <span className="inline-flex items-center gap-2 font-medium">
+                    <span
+                      className="size-4 rounded-full border"
+                      style={{ backgroundColor: color }}
+                    />
+                    {color}
+                  </span>
+                </div>
+              ))}
+              <div className="rounded-md border bg-card px-3 py-2">
+                <span className="text-muted-foreground">Status:</span>{" "}
+                <span className="font-medium">Onboarding concluido</span>
+              </div>
             </CardContent>
           </Card>
         </div>

@@ -22,6 +22,7 @@ import {
   type LoginInput,
 } from "@/features/auth/schemas/auth.schema";
 import {
+  getPostAuthRedirect,
   loginWithEmail,
   loginWithGoogle,
 } from "@/features/auth/services/auth.service";
@@ -40,9 +41,12 @@ export function LoginForm() {
 
   async function onSubmit(values: LoginInput) {
     try {
-      await loginWithEmail(values);
+      const data = await loginWithEmail(values);
+      const redirectTo = data.session?.access_token
+        ? await getPostAuthRedirect(data.session.access_token)
+        : "/onboarding";
       toast.success("Login realizado com sucesso.");
-      router.push(searchParams.get("next") ?? "/painel");
+      router.push(searchParams.get("next") ?? redirectTo);
       router.refresh();
     } catch (error) {
       toast.error(

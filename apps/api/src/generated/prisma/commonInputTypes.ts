@@ -124,6 +124,13 @@ export type EnumCompanyFontPreferenceFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumCompanyFontPreferenceFilter<$PrismaModel> | $Enums.CompanyFontPreference
 }
 
+export type EnumCompanyVisualStyleFilter<$PrismaModel = never> = {
+  equals?: $Enums.CompanyVisualStyle | Prisma.EnumCompanyVisualStyleFieldRefInput<$PrismaModel>
+  in?: $Enums.CompanyVisualStyle[] | Prisma.ListEnumCompanyVisualStyleFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CompanyVisualStyle[] | Prisma.ListEnumCompanyVisualStyleFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCompanyVisualStyleFilter<$PrismaModel> | $Enums.CompanyVisualStyle
+}
+
 export type IntFilter<$PrismaModel = never> = {
   equals?: number | Prisma.IntFieldRefInput<$PrismaModel>
   in?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel>
@@ -158,6 +165,16 @@ export type EnumCompanyFontPreferenceWithAggregatesFilter<$PrismaModel = never> 
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumCompanyFontPreferenceFilter<$PrismaModel>
   _max?: Prisma.NestedEnumCompanyFontPreferenceFilter<$PrismaModel>
+}
+
+export type EnumCompanyVisualStyleWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.CompanyVisualStyle | Prisma.EnumCompanyVisualStyleFieldRefInput<$PrismaModel>
+  in?: $Enums.CompanyVisualStyle[] | Prisma.ListEnumCompanyVisualStyleFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CompanyVisualStyle[] | Prisma.ListEnumCompanyVisualStyleFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCompanyVisualStyleWithAggregatesFilter<$PrismaModel> | $Enums.CompanyVisualStyle
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumCompanyVisualStyleFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumCompanyVisualStyleFilter<$PrismaModel>
 }
 
 export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -307,6 +324,13 @@ export type NestedEnumCompanyFontPreferenceFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumCompanyFontPreferenceFilter<$PrismaModel> | $Enums.CompanyFontPreference
 }
 
+export type NestedEnumCompanyVisualStyleFilter<$PrismaModel = never> = {
+  equals?: $Enums.CompanyVisualStyle | Prisma.EnumCompanyVisualStyleFieldRefInput<$PrismaModel>
+  in?: $Enums.CompanyVisualStyle[] | Prisma.ListEnumCompanyVisualStyleFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CompanyVisualStyle[] | Prisma.ListEnumCompanyVisualStyleFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCompanyVisualStyleFilter<$PrismaModel> | $Enums.CompanyVisualStyle
+}
+
 export type NestedBoolFilter<$PrismaModel = never> = {
   equals?: boolean | Prisma.BooleanFieldRefInput<$PrismaModel>
   not?: Prisma.NestedBoolFilter<$PrismaModel> | boolean
@@ -330,6 +354,16 @@ export type NestedEnumCompanyFontPreferenceWithAggregatesFilter<$PrismaModel = n
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumCompanyFontPreferenceFilter<$PrismaModel>
   _max?: Prisma.NestedEnumCompanyFontPreferenceFilter<$PrismaModel>
+}
+
+export type NestedEnumCompanyVisualStyleWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.CompanyVisualStyle | Prisma.EnumCompanyVisualStyleFieldRefInput<$PrismaModel>
+  in?: $Enums.CompanyVisualStyle[] | Prisma.ListEnumCompanyVisualStyleFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CompanyVisualStyle[] | Prisma.ListEnumCompanyVisualStyleFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCompanyVisualStyleWithAggregatesFilter<$PrismaModel> | $Enums.CompanyVisualStyle
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumCompanyVisualStyleFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumCompanyVisualStyleFilter<$PrismaModel>
 }
 
 export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {

@@ -6,5 +6,13 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/painel/:path*", "/login", "/cadastro", "/recuperar-senha", "/redefinir-senha"]
+  matcher: [
+    "/painel/:path*",
+    "/onboarding/:path*",
+    "/minha-empresa/:path*",
+    "/login",
+    "/cadastro",
+    "/recuperar-senha",
+    "/redefinir-senha",
+  ],
 };

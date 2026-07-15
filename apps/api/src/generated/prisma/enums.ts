@@ -12,7 +12,7 @@
 export const CompanyVisualPreference = {
   LIGHT: 'LIGHT',
   DARK: 'DARK',
-  SYSTEM: 'SYSTEM'
+  AUTO: 'AUTO'
 } as const
 
 export type CompanyVisualPreference = (typeof CompanyVisualPreference)[keyof typeof CompanyVisualPreference]
@@ -26,3 +26,13 @@ export const CompanyFontPreference = {
 } as const
 
 export type CompanyFontPreference = (typeof CompanyFontPreference)[keyof typeof CompanyFontPreference]
+
+
+export const CompanyVisualStyle = {
+  MINIMAL: 'MINIMAL',
+  MODERN: 'MODERN',
+  PREMIUM: 'PREMIUM',
+  BOLD: 'BOLD'
+} as const
+
+export type CompanyVisualStyle = (typeof CompanyVisualStyle)[keyof typeof CompanyVisualStyle]

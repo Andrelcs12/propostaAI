@@ -3,7 +3,7 @@ import { defineConfig } from "prisma/config";
 
 const databaseUrl =
   process.env.DATABASE_URL ||
-  "postgresql://postgres:postgres@localhost:5432/proposta_ai";
+  "postgresql://postgres:postgres@localhost:5438/proposta_ai";
 
 export default defineConfig({
   schema: "prisma/schema.prisma",

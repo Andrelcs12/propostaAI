@@ -22,6 +22,7 @@ import {
   type RegisterInput,
 } from "@/features/auth/schemas/auth.schema";
 import {
+  getPostAuthRedirect,
   loginWithGoogle,
   registerWithEmail,
 } from "@/features/auth/services/auth.service";
@@ -41,12 +42,11 @@ export function RegisterForm() {
   async function onSubmit(values: RegisterInput) {
     try {
       const data = await registerWithEmail(values);
-      toast.success(
-        data.session
-          ? "Conta criada com sucesso."
-          : "Verifique seu e-mail para confirmar a conta.",
-      );
-      router.push(data.session ? "/painel" : "/login");
+      const redirectTo = data.session?.access_token
+        ? await getPostAuthRedirect(data.session.access_token)
+        : "/onboarding";
+      toast.success("Conta criada com sucesso.");
+      router.push(redirectTo);
       router.refresh();
     } catch (error) {
       toast.error(

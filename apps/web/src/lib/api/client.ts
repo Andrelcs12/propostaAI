@@ -2,7 +2,7 @@ export class ApiError extends Error {
   constructor(
     message: string,
     readonly status: number,
-    readonly details?: unknown
+    readonly details?: unknown,
   ) {
     super(message);
     this.name = "ApiError";
@@ -15,7 +15,7 @@ type ApiClientOptions = {
 
 export async function apiFetch<TResponse>(
   path: string,
-  options: RequestInit & ApiClientOptions = {}
+  options: RequestInit & ApiClientOptions = {},
 ): Promise<TResponse> {
   const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -24,13 +24,14 @@ export async function apiFetch<TResponse>(
   }
 
   const { accessToken, headers, ...requestOptions } = options;
-  const response = await fetch(`${baseUrl}${path}`, {
+  const endpoint = `${baseUrl}${path}`;
+  const response = await fetch(endpoint, {
     ...requestOptions,
     headers: {
       "Content-Type": "application/json",
       ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
-      ...headers
-    }
+      ...headers,
+    },
   });
 
   const contentType = response.headers.get("content-type");
@@ -39,8 +40,37 @@ export async function apiFetch<TResponse>(
     : await response.text();
 
   if (!response.ok) {
-    throw new ApiError("Erro ao comunicar com a API", response.status, body);
+    throw new ApiError(
+      getApiErrorMessage(body, response.status, path),
+      response.status,
+      {
+        endpoint: path,
+        body,
+      },
+    );
   }
 
   return body as TResponse;
+}
+
+function getApiErrorMessage(body: unknown, status: number, path: string) {
+  const fallback = `Erro na API (${status}) em ${path}`;
+
+  if (typeof body === "object" && body && "message" in body) {
+    const message = (body as { message?: unknown }).message;
+
+    if (Array.isArray(message)) {
+      return message.join(" ");
+    }
+
+    if (typeof message === "string") {
+      return message;
+    }
+  }
+
+  if (typeof body === "string" && body.trim()) {
+    return body;
+  }
+
+  return fallback;
 }
