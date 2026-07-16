@@ -1,6 +1,7 @@
 import { AudiencesSection } from "./audiences-section";
 import { BrandingSection } from "./branding-section";
 import { ComparisonSection } from "./comparison-section";
+import { IntegrationsAnimation } from "./cu";
 import { EarlyAccessSection } from "./early-access-section";
 import { FaqSection } from "./faq-section";
 import { FeaturesSection } from "./features-section";
@@ -24,6 +25,7 @@ export function LandingPage({ isAuthenticated }: LandingPageProps) {
       <LandingHeader isAuthenticated={isAuthenticated} />
       <HeroSection isAuthenticated={isAuthenticated} />
       <ProblemSection />
+      <IntegrationsAnimation />
       <SolutionSection />
       <FeaturesSection />
       <BrandingSection />
