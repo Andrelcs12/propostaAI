@@ -3,6 +3,9 @@ import type { User as SupabaseUser } from "@supabase/supabase-js";
 import type { UpdateCompanyBasicDto } from "./dto/update-company-basic.dto";
 import type { UpdateCompanyBrandDto } from "./dto/update-company-brand.dto";
 import type { UpdateCompanyCommercialDto } from "./dto/update-company-commercial.dto";
+import type { UpdateCompanyDefaultsDto } from "./dto/update-company-defaults.dto";
+import type { UpdateCompanyIdentityDto } from "./dto/update-company-identity.dto";
+import type { UpdateProfileTypeDto } from "./dto/update-profile-type.dto";
 import { PrismaService } from "../../database/prisma.service";
 import { UsersService } from "../users/users.service";
 
@@ -26,6 +29,29 @@ export class CompanyService {
     return this.toStatusResponse(company);
   }
 
+  async updateProfileType(
+    authUser: SupabaseUser,
+    dto: UpdateProfileTypeDto,
+  ) {
+    const user = await this.usersService.findOrSyncFromSupabase(authUser);
+
+    const company = await this.prisma.company.upsert({
+      where: { userId: user.id },
+      update: {
+        profileType: dto.profileType,
+        onboardingStep: { set: 2 },
+      },
+      create: {
+        userId: user.id,
+        name: user.name,
+        profileType: dto.profileType,
+        onboardingStep: 2,
+      },
+    });
+
+    return this.toStatusResponse(company);
+  }
+
   async updateBasic(authUser: SupabaseUser, dto: UpdateCompanyBasicDto) {
     const user = await this.usersService.findOrSyncFromSupabase(authUser);
     const data = this.getBasicData(dto);
@@ -34,12 +60,12 @@ export class CompanyService {
       where: { userId: user.id },
       update: {
         ...data,
-        onboardingStep: { set: 2 },
+        onboardingStep: { set: 3 },
       },
       create: {
         ...data,
         userId: user.id,
-        onboardingStep: 2,
+        onboardingStep: 3,
       },
     });
 
@@ -54,7 +80,64 @@ export class CompanyService {
       where: { userId: user.id },
       data: {
         ...this.getBrandData(dto),
-        onboardingStep: { set: 3 },
+        onboardingStep: { set: 4 },
+      },
+    });
+
+    return this.toStatusResponse(company);
+  }
+
+  async updateIdentity(
+    authUser: SupabaseUser,
+    dto: UpdateCompanyIdentityDto,
+  ) {
+    const user = await this.usersService.findOrSyncFromSupabase(authUser);
+    await this.ensureCompanyExists(user.id);
+
+    const company = await this.prisma.company.update({
+      where: { userId: user.id },
+      data: {
+        tradeName: this.normalizeOptionalText(dto.tradeName),
+        presentationText: this.normalizeOptionalText(dto.presentationText),
+        responsibleName: this.normalizeOptionalText(dto.responsibleName),
+        responsibleRole: this.normalizeOptionalText(dto.responsibleRole),
+        contactText: this.normalizeOptionalText(dto.contactText),
+        showContactData: dto.showContactData,
+        showSignature: dto.showSignature,
+        onboardingStep: { set: 4 },
+      },
+    });
+
+    return this.toStatusResponse(company);
+  }
+
+  async updateDefaults(authUser: SupabaseUser, dto: UpdateCompanyDefaultsDto) {
+    const user = await this.usersService.findOrSyncFromSupabase(authUser);
+    await this.ensureCompanyExists(user.id);
+
+    const company = await this.prisma.company.update({
+      where: { userId: user.id },
+      data: {
+        defaultValidityDays: dto.defaultValidityDays,
+        defaultDeliveryTime: this.normalizeOptionalText(
+          dto.defaultDeliveryTime,
+        ),
+        defaultPaymentConditions: this.normalizeOptionalText(
+          dto.defaultPaymentConditions,
+        ),
+        defaultCurrency: dto.defaultCurrency?.toUpperCase(),
+        defaultBillingType: dto.defaultBillingType,
+        defaultIntroMessage: this.normalizeOptionalText(
+          dto.defaultIntroMessage,
+        ),
+        defaultClosingMessage: this.normalizeOptionalText(
+          dto.defaultClosingMessage,
+        ),
+        defaultTerms: this.normalizeOptionalText(dto.defaultTerms),
+        showDetailedValues: dto.showDetailedValues,
+        showDiscount: dto.showDiscount,
+        defaultTone: dto.defaultTone,
+        onboardingStep: { set: 5 },
       },
     });
 
@@ -82,7 +165,7 @@ export class CompanyService {
 
     if (!existing.name.trim()) {
       throw new BadRequestException(
-        "Informe o nome da empresa antes de concluir.",
+        "Informe o nome antes de concluir o onboarding.",
       );
     }
 
@@ -90,7 +173,8 @@ export class CompanyService {
       where: { userId: user.id },
       data: {
         onboardingDone: true,
-        onboardingStep: 3,
+        onboardingStep: 5,
+        onboardingCompletedAt: new Date(),
       },
     });
 
@@ -104,7 +188,7 @@ export class CompanyService {
 
     if (!company) {
       throw new BadRequestException(
-        "Complete os dados basicos da empresa primeiro.",
+        "Complete os dados basicos primeiro.",
       );
     }
 
@@ -152,6 +236,8 @@ export class CompanyService {
       presentationText: this.normalizeOptionalText(dto.presentationText),
       footerText: this.normalizeOptionalText(dto.footerText),
       contactText: this.normalizeOptionalText(dto.contactText),
+      defaultClosingMessage:
+        this.normalizeOptionalText(dto.footerText) ?? undefined,
     };
   }
 

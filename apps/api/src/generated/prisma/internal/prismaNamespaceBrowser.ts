@@ -52,7 +52,8 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
-  Company: 'Company'
+  Company: 'Company',
+  Proposal: 'Proposal'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -87,6 +88,7 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 export const CompanyScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
+  profileType: 'profileType',
   name: 'name',
   tradeName: 'tradeName',
   description: 'description',
@@ -116,13 +118,64 @@ export const CompanyScalarFieldEnum = {
   presentationText: 'presentationText',
   footerText: 'footerText',
   contactText: 'contactText',
+  defaultValidityDays: 'defaultValidityDays',
+  defaultDeliveryTime: 'defaultDeliveryTime',
+  defaultPaymentConditions: 'defaultPaymentConditions',
+  defaultCurrency: 'defaultCurrency',
+  defaultBillingType: 'defaultBillingType',
+  defaultIntroMessage: 'defaultIntroMessage',
+  defaultClosingMessage: 'defaultClosingMessage',
+  defaultTerms: 'defaultTerms',
+  showDetailedValues: 'showDetailedValues',
+  showDiscount: 'showDiscount',
+  showContactData: 'showContactData',
+  showSignature: 'showSignature',
+  defaultTone: 'defaultTone',
   onboardingStep: 'onboardingStep',
   onboardingDone: 'onboardingDone',
+  onboardingCompletedAt: 'onboardingCompletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type CompanyScalarFieldEnum = (typeof CompanyScalarFieldEnum)[keyof typeof CompanyScalarFieldEnum]
+
+
+export const ProposalScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  companyId: 'companyId',
+  status: 'status',
+  tone: 'tone',
+  clientName: 'clientName',
+  clientContactName: 'clientContactName',
+  clientEmail: 'clientEmail',
+  clientPhone: 'clientPhone',
+  clientSegment: 'clientSegment',
+  clientWebsite: 'clientWebsite',
+  clientDescription: 'clientDescription',
+  clientProblem: 'clientProblem',
+  title: 'title',
+  serviceOffered: 'serviceOffered',
+  objective: 'objective',
+  scope: 'scope',
+  deliverables: 'deliverables',
+  timeline: 'timeline',
+  investment: 'investment',
+  paymentConditions: 'paymentConditions',
+  validityDate: 'validityDate',
+  observations: 'observations',
+  differentials: 'differentials',
+  nextSteps: 'nextSteps',
+  terms: 'terms',
+  generatedContent: 'generatedContent',
+  senderSnapshot: 'senderSnapshot',
+  styleSnapshot: 'styleSnapshot',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProposalScalarFieldEnum = (typeof ProposalScalarFieldEnum)[keyof typeof ProposalScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -131,6 +184,21 @@ export const SortOrder = {
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+
+
+export const NullableJsonNullValueInput = {
+  DbNull: DbNull,
+  JsonNull: JsonNull
+} as const
+
+export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
 
 
 export const QueryMode = {
@@ -147,4 +215,13 @@ export const NullsOrder = {
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 

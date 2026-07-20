@@ -9,6 +9,50 @@
 * 🟢 You can import this file directly.
 */
 
+export const ProfileType = {
+  COMPANY: 'COMPANY',
+  INDIVIDUAL: 'INDIVIDUAL'
+} as const
+
+export type ProfileType = (typeof ProfileType)[keyof typeof ProfileType]
+
+
+export const ProposalTone = {
+  PROFESSIONAL: 'PROFESSIONAL',
+  DIRECT: 'DIRECT',
+  PERSUASIVE: 'PERSUASIVE',
+  FRIENDLY: 'FRIENDLY',
+  PREMIUM: 'PREMIUM'
+} as const
+
+export type ProposalTone = (typeof ProposalTone)[keyof typeof ProposalTone]
+
+
+export const ProposalStatus = {
+  DRAFT: 'DRAFT',
+  GENERATING: 'GENERATING',
+  READY: 'READY',
+  SENT: 'SENT',
+  VIEWED: 'VIEWED',
+  ACCEPTED: 'ACCEPTED',
+  REJECTED: 'REJECTED',
+  EXPIRED: 'EXPIRED',
+  ARCHIVED: 'ARCHIVED'
+} as const
+
+export type ProposalStatus = (typeof ProposalStatus)[keyof typeof ProposalStatus]
+
+
+export const BillingType = {
+  FIXED: 'FIXED',
+  HOURLY: 'HOURLY',
+  MONTHLY: 'MONTHLY',
+  PROJECT: 'PROJECT'
+} as const
+
+export type BillingType = (typeof BillingType)[keyof typeof BillingType]
+
+
 export const CompanyVisualPreference = {
   LIGHT: 'LIGHT',
   DARK: 'DARK',

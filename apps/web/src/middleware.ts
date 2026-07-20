@@ -10,6 +10,8 @@ export const config = {
     "/painel/:path*",
     "/onboarding/:path*",
     "/minha-empresa/:path*",
+    "/configuracoes/:path*",
+    "/propostas/:path*",
     "/login",
     "/cadastro",
     "/recuperar-senha",

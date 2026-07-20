@@ -49,3 +49,8 @@ export type User = Prisma.UserModel
  * 
  */
 export type Company = Prisma.CompanyModel
+/**
+ * Model Proposal
+ * 
+ */
+export type Proposal = Prisma.ProposalModel

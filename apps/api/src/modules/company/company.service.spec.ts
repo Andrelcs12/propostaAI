@@ -60,7 +60,7 @@ describe("CompanyService", () => {
       userId: "user-id",
       name: "Proposta AI",
       onboardingDone: false,
-      onboardingStep: 2,
+      onboardingStep: 3,
     });
 
     await service.updateBasic(authUser, { name: "Proposta AI" });
@@ -78,7 +78,7 @@ describe("CompanyService", () => {
         instagram: null,
         city: null,
         state: null,
-        onboardingStep: { set: 2 },
+        onboardingStep: { set: 3 },
       },
       create: {
         name: "Proposta AI",
@@ -92,7 +92,7 @@ describe("CompanyService", () => {
         city: null,
         state: null,
         userId: "user-id",
-        onboardingStep: 2,
+        onboardingStep: 3,
       },
     });
   });
@@ -129,17 +129,18 @@ describe("CompanyService", () => {
       userId: "user-id",
       name: "Proposta AI",
       onboardingDone: true,
-      onboardingStep: 3,
+      onboardingStep: 5,
     });
 
     await service.completeOnboarding(authUser);
 
     expect(prisma.company.update).toHaveBeenCalledWith({
       where: { userId: "user-id" },
-      data: {
+      data: expect.objectContaining({
         onboardingDone: true,
-        onboardingStep: 3,
-      },
+        onboardingStep: 5,
+        onboardingCompletedAt: expect.any(Date),
+      }),
     });
   });
 });

@@ -50,7 +50,9 @@ export async function updateSession(request: NextRequest) {
   const isProtectedRoute =
     pathname.startsWith("/painel") ||
     pathname.startsWith("/onboarding") ||
-    pathname.startsWith("/minha-empresa");
+    pathname.startsWith("/minha-empresa") ||
+    pathname.startsWith("/configuracoes") ||
+    pathname.startsWith("/propostas");
   const isAuthRoute =
     pathname.startsWith("/login") ||
     pathname.startsWith("/cadastro") ||

@@ -7,6 +7,38 @@ datasource db {
   provider = "postgresql"
 }
 
+enum ProfileType {
+  COMPANY
+  INDIVIDUAL
+}
+
+enum ProposalTone {
+  PROFESSIONAL
+  DIRECT
+  PERSUASIVE
+  FRIENDLY
+  PREMIUM
+}
+
+enum ProposalStatus {
+  DRAFT
+  GENERATING
+  READY
+  SENT
+  VIEWED
+  ACCEPTED
+  REJECTED
+  EXPIRED
+  ARCHIVED
+}
+
+enum BillingType {
+  FIXED
+  HOURLY
+  MONTHLY
+  PROJECT
+}
+
 enum CompanyVisualPreference {
   LIGHT
   DARK
@@ -36,12 +68,14 @@ model User {
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 
-  company Company?
+  company   Company?
+  proposals Proposal[]
 }
 
 model Company {
   id               String                  @id @default(cuid())
   userId           String                  @unique
+  profileType      ProfileType             @default(COMPANY)
   name             String
   tradeName        String?
   description      String?
@@ -71,10 +105,66 @@ model Company {
   presentationText String?
   footerText       String?
   contactText      String?
-  onboardingStep   Int                     @default(1)
-  onboardingDone   Boolean                 @default(false)
+  defaultValidityDays      Int           @default(15)
+  defaultDeliveryTime      String?
+  defaultPaymentConditions String?
+  defaultCurrency          String        @default("BRL")
+  defaultBillingType       BillingType   @default(PROJECT)
+  defaultIntroMessage      String?
+  defaultClosingMessage    String?
+  defaultTerms             String?
+  showDetailedValues       Boolean       @default(true)
+  showDiscount             Boolean       @default(false)
+  showContactData          Boolean       @default(true)
+  showSignature            Boolean       @default(true)
+  defaultTone              ProposalTone  @default(PROFESSIONAL)
+  onboardingStep           Int           @default(1)
+  onboardingDone           Boolean       @default(false)
+  onboardingCompletedAt    DateTime?
   createdAt        DateTime                @default(now())
   updatedAt        DateTime                @updatedAt
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  proposals Proposal[]
+}
+
+model Proposal {
+  id                 String         @id @default(cuid())
+  userId             String
+  companyId          String
+  status             ProposalStatus @default(DRAFT)
+  tone               ProposalTone   @default(PROFESSIONAL)
+  clientName         String
+  clientContactName  String?
+  clientEmail        String?
+  clientPhone        String?
+  clientSegment      String?
+  clientWebsite      String?
+  clientDescription  String?
+  clientProblem      String?
+  title              String
+  serviceOffered     String?
+  objective          String?
+  scope              Json           @default("[]")
+  deliverables       Json           @default("[]")
+  timeline           Json           @default("[]")
+  investment         Json           @default("[]")
+  paymentConditions  String?
+  validityDate       DateTime?
+  observations       String?
+  differentials      Json           @default("[]")
+  nextSteps          String?
+  terms              String?
+  generatedContent   Json?
+  senderSnapshot     Json
+  styleSnapshot      Json
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  company Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([companyId])
+  @@index([status])
 }

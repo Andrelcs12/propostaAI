@@ -33,6 +33,35 @@ export function CompanyBasicForm({
   submitLabel,
   onSaved,
 }: CompanyBasicFormProps) {
+  const isIndividual = company?.profileType === "INDIVIDUAL";
+  const labels = isIndividual
+    ? {
+        name: "Nome profissional",
+        namePlaceholder: "Ex: Lucas Design",
+        tradeName: "Nome completo",
+        tradeNamePlaceholder: "Ex: Lucas Almeida",
+        segment: "Area de atuacao",
+        segmentPlaceholder: "Ex: Design UX/UI",
+        email: "E-mail profissional",
+        emailPlaceholder: "contato@seudominio.com",
+        website: "Site ou portfolio",
+        description: "Descricao curta dos servicos",
+        descriptionPlaceholder: "Explique em poucas linhas o que voce oferece.",
+      }
+    : {
+        name: "Nome da empresa",
+        namePlaceholder: "Ex: Studio Lucas",
+        tradeName: "Nome comercial",
+        tradeNamePlaceholder: "Ex: Proposta AI",
+        segment: "Segmento de atuacao",
+        segmentPlaceholder: "Ex: Desenvolvimento de software",
+        email: "E-mail comercial",
+        emailPlaceholder: "comercial@suaempresa.com",
+        website: "Site",
+        description: "Descricao curta da empresa",
+        descriptionPlaceholder: "Explique em poucas linhas o que sua empresa faz.",
+      };
+
   const form = useForm<CompanyBasicInput>({
     resolver: zodResolver(companyBasicSchema),
     defaultValues: {
@@ -76,11 +105,11 @@ export function CompanyBasicForm({
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Nome da empresa</FormLabel>
+                <FormLabel>{labels.name}</FormLabel>
                 <FormControl>
                   <Input
                     disabled={form.formState.isSubmitting}
-                    placeholder="Ex: Studio Lucas"
+                    placeholder={labels.namePlaceholder}
                     {...field}
                   />
                 </FormControl>
@@ -93,11 +122,11 @@ export function CompanyBasicForm({
             name="tradeName"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Nome comercial</FormLabel>
+                <FormLabel>{labels.tradeName}</FormLabel>
                 <FormControl>
                   <Input
                     disabled={form.formState.isSubmitting}
-                    placeholder="Ex: Proposta AI"
+                    placeholder={labels.tradeNamePlaceholder}
                     {...field}
                   />
                 </FormControl>
@@ -110,11 +139,11 @@ export function CompanyBasicForm({
             name="segment"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Segmento</FormLabel>
+                <FormLabel>{labels.segment}</FormLabel>
                 <FormControl>
                   <Input
                     disabled={form.formState.isSubmitting}
-                    placeholder="Ex: Desenvolvimento de software"
+                    placeholder={labels.segmentPlaceholder}
                     {...field}
                   />
                 </FormControl>
@@ -127,7 +156,7 @@ export function CompanyBasicForm({
             name="website"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Site</FormLabel>
+                <FormLabel>{labels.website}</FormLabel>
                 <FormControl>
                   <Input
                     disabled={form.formState.isSubmitting}
@@ -144,11 +173,11 @@ export function CompanyBasicForm({
             name="commercialEmail"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>E-mail comercial</FormLabel>
+                <FormLabel>{labels.email}</FormLabel>
                 <FormControl>
                   <Input
                     disabled={form.formState.isSubmitting}
-                    placeholder="comercial@suaempresa.com"
+                    placeholder={labels.emailPlaceholder}
                     {...field}
                   />
                 </FormControl>
@@ -233,12 +262,12 @@ export function CompanyBasicForm({
           name="description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Descricao curta</FormLabel>
+              <FormLabel>{labels.description}</FormLabel>
               <FormControl>
                 <textarea
                   className="min-h-24 w-full rounded-md border bg-background px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
                   disabled={form.formState.isSubmitting}
-                  placeholder="Explique em poucas linhas o que sua empresa faz."
+                  placeholder={labels.descriptionPlaceholder}
                   {...field}
                 />
               </FormControl>

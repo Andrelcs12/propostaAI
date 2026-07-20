@@ -385,7 +385,8 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   User: 'User',
-  Company: 'Company'
+  Company: 'Company',
+  Proposal: 'Proposal'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -401,7 +402,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "company"
+    modelProps: "user" | "company" | "proposal"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -553,6 +554,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Proposal: {
+      payload: Prisma.$ProposalPayload<ExtArgs>
+      fields: Prisma.ProposalFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ProposalFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProposalPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ProposalFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProposalPayload>
+        }
+        findFirst: {
+          args: Prisma.ProposalFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProposalPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ProposalFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProposalPayload>
+        }
+        findMany: {
+          args: Prisma.ProposalFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProposalPayload>[]
+        }
+        create: {
+          args: Prisma.ProposalCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProposalPayload>
+        }
+        createMany: {
+          args: Prisma.ProposalCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ProposalCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProposalPayload>[]
+        }
+        delete: {
+          args: Prisma.ProposalDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProposalPayload>
+        }
+        update: {
+          args: Prisma.ProposalUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProposalPayload>
+        }
+        deleteMany: {
+          args: Prisma.ProposalDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ProposalUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ProposalUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProposalPayload>[]
+        }
+        upsert: {
+          args: Prisma.ProposalUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProposalPayload>
+        }
+        aggregate: {
+          args: Prisma.ProposalAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateProposal>
+        }
+        groupBy: {
+          args: Prisma.ProposalGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProposalGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ProposalCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProposalCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -608,6 +683,7 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 export const CompanyScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
+  profileType: 'profileType',
   name: 'name',
   tradeName: 'tradeName',
   description: 'description',
@@ -637,13 +713,64 @@ export const CompanyScalarFieldEnum = {
   presentationText: 'presentationText',
   footerText: 'footerText',
   contactText: 'contactText',
+  defaultValidityDays: 'defaultValidityDays',
+  defaultDeliveryTime: 'defaultDeliveryTime',
+  defaultPaymentConditions: 'defaultPaymentConditions',
+  defaultCurrency: 'defaultCurrency',
+  defaultBillingType: 'defaultBillingType',
+  defaultIntroMessage: 'defaultIntroMessage',
+  defaultClosingMessage: 'defaultClosingMessage',
+  defaultTerms: 'defaultTerms',
+  showDetailedValues: 'showDetailedValues',
+  showDiscount: 'showDiscount',
+  showContactData: 'showContactData',
+  showSignature: 'showSignature',
+  defaultTone: 'defaultTone',
   onboardingStep: 'onboardingStep',
   onboardingDone: 'onboardingDone',
+  onboardingCompletedAt: 'onboardingCompletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type CompanyScalarFieldEnum = (typeof CompanyScalarFieldEnum)[keyof typeof CompanyScalarFieldEnum]
+
+
+export const ProposalScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  companyId: 'companyId',
+  status: 'status',
+  tone: 'tone',
+  clientName: 'clientName',
+  clientContactName: 'clientContactName',
+  clientEmail: 'clientEmail',
+  clientPhone: 'clientPhone',
+  clientSegment: 'clientSegment',
+  clientWebsite: 'clientWebsite',
+  clientDescription: 'clientDescription',
+  clientProblem: 'clientProblem',
+  title: 'title',
+  serviceOffered: 'serviceOffered',
+  objective: 'objective',
+  scope: 'scope',
+  deliverables: 'deliverables',
+  timeline: 'timeline',
+  investment: 'investment',
+  paymentConditions: 'paymentConditions',
+  validityDate: 'validityDate',
+  observations: 'observations',
+  differentials: 'differentials',
+  nextSteps: 'nextSteps',
+  terms: 'terms',
+  generatedContent: 'generatedContent',
+  senderSnapshot: 'senderSnapshot',
+  styleSnapshot: 'styleSnapshot',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProposalScalarFieldEnum = (typeof ProposalScalarFieldEnum)[keyof typeof ProposalScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -652,6 +779,21 @@ export const SortOrder = {
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+
+
+export const NullableJsonNullValueInput = {
+  DbNull: DbNull,
+  JsonNull: JsonNull
+} as const
+
+export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
 
 
 export const QueryMode = {
@@ -668,6 +810,15 @@ export const NullsOrder = {
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
 
@@ -701,6 +852,20 @@ export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
  * Reference to a field of type 'DateTime[]'
  */
 export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ProfileType'
+ */
+export type EnumProfileTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProfileType'>
+    
+
+
+/**
+ * Reference to a field of type 'ProfileType[]'
+ */
+export type ListEnumProfileTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProfileType[]'>
     
 
 
@@ -761,9 +926,65 @@ export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel,
 
 
 /**
+ * Reference to a field of type 'BillingType'
+ */
+export type EnumBillingTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BillingType'>
+    
+
+
+/**
+ * Reference to a field of type 'BillingType[]'
+ */
+export type ListEnumBillingTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BillingType[]'>
+    
+
+
+/**
  * Reference to a field of type 'Boolean'
  */
 export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+/**
+ * Reference to a field of type 'ProposalTone'
+ */
+export type EnumProposalToneFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProposalTone'>
+    
+
+
+/**
+ * Reference to a field of type 'ProposalTone[]'
+ */
+export type ListEnumProposalToneFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProposalTone[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ProposalStatus'
+ */
+export type EnumProposalStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProposalStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'ProposalStatus[]'
+ */
+export type ListEnumProposalStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProposalStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Json'
+ */
+export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+/**
+ * Reference to a field of type 'QueryMode'
+ */
+export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
     
 
 
@@ -892,6 +1113,7 @@ export type PrismaClientOptions = ({
 export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   company?: Prisma.CompanyOmit
+  proposal?: Prisma.ProposalOmit
 }
 
 /* Types for Logging */

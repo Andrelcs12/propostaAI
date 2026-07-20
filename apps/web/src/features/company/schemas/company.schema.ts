@@ -35,11 +35,15 @@ export const hexColorSchema = z
     "Use uma cor hexadecimal valida. Exemplo: #0F766E",
   );
 
+export const profileTypeSchema = z.object({
+  profileType: z.enum(["COMPANY", "INDIVIDUAL"]),
+});
+
 export const companyBasicSchema = z.object({
   name: z
     .string()
     .trim()
-    .min(2, "Informe o nome da empresa.")
+    .min(2, "Informe o nome.")
     .max(120, "Use no maximo 120 caracteres."),
   tradeName: optionalText(120),
   description: optionalText(300),
@@ -72,6 +76,43 @@ export const companyBrandSchema = z.object({
   borderRadius: z.enum(["SMALL", "MEDIUM", "LARGE"]),
 });
 
+export const companyIdentitySchema = z.object({
+  tradeName: optionalText(120),
+  presentationText: optionalText(1200),
+  responsibleName: optionalText(120),
+  responsibleRole: optionalText(120),
+  contactText: optionalText(600),
+  showContactData: z.boolean(),
+  showSignature: z.boolean(),
+});
+
+export const companyDefaultsSchema = z.object({
+  defaultValidityDays: z.coerce
+    .number()
+    .int()
+    .min(1, "Informe pelo menos 1 dia.")
+    .max(365, "Use no maximo 365 dias."),
+  defaultDeliveryTime: optionalText(120),
+  defaultPaymentConditions: optionalText(600),
+  defaultCurrency: z
+    .string()
+    .trim()
+    .length(3, "Use o codigo da moeda com 3 letras."),
+  defaultBillingType: z.enum(["FIXED", "HOURLY", "MONTHLY", "PROJECT"]),
+  defaultIntroMessage: optionalText(1200),
+  defaultClosingMessage: optionalText(600),
+  defaultTerms: optionalText(1200),
+  showDetailedValues: z.boolean(),
+  showDiscount: z.boolean(),
+  defaultTone: z.enum([
+    "PROFESSIONAL",
+    "DIRECT",
+    "PERSUASIVE",
+    "FRIENDLY",
+    "PREMIUM",
+  ]),
+});
+
 export const companyCommercialSchema = z.object({
   responsibleName: optionalText(120),
   responsibleRole: optionalText(120),
@@ -82,6 +123,9 @@ export const companyCommercialSchema = z.object({
   contactText: optionalText(600),
 });
 
+export type ProfileTypeInput = z.infer<typeof profileTypeSchema>;
 export type CompanyBasicInput = z.infer<typeof companyBasicSchema>;
 export type CompanyBrandInput = z.infer<typeof companyBrandSchema>;
+export type CompanyIdentityInput = z.infer<typeof companyIdentitySchema>;
+export type CompanyDefaultsInput = z.infer<typeof companyDefaultsSchema>;
 export type CompanyCommercialInput = z.infer<typeof companyCommercialSchema>;

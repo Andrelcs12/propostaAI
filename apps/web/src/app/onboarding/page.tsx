@@ -25,7 +25,7 @@ export default async function OnboardingPage() {
         <div className="mb-8 max-w-2xl">
           <p className="text-sm font-medium text-primary">Onboarding</p>
           <h1 className="mt-2 text-3xl font-semibold tracking-normal">
-            Configure sua empresa
+            Configure sua conta
           </h1>
           <p className="mt-2 text-muted-foreground">
             Esses dados serao usados como base para suas propostas comerciais.

@@ -27,16 +27,19 @@ export type AggregateCompany = {
 }
 
 export type CompanyAvgAggregateOutputType = {
+  defaultValidityDays: number | null
   onboardingStep: number | null
 }
 
 export type CompanySumAggregateOutputType = {
+  defaultValidityDays: number | null
   onboardingStep: number | null
 }
 
 export type CompanyMinAggregateOutputType = {
   id: string | null
   userId: string | null
+  profileType: $Enums.ProfileType | null
   name: string | null
   tradeName: string | null
   description: string | null
@@ -66,8 +69,22 @@ export type CompanyMinAggregateOutputType = {
   presentationText: string | null
   footerText: string | null
   contactText: string | null
+  defaultValidityDays: number | null
+  defaultDeliveryTime: string | null
+  defaultPaymentConditions: string | null
+  defaultCurrency: string | null
+  defaultBillingType: $Enums.BillingType | null
+  defaultIntroMessage: string | null
+  defaultClosingMessage: string | null
+  defaultTerms: string | null
+  showDetailedValues: boolean | null
+  showDiscount: boolean | null
+  showContactData: boolean | null
+  showSignature: boolean | null
+  defaultTone: $Enums.ProposalTone | null
   onboardingStep: number | null
   onboardingDone: boolean | null
+  onboardingCompletedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -75,6 +92,7 @@ export type CompanyMinAggregateOutputType = {
 export type CompanyMaxAggregateOutputType = {
   id: string | null
   userId: string | null
+  profileType: $Enums.ProfileType | null
   name: string | null
   tradeName: string | null
   description: string | null
@@ -104,8 +122,22 @@ export type CompanyMaxAggregateOutputType = {
   presentationText: string | null
   footerText: string | null
   contactText: string | null
+  defaultValidityDays: number | null
+  defaultDeliveryTime: string | null
+  defaultPaymentConditions: string | null
+  defaultCurrency: string | null
+  defaultBillingType: $Enums.BillingType | null
+  defaultIntroMessage: string | null
+  defaultClosingMessage: string | null
+  defaultTerms: string | null
+  showDetailedValues: boolean | null
+  showDiscount: boolean | null
+  showContactData: boolean | null
+  showSignature: boolean | null
+  defaultTone: $Enums.ProposalTone | null
   onboardingStep: number | null
   onboardingDone: boolean | null
+  onboardingCompletedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -113,6 +145,7 @@ export type CompanyMaxAggregateOutputType = {
 export type CompanyCountAggregateOutputType = {
   id: number
   userId: number
+  profileType: number
   name: number
   tradeName: number
   description: number
@@ -142,8 +175,22 @@ export type CompanyCountAggregateOutputType = {
   presentationText: number
   footerText: number
   contactText: number
+  defaultValidityDays: number
+  defaultDeliveryTime: number
+  defaultPaymentConditions: number
+  defaultCurrency: number
+  defaultBillingType: number
+  defaultIntroMessage: number
+  defaultClosingMessage: number
+  defaultTerms: number
+  showDetailedValues: number
+  showDiscount: number
+  showContactData: number
+  showSignature: number
+  defaultTone: number
   onboardingStep: number
   onboardingDone: number
+  onboardingCompletedAt: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -151,16 +198,19 @@ export type CompanyCountAggregateOutputType = {
 
 
 export type CompanyAvgAggregateInputType = {
+  defaultValidityDays?: true
   onboardingStep?: true
 }
 
 export type CompanySumAggregateInputType = {
+  defaultValidityDays?: true
   onboardingStep?: true
 }
 
 export type CompanyMinAggregateInputType = {
   id?: true
   userId?: true
+  profileType?: true
   name?: true
   tradeName?: true
   description?: true
@@ -190,8 +240,22 @@ export type CompanyMinAggregateInputType = {
   presentationText?: true
   footerText?: true
   contactText?: true
+  defaultValidityDays?: true
+  defaultDeliveryTime?: true
+  defaultPaymentConditions?: true
+  defaultCurrency?: true
+  defaultBillingType?: true
+  defaultIntroMessage?: true
+  defaultClosingMessage?: true
+  defaultTerms?: true
+  showDetailedValues?: true
+  showDiscount?: true
+  showContactData?: true
+  showSignature?: true
+  defaultTone?: true
   onboardingStep?: true
   onboardingDone?: true
+  onboardingCompletedAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -199,6 +263,7 @@ export type CompanyMinAggregateInputType = {
 export type CompanyMaxAggregateInputType = {
   id?: true
   userId?: true
+  profileType?: true
   name?: true
   tradeName?: true
   description?: true
@@ -228,8 +293,22 @@ export type CompanyMaxAggregateInputType = {
   presentationText?: true
   footerText?: true
   contactText?: true
+  defaultValidityDays?: true
+  defaultDeliveryTime?: true
+  defaultPaymentConditions?: true
+  defaultCurrency?: true
+  defaultBillingType?: true
+  defaultIntroMessage?: true
+  defaultClosingMessage?: true
+  defaultTerms?: true
+  showDetailedValues?: true
+  showDiscount?: true
+  showContactData?: true
+  showSignature?: true
+  defaultTone?: true
   onboardingStep?: true
   onboardingDone?: true
+  onboardingCompletedAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -237,6 +316,7 @@ export type CompanyMaxAggregateInputType = {
 export type CompanyCountAggregateInputType = {
   id?: true
   userId?: true
+  profileType?: true
   name?: true
   tradeName?: true
   description?: true
@@ -266,8 +346,22 @@ export type CompanyCountAggregateInputType = {
   presentationText?: true
   footerText?: true
   contactText?: true
+  defaultValidityDays?: true
+  defaultDeliveryTime?: true
+  defaultPaymentConditions?: true
+  defaultCurrency?: true
+  defaultBillingType?: true
+  defaultIntroMessage?: true
+  defaultClosingMessage?: true
+  defaultTerms?: true
+  showDetailedValues?: true
+  showDiscount?: true
+  showContactData?: true
+  showSignature?: true
+  defaultTone?: true
   onboardingStep?: true
   onboardingDone?: true
+  onboardingCompletedAt?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -362,6 +456,7 @@ export type CompanyGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 export type CompanyGroupByOutputType = {
   id: string
   userId: string
+  profileType: $Enums.ProfileType
   name: string
   tradeName: string | null
   description: string | null
@@ -391,8 +486,22 @@ export type CompanyGroupByOutputType = {
   presentationText: string | null
   footerText: string | null
   contactText: string | null
+  defaultValidityDays: number
+  defaultDeliveryTime: string | null
+  defaultPaymentConditions: string | null
+  defaultCurrency: string
+  defaultBillingType: $Enums.BillingType
+  defaultIntroMessage: string | null
+  defaultClosingMessage: string | null
+  defaultTerms: string | null
+  showDetailedValues: boolean
+  showDiscount: boolean
+  showContactData: boolean
+  showSignature: boolean
+  defaultTone: $Enums.ProposalTone
   onboardingStep: number
   onboardingDone: boolean
+  onboardingCompletedAt: Date | null
   createdAt: Date
   updatedAt: Date
   _count: CompanyCountAggregateOutputType | null
@@ -423,6 +532,7 @@ export type CompanyWhereInput = {
   NOT?: Prisma.CompanyWhereInput | Prisma.CompanyWhereInput[]
   id?: Prisma.StringFilter<"Company"> | string
   userId?: Prisma.StringFilter<"Company"> | string
+  profileType?: Prisma.EnumProfileTypeFilter<"Company"> | $Enums.ProfileType
   name?: Prisma.StringFilter<"Company"> | string
   tradeName?: Prisma.StringNullableFilter<"Company"> | string | null
   description?: Prisma.StringNullableFilter<"Company"> | string | null
@@ -452,16 +562,32 @@ export type CompanyWhereInput = {
   presentationText?: Prisma.StringNullableFilter<"Company"> | string | null
   footerText?: Prisma.StringNullableFilter<"Company"> | string | null
   contactText?: Prisma.StringNullableFilter<"Company"> | string | null
+  defaultValidityDays?: Prisma.IntFilter<"Company"> | number
+  defaultDeliveryTime?: Prisma.StringNullableFilter<"Company"> | string | null
+  defaultPaymentConditions?: Prisma.StringNullableFilter<"Company"> | string | null
+  defaultCurrency?: Prisma.StringFilter<"Company"> | string
+  defaultBillingType?: Prisma.EnumBillingTypeFilter<"Company"> | $Enums.BillingType
+  defaultIntroMessage?: Prisma.StringNullableFilter<"Company"> | string | null
+  defaultClosingMessage?: Prisma.StringNullableFilter<"Company"> | string | null
+  defaultTerms?: Prisma.StringNullableFilter<"Company"> | string | null
+  showDetailedValues?: Prisma.BoolFilter<"Company"> | boolean
+  showDiscount?: Prisma.BoolFilter<"Company"> | boolean
+  showContactData?: Prisma.BoolFilter<"Company"> | boolean
+  showSignature?: Prisma.BoolFilter<"Company"> | boolean
+  defaultTone?: Prisma.EnumProposalToneFilter<"Company"> | $Enums.ProposalTone
   onboardingStep?: Prisma.IntFilter<"Company"> | number
   onboardingDone?: Prisma.BoolFilter<"Company"> | boolean
+  onboardingCompletedAt?: Prisma.DateTimeNullableFilter<"Company"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Company"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Company"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  proposals?: Prisma.ProposalListRelationFilter
 }
 
 export type CompanyOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  profileType?: Prisma.SortOrder
   name?: Prisma.SortOrder
   tradeName?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -491,11 +617,26 @@ export type CompanyOrderByWithRelationInput = {
   presentationText?: Prisma.SortOrderInput | Prisma.SortOrder
   footerText?: Prisma.SortOrderInput | Prisma.SortOrder
   contactText?: Prisma.SortOrderInput | Prisma.SortOrder
+  defaultValidityDays?: Prisma.SortOrder
+  defaultDeliveryTime?: Prisma.SortOrderInput | Prisma.SortOrder
+  defaultPaymentConditions?: Prisma.SortOrderInput | Prisma.SortOrder
+  defaultCurrency?: Prisma.SortOrder
+  defaultBillingType?: Prisma.SortOrder
+  defaultIntroMessage?: Prisma.SortOrderInput | Prisma.SortOrder
+  defaultClosingMessage?: Prisma.SortOrderInput | Prisma.SortOrder
+  defaultTerms?: Prisma.SortOrderInput | Prisma.SortOrder
+  showDetailedValues?: Prisma.SortOrder
+  showDiscount?: Prisma.SortOrder
+  showContactData?: Prisma.SortOrder
+  showSignature?: Prisma.SortOrder
+  defaultTone?: Prisma.SortOrder
   onboardingStep?: Prisma.SortOrder
   onboardingDone?: Prisma.SortOrder
+  onboardingCompletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
+  proposals?: Prisma.ProposalOrderByRelationAggregateInput
 }
 
 export type CompanyWhereUniqueInput = Prisma.AtLeast<{
@@ -504,6 +645,7 @@ export type CompanyWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.CompanyWhereInput | Prisma.CompanyWhereInput[]
   OR?: Prisma.CompanyWhereInput[]
   NOT?: Prisma.CompanyWhereInput | Prisma.CompanyWhereInput[]
+  profileType?: Prisma.EnumProfileTypeFilter<"Company"> | $Enums.ProfileType
   name?: Prisma.StringFilter<"Company"> | string
   tradeName?: Prisma.StringNullableFilter<"Company"> | string | null
   description?: Prisma.StringNullableFilter<"Company"> | string | null
@@ -533,16 +675,32 @@ export type CompanyWhereUniqueInput = Prisma.AtLeast<{
   presentationText?: Prisma.StringNullableFilter<"Company"> | string | null
   footerText?: Prisma.StringNullableFilter<"Company"> | string | null
   contactText?: Prisma.StringNullableFilter<"Company"> | string | null
+  defaultValidityDays?: Prisma.IntFilter<"Company"> | number
+  defaultDeliveryTime?: Prisma.StringNullableFilter<"Company"> | string | null
+  defaultPaymentConditions?: Prisma.StringNullableFilter<"Company"> | string | null
+  defaultCurrency?: Prisma.StringFilter<"Company"> | string
+  defaultBillingType?: Prisma.EnumBillingTypeFilter<"Company"> | $Enums.BillingType
+  defaultIntroMessage?: Prisma.StringNullableFilter<"Company"> | string | null
+  defaultClosingMessage?: Prisma.StringNullableFilter<"Company"> | string | null
+  defaultTerms?: Prisma.StringNullableFilter<"Company"> | string | null
+  showDetailedValues?: Prisma.BoolFilter<"Company"> | boolean
+  showDiscount?: Prisma.BoolFilter<"Company"> | boolean
+  showContactData?: Prisma.BoolFilter<"Company"> | boolean
+  showSignature?: Prisma.BoolFilter<"Company"> | boolean
+  defaultTone?: Prisma.EnumProposalToneFilter<"Company"> | $Enums.ProposalTone
   onboardingStep?: Prisma.IntFilter<"Company"> | number
   onboardingDone?: Prisma.BoolFilter<"Company"> | boolean
+  onboardingCompletedAt?: Prisma.DateTimeNullableFilter<"Company"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Company"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Company"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  proposals?: Prisma.ProposalListRelationFilter
 }, "id" | "userId">
 
 export type CompanyOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  profileType?: Prisma.SortOrder
   name?: Prisma.SortOrder
   tradeName?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -572,8 +730,22 @@ export type CompanyOrderByWithAggregationInput = {
   presentationText?: Prisma.SortOrderInput | Prisma.SortOrder
   footerText?: Prisma.SortOrderInput | Prisma.SortOrder
   contactText?: Prisma.SortOrderInput | Prisma.SortOrder
+  defaultValidityDays?: Prisma.SortOrder
+  defaultDeliveryTime?: Prisma.SortOrderInput | Prisma.SortOrder
+  defaultPaymentConditions?: Prisma.SortOrderInput | Prisma.SortOrder
+  defaultCurrency?: Prisma.SortOrder
+  defaultBillingType?: Prisma.SortOrder
+  defaultIntroMessage?: Prisma.SortOrderInput | Prisma.SortOrder
+  defaultClosingMessage?: Prisma.SortOrderInput | Prisma.SortOrder
+  defaultTerms?: Prisma.SortOrderInput | Prisma.SortOrder
+  showDetailedValues?: Prisma.SortOrder
+  showDiscount?: Prisma.SortOrder
+  showContactData?: Prisma.SortOrder
+  showSignature?: Prisma.SortOrder
+  defaultTone?: Prisma.SortOrder
   onboardingStep?: Prisma.SortOrder
   onboardingDone?: Prisma.SortOrder
+  onboardingCompletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.CompanyCountOrderByAggregateInput
@@ -589,6 +761,7 @@ export type CompanyScalarWhereWithAggregatesInput = {
   NOT?: Prisma.CompanyScalarWhereWithAggregatesInput | Prisma.CompanyScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Company"> | string
   userId?: Prisma.StringWithAggregatesFilter<"Company"> | string
+  profileType?: Prisma.EnumProfileTypeWithAggregatesFilter<"Company"> | $Enums.ProfileType
   name?: Prisma.StringWithAggregatesFilter<"Company"> | string
   tradeName?: Prisma.StringNullableWithAggregatesFilter<"Company"> | string | null
   description?: Prisma.StringNullableWithAggregatesFilter<"Company"> | string | null
@@ -618,14 +791,29 @@ export type CompanyScalarWhereWithAggregatesInput = {
   presentationText?: Prisma.StringNullableWithAggregatesFilter<"Company"> | string | null
   footerText?: Prisma.StringNullableWithAggregatesFilter<"Company"> | string | null
   contactText?: Prisma.StringNullableWithAggregatesFilter<"Company"> | string | null
+  defaultValidityDays?: Prisma.IntWithAggregatesFilter<"Company"> | number
+  defaultDeliveryTime?: Prisma.StringNullableWithAggregatesFilter<"Company"> | string | null
+  defaultPaymentConditions?: Prisma.StringNullableWithAggregatesFilter<"Company"> | string | null
+  defaultCurrency?: Prisma.StringWithAggregatesFilter<"Company"> | string
+  defaultBillingType?: Prisma.EnumBillingTypeWithAggregatesFilter<"Company"> | $Enums.BillingType
+  defaultIntroMessage?: Prisma.StringNullableWithAggregatesFilter<"Company"> | string | null
+  defaultClosingMessage?: Prisma.StringNullableWithAggregatesFilter<"Company"> | string | null
+  defaultTerms?: Prisma.StringNullableWithAggregatesFilter<"Company"> | string | null
+  showDetailedValues?: Prisma.BoolWithAggregatesFilter<"Company"> | boolean
+  showDiscount?: Prisma.BoolWithAggregatesFilter<"Company"> | boolean
+  showContactData?: Prisma.BoolWithAggregatesFilter<"Company"> | boolean
+  showSignature?: Prisma.BoolWithAggregatesFilter<"Company"> | boolean
+  defaultTone?: Prisma.EnumProposalToneWithAggregatesFilter<"Company"> | $Enums.ProposalTone
   onboardingStep?: Prisma.IntWithAggregatesFilter<"Company"> | number
   onboardingDone?: Prisma.BoolWithAggregatesFilter<"Company"> | boolean
+  onboardingCompletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Company"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Company"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Company"> | Date | string
 }
 
 export type CompanyCreateInput = {
   id?: string
+  profileType?: $Enums.ProfileType
   name: string
   tradeName?: string | null
   description?: string | null
@@ -655,16 +843,32 @@ export type CompanyCreateInput = {
   presentationText?: string | null
   footerText?: string | null
   contactText?: string | null
+  defaultValidityDays?: number
+  defaultDeliveryTime?: string | null
+  defaultPaymentConditions?: string | null
+  defaultCurrency?: string
+  defaultBillingType?: $Enums.BillingType
+  defaultIntroMessage?: string | null
+  defaultClosingMessage?: string | null
+  defaultTerms?: string | null
+  showDetailedValues?: boolean
+  showDiscount?: boolean
+  showContactData?: boolean
+  showSignature?: boolean
+  defaultTone?: $Enums.ProposalTone
   onboardingStep?: number
   onboardingDone?: boolean
+  onboardingCompletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCompanyInput
+  proposals?: Prisma.ProposalCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyUncheckedCreateInput = {
   id?: string
   userId: string
+  profileType?: $Enums.ProfileType
   name: string
   tradeName?: string | null
   description?: string | null
@@ -694,14 +898,30 @@ export type CompanyUncheckedCreateInput = {
   presentationText?: string | null
   footerText?: string | null
   contactText?: string | null
+  defaultValidityDays?: number
+  defaultDeliveryTime?: string | null
+  defaultPaymentConditions?: string | null
+  defaultCurrency?: string
+  defaultBillingType?: $Enums.BillingType
+  defaultIntroMessage?: string | null
+  defaultClosingMessage?: string | null
+  defaultTerms?: string | null
+  showDetailedValues?: boolean
+  showDiscount?: boolean
+  showContactData?: boolean
+  showSignature?: boolean
+  defaultTone?: $Enums.ProposalTone
   onboardingStep?: number
   onboardingDone?: boolean
+  onboardingCompletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  proposals?: Prisma.ProposalUncheckedCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  profileType?: Prisma.EnumProfileTypeFieldUpdateOperationsInput | $Enums.ProfileType
   name?: Prisma.StringFieldUpdateOperationsInput | string
   tradeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -731,16 +951,32 @@ export type CompanyUpdateInput = {
   presentationText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   footerText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultValidityDays?: Prisma.IntFieldUpdateOperationsInput | number
+  defaultDeliveryTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultPaymentConditions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultCurrency?: Prisma.StringFieldUpdateOperationsInput | string
+  defaultBillingType?: Prisma.EnumBillingTypeFieldUpdateOperationsInput | $Enums.BillingType
+  defaultIntroMessage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultClosingMessage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultTerms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showDetailedValues?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  showDiscount?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  showContactData?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  showSignature?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  defaultTone?: Prisma.EnumProposalToneFieldUpdateOperationsInput | $Enums.ProposalTone
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingDone?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCompanyNestedInput
+  proposals?: Prisma.ProposalUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  profileType?: Prisma.EnumProfileTypeFieldUpdateOperationsInput | $Enums.ProfileType
   name?: Prisma.StringFieldUpdateOperationsInput | string
   tradeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -770,15 +1006,31 @@ export type CompanyUncheckedUpdateInput = {
   presentationText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   footerText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultValidityDays?: Prisma.IntFieldUpdateOperationsInput | number
+  defaultDeliveryTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultPaymentConditions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultCurrency?: Prisma.StringFieldUpdateOperationsInput | string
+  defaultBillingType?: Prisma.EnumBillingTypeFieldUpdateOperationsInput | $Enums.BillingType
+  defaultIntroMessage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultClosingMessage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultTerms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showDetailedValues?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  showDiscount?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  showContactData?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  showSignature?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  defaultTone?: Prisma.EnumProposalToneFieldUpdateOperationsInput | $Enums.ProposalTone
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingDone?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  proposals?: Prisma.ProposalUncheckedUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyCreateManyInput = {
   id?: string
   userId: string
+  profileType?: $Enums.ProfileType
   name: string
   tradeName?: string | null
   description?: string | null
@@ -808,14 +1060,29 @@ export type CompanyCreateManyInput = {
   presentationText?: string | null
   footerText?: string | null
   contactText?: string | null
+  defaultValidityDays?: number
+  defaultDeliveryTime?: string | null
+  defaultPaymentConditions?: string | null
+  defaultCurrency?: string
+  defaultBillingType?: $Enums.BillingType
+  defaultIntroMessage?: string | null
+  defaultClosingMessage?: string | null
+  defaultTerms?: string | null
+  showDetailedValues?: boolean
+  showDiscount?: boolean
+  showContactData?: boolean
+  showSignature?: boolean
+  defaultTone?: $Enums.ProposalTone
   onboardingStep?: number
   onboardingDone?: boolean
+  onboardingCompletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type CompanyUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  profileType?: Prisma.EnumProfileTypeFieldUpdateOperationsInput | $Enums.ProfileType
   name?: Prisma.StringFieldUpdateOperationsInput | string
   tradeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -845,8 +1112,22 @@ export type CompanyUpdateManyMutationInput = {
   presentationText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   footerText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultValidityDays?: Prisma.IntFieldUpdateOperationsInput | number
+  defaultDeliveryTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultPaymentConditions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultCurrency?: Prisma.StringFieldUpdateOperationsInput | string
+  defaultBillingType?: Prisma.EnumBillingTypeFieldUpdateOperationsInput | $Enums.BillingType
+  defaultIntroMessage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultClosingMessage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultTerms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showDetailedValues?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  showDiscount?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  showContactData?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  showSignature?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  defaultTone?: Prisma.EnumProposalToneFieldUpdateOperationsInput | $Enums.ProposalTone
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingDone?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -854,6 +1135,7 @@ export type CompanyUpdateManyMutationInput = {
 export type CompanyUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  profileType?: Prisma.EnumProfileTypeFieldUpdateOperationsInput | $Enums.ProfileType
   name?: Prisma.StringFieldUpdateOperationsInput | string
   tradeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -883,8 +1165,22 @@ export type CompanyUncheckedUpdateManyInput = {
   presentationText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   footerText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultValidityDays?: Prisma.IntFieldUpdateOperationsInput | number
+  defaultDeliveryTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultPaymentConditions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultCurrency?: Prisma.StringFieldUpdateOperationsInput | string
+  defaultBillingType?: Prisma.EnumBillingTypeFieldUpdateOperationsInput | $Enums.BillingType
+  defaultIntroMessage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultClosingMessage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultTerms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showDetailedValues?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  showDiscount?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  showContactData?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  showSignature?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  defaultTone?: Prisma.EnumProposalToneFieldUpdateOperationsInput | $Enums.ProposalTone
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingDone?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -897,6 +1193,7 @@ export type CompanyNullableScalarRelationFilter = {
 export type CompanyCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  profileType?: Prisma.SortOrder
   name?: Prisma.SortOrder
   tradeName?: Prisma.SortOrder
   description?: Prisma.SortOrder
@@ -926,19 +1223,35 @@ export type CompanyCountOrderByAggregateInput = {
   presentationText?: Prisma.SortOrder
   footerText?: Prisma.SortOrder
   contactText?: Prisma.SortOrder
+  defaultValidityDays?: Prisma.SortOrder
+  defaultDeliveryTime?: Prisma.SortOrder
+  defaultPaymentConditions?: Prisma.SortOrder
+  defaultCurrency?: Prisma.SortOrder
+  defaultBillingType?: Prisma.SortOrder
+  defaultIntroMessage?: Prisma.SortOrder
+  defaultClosingMessage?: Prisma.SortOrder
+  defaultTerms?: Prisma.SortOrder
+  showDetailedValues?: Prisma.SortOrder
+  showDiscount?: Prisma.SortOrder
+  showContactData?: Prisma.SortOrder
+  showSignature?: Prisma.SortOrder
+  defaultTone?: Prisma.SortOrder
   onboardingStep?: Prisma.SortOrder
   onboardingDone?: Prisma.SortOrder
+  onboardingCompletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type CompanyAvgOrderByAggregateInput = {
+  defaultValidityDays?: Prisma.SortOrder
   onboardingStep?: Prisma.SortOrder
 }
 
 export type CompanyMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  profileType?: Prisma.SortOrder
   name?: Prisma.SortOrder
   tradeName?: Prisma.SortOrder
   description?: Prisma.SortOrder
@@ -968,8 +1281,22 @@ export type CompanyMaxOrderByAggregateInput = {
   presentationText?: Prisma.SortOrder
   footerText?: Prisma.SortOrder
   contactText?: Prisma.SortOrder
+  defaultValidityDays?: Prisma.SortOrder
+  defaultDeliveryTime?: Prisma.SortOrder
+  defaultPaymentConditions?: Prisma.SortOrder
+  defaultCurrency?: Prisma.SortOrder
+  defaultBillingType?: Prisma.SortOrder
+  defaultIntroMessage?: Prisma.SortOrder
+  defaultClosingMessage?: Prisma.SortOrder
+  defaultTerms?: Prisma.SortOrder
+  showDetailedValues?: Prisma.SortOrder
+  showDiscount?: Prisma.SortOrder
+  showContactData?: Prisma.SortOrder
+  showSignature?: Prisma.SortOrder
+  defaultTone?: Prisma.SortOrder
   onboardingStep?: Prisma.SortOrder
   onboardingDone?: Prisma.SortOrder
+  onboardingCompletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -977,6 +1304,7 @@ export type CompanyMaxOrderByAggregateInput = {
 export type CompanyMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  profileType?: Prisma.SortOrder
   name?: Prisma.SortOrder
   tradeName?: Prisma.SortOrder
   description?: Prisma.SortOrder
@@ -1006,14 +1334,34 @@ export type CompanyMinOrderByAggregateInput = {
   presentationText?: Prisma.SortOrder
   footerText?: Prisma.SortOrder
   contactText?: Prisma.SortOrder
+  defaultValidityDays?: Prisma.SortOrder
+  defaultDeliveryTime?: Prisma.SortOrder
+  defaultPaymentConditions?: Prisma.SortOrder
+  defaultCurrency?: Prisma.SortOrder
+  defaultBillingType?: Prisma.SortOrder
+  defaultIntroMessage?: Prisma.SortOrder
+  defaultClosingMessage?: Prisma.SortOrder
+  defaultTerms?: Prisma.SortOrder
+  showDetailedValues?: Prisma.SortOrder
+  showDiscount?: Prisma.SortOrder
+  showContactData?: Prisma.SortOrder
+  showSignature?: Prisma.SortOrder
+  defaultTone?: Prisma.SortOrder
   onboardingStep?: Prisma.SortOrder
   onboardingDone?: Prisma.SortOrder
+  onboardingCompletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type CompanySumOrderByAggregateInput = {
+  defaultValidityDays?: Prisma.SortOrder
   onboardingStep?: Prisma.SortOrder
+}
+
+export type CompanyScalarRelationFilter = {
+  is?: Prisma.CompanyWhereInput
+  isNot?: Prisma.CompanyWhereInput
 }
 
 export type CompanyCreateNestedOneWithoutUserInput = {
@@ -1048,6 +1396,10 @@ export type CompanyUncheckedUpdateOneWithoutUserNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CompanyUpdateToOneWithWhereWithoutUserInput, Prisma.CompanyUpdateWithoutUserInput>, Prisma.CompanyUncheckedUpdateWithoutUserInput>
 }
 
+export type EnumProfileTypeFieldUpdateOperationsInput = {
+  set?: $Enums.ProfileType
+}
+
 export type EnumCompanyVisualPreferenceFieldUpdateOperationsInput = {
   set?: $Enums.CompanyVisualPreference
 }
@@ -1068,12 +1420,39 @@ export type IntFieldUpdateOperationsInput = {
   divide?: number
 }
 
+export type EnumBillingTypeFieldUpdateOperationsInput = {
+  set?: $Enums.BillingType
+}
+
 export type BoolFieldUpdateOperationsInput = {
   set?: boolean
 }
 
+export type EnumProposalToneFieldUpdateOperationsInput = {
+  set?: $Enums.ProposalTone
+}
+
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
+}
+
+export type CompanyCreateNestedOneWithoutProposalsInput = {
+  create?: Prisma.XOR<Prisma.CompanyCreateWithoutProposalsInput, Prisma.CompanyUncheckedCreateWithoutProposalsInput>
+  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutProposalsInput
+  connect?: Prisma.CompanyWhereUniqueInput
+}
+
+export type CompanyUpdateOneRequiredWithoutProposalsNestedInput = {
+  create?: Prisma.XOR<Prisma.CompanyCreateWithoutProposalsInput, Prisma.CompanyUncheckedCreateWithoutProposalsInput>
+  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutProposalsInput
+  upsert?: Prisma.CompanyUpsertWithoutProposalsInput
+  connect?: Prisma.CompanyWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CompanyUpdateToOneWithWhereWithoutProposalsInput, Prisma.CompanyUpdateWithoutProposalsInput>, Prisma.CompanyUncheckedUpdateWithoutProposalsInput>
+}
+
 export type CompanyCreateWithoutUserInput = {
   id?: string
+  profileType?: $Enums.ProfileType
   name: string
   tradeName?: string | null
   description?: string | null
@@ -1103,14 +1482,30 @@ export type CompanyCreateWithoutUserInput = {
   presentationText?: string | null
   footerText?: string | null
   contactText?: string | null
+  defaultValidityDays?: number
+  defaultDeliveryTime?: string | null
+  defaultPaymentConditions?: string | null
+  defaultCurrency?: string
+  defaultBillingType?: $Enums.BillingType
+  defaultIntroMessage?: string | null
+  defaultClosingMessage?: string | null
+  defaultTerms?: string | null
+  showDetailedValues?: boolean
+  showDiscount?: boolean
+  showContactData?: boolean
+  showSignature?: boolean
+  defaultTone?: $Enums.ProposalTone
   onboardingStep?: number
   onboardingDone?: boolean
+  onboardingCompletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  proposals?: Prisma.ProposalCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyUncheckedCreateWithoutUserInput = {
   id?: string
+  profileType?: $Enums.ProfileType
   name: string
   tradeName?: string | null
   description?: string | null
@@ -1140,10 +1535,25 @@ export type CompanyUncheckedCreateWithoutUserInput = {
   presentationText?: string | null
   footerText?: string | null
   contactText?: string | null
+  defaultValidityDays?: number
+  defaultDeliveryTime?: string | null
+  defaultPaymentConditions?: string | null
+  defaultCurrency?: string
+  defaultBillingType?: $Enums.BillingType
+  defaultIntroMessage?: string | null
+  defaultClosingMessage?: string | null
+  defaultTerms?: string | null
+  showDetailedValues?: boolean
+  showDiscount?: boolean
+  showContactData?: boolean
+  showSignature?: boolean
+  defaultTone?: $Enums.ProposalTone
   onboardingStep?: number
   onboardingDone?: boolean
+  onboardingCompletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  proposals?: Prisma.ProposalUncheckedCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyCreateOrConnectWithoutUserInput = {
@@ -1164,6 +1574,7 @@ export type CompanyUpdateToOneWithWhereWithoutUserInput = {
 
 export type CompanyUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  profileType?: Prisma.EnumProfileTypeFieldUpdateOperationsInput | $Enums.ProfileType
   name?: Prisma.StringFieldUpdateOperationsInput | string
   tradeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1193,14 +1604,30 @@ export type CompanyUpdateWithoutUserInput = {
   presentationText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   footerText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultValidityDays?: Prisma.IntFieldUpdateOperationsInput | number
+  defaultDeliveryTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultPaymentConditions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultCurrency?: Prisma.StringFieldUpdateOperationsInput | string
+  defaultBillingType?: Prisma.EnumBillingTypeFieldUpdateOperationsInput | $Enums.BillingType
+  defaultIntroMessage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultClosingMessage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultTerms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showDetailedValues?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  showDiscount?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  showContactData?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  showSignature?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  defaultTone?: Prisma.EnumProposalToneFieldUpdateOperationsInput | $Enums.ProposalTone
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingDone?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  proposals?: Prisma.ProposalUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  profileType?: Prisma.EnumProfileTypeFieldUpdateOperationsInput | $Enums.ProfileType
   name?: Prisma.StringFieldUpdateOperationsInput | string
   tradeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1230,17 +1657,290 @@ export type CompanyUncheckedUpdateWithoutUserInput = {
   presentationText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   footerText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultValidityDays?: Prisma.IntFieldUpdateOperationsInput | number
+  defaultDeliveryTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultPaymentConditions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultCurrency?: Prisma.StringFieldUpdateOperationsInput | string
+  defaultBillingType?: Prisma.EnumBillingTypeFieldUpdateOperationsInput | $Enums.BillingType
+  defaultIntroMessage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultClosingMessage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultTerms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showDetailedValues?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  showDiscount?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  showContactData?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  showSignature?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  defaultTone?: Prisma.EnumProposalToneFieldUpdateOperationsInput | $Enums.ProposalTone
   onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
   onboardingDone?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  proposals?: Prisma.ProposalUncheckedUpdateManyWithoutCompanyNestedInput
+}
+
+export type CompanyCreateWithoutProposalsInput = {
+  id?: string
+  profileType?: $Enums.ProfileType
+  name: string
+  tradeName?: string | null
+  description?: string | null
+  segment?: string | null
+  website?: string | null
+  commercialEmail?: string | null
+  whatsapp?: string | null
+  instagram?: string | null
+  city?: string | null
+  state?: string | null
+  logoUrl?: string | null
+  lightLogoUrl?: string | null
+  primaryColor?: string
+  secondaryColor?: string
+  accentColor?: string
+  backgroundColor?: string
+  surfaceColor?: string
+  textColor?: string
+  visualPreference?: $Enums.CompanyVisualPreference
+  fontPreference?: $Enums.CompanyFontPreference
+  visualStyle?: $Enums.CompanyVisualStyle
+  borderRadius?: string
+  responsibleName?: string | null
+  responsibleRole?: string | null
+  document?: string | null
+  address?: string | null
+  presentationText?: string | null
+  footerText?: string | null
+  contactText?: string | null
+  defaultValidityDays?: number
+  defaultDeliveryTime?: string | null
+  defaultPaymentConditions?: string | null
+  defaultCurrency?: string
+  defaultBillingType?: $Enums.BillingType
+  defaultIntroMessage?: string | null
+  defaultClosingMessage?: string | null
+  defaultTerms?: string | null
+  showDetailedValues?: boolean
+  showDiscount?: boolean
+  showContactData?: boolean
+  showSignature?: boolean
+  defaultTone?: $Enums.ProposalTone
+  onboardingStep?: number
+  onboardingDone?: boolean
+  onboardingCompletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutCompanyInput
+}
+
+export type CompanyUncheckedCreateWithoutProposalsInput = {
+  id?: string
+  userId: string
+  profileType?: $Enums.ProfileType
+  name: string
+  tradeName?: string | null
+  description?: string | null
+  segment?: string | null
+  website?: string | null
+  commercialEmail?: string | null
+  whatsapp?: string | null
+  instagram?: string | null
+  city?: string | null
+  state?: string | null
+  logoUrl?: string | null
+  lightLogoUrl?: string | null
+  primaryColor?: string
+  secondaryColor?: string
+  accentColor?: string
+  backgroundColor?: string
+  surfaceColor?: string
+  textColor?: string
+  visualPreference?: $Enums.CompanyVisualPreference
+  fontPreference?: $Enums.CompanyFontPreference
+  visualStyle?: $Enums.CompanyVisualStyle
+  borderRadius?: string
+  responsibleName?: string | null
+  responsibleRole?: string | null
+  document?: string | null
+  address?: string | null
+  presentationText?: string | null
+  footerText?: string | null
+  contactText?: string | null
+  defaultValidityDays?: number
+  defaultDeliveryTime?: string | null
+  defaultPaymentConditions?: string | null
+  defaultCurrency?: string
+  defaultBillingType?: $Enums.BillingType
+  defaultIntroMessage?: string | null
+  defaultClosingMessage?: string | null
+  defaultTerms?: string | null
+  showDetailedValues?: boolean
+  showDiscount?: boolean
+  showContactData?: boolean
+  showSignature?: boolean
+  defaultTone?: $Enums.ProposalTone
+  onboardingStep?: number
+  onboardingDone?: boolean
+  onboardingCompletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type CompanyCreateOrConnectWithoutProposalsInput = {
+  where: Prisma.CompanyWhereUniqueInput
+  create: Prisma.XOR<Prisma.CompanyCreateWithoutProposalsInput, Prisma.CompanyUncheckedCreateWithoutProposalsInput>
+}
+
+export type CompanyUpsertWithoutProposalsInput = {
+  update: Prisma.XOR<Prisma.CompanyUpdateWithoutProposalsInput, Prisma.CompanyUncheckedUpdateWithoutProposalsInput>
+  create: Prisma.XOR<Prisma.CompanyCreateWithoutProposalsInput, Prisma.CompanyUncheckedCreateWithoutProposalsInput>
+  where?: Prisma.CompanyWhereInput
+}
+
+export type CompanyUpdateToOneWithWhereWithoutProposalsInput = {
+  where?: Prisma.CompanyWhereInput
+  data: Prisma.XOR<Prisma.CompanyUpdateWithoutProposalsInput, Prisma.CompanyUncheckedUpdateWithoutProposalsInput>
+}
+
+export type CompanyUpdateWithoutProposalsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  profileType?: Prisma.EnumProfileTypeFieldUpdateOperationsInput | $Enums.ProfileType
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  tradeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  segment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commercialEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lightLogoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.StringFieldUpdateOperationsInput | string
+  secondaryColor?: Prisma.StringFieldUpdateOperationsInput | string
+  accentColor?: Prisma.StringFieldUpdateOperationsInput | string
+  backgroundColor?: Prisma.StringFieldUpdateOperationsInput | string
+  surfaceColor?: Prisma.StringFieldUpdateOperationsInput | string
+  textColor?: Prisma.StringFieldUpdateOperationsInput | string
+  visualPreference?: Prisma.EnumCompanyVisualPreferenceFieldUpdateOperationsInput | $Enums.CompanyVisualPreference
+  fontPreference?: Prisma.EnumCompanyFontPreferenceFieldUpdateOperationsInput | $Enums.CompanyFontPreference
+  visualStyle?: Prisma.EnumCompanyVisualStyleFieldUpdateOperationsInput | $Enums.CompanyVisualStyle
+  borderRadius?: Prisma.StringFieldUpdateOperationsInput | string
+  responsibleName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsibleRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  document?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  presentationText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  footerText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultValidityDays?: Prisma.IntFieldUpdateOperationsInput | number
+  defaultDeliveryTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultPaymentConditions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultCurrency?: Prisma.StringFieldUpdateOperationsInput | string
+  defaultBillingType?: Prisma.EnumBillingTypeFieldUpdateOperationsInput | $Enums.BillingType
+  defaultIntroMessage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultClosingMessage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultTerms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showDetailedValues?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  showDiscount?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  showContactData?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  showSignature?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  defaultTone?: Prisma.EnumProposalToneFieldUpdateOperationsInput | $Enums.ProposalTone
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingDone?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutCompanyNestedInput
+}
+
+export type CompanyUncheckedUpdateWithoutProposalsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  profileType?: Prisma.EnumProfileTypeFieldUpdateOperationsInput | $Enums.ProfileType
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  tradeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  segment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commercialEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instagram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lightLogoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryColor?: Prisma.StringFieldUpdateOperationsInput | string
+  secondaryColor?: Prisma.StringFieldUpdateOperationsInput | string
+  accentColor?: Prisma.StringFieldUpdateOperationsInput | string
+  backgroundColor?: Prisma.StringFieldUpdateOperationsInput | string
+  surfaceColor?: Prisma.StringFieldUpdateOperationsInput | string
+  textColor?: Prisma.StringFieldUpdateOperationsInput | string
+  visualPreference?: Prisma.EnumCompanyVisualPreferenceFieldUpdateOperationsInput | $Enums.CompanyVisualPreference
+  fontPreference?: Prisma.EnumCompanyFontPreferenceFieldUpdateOperationsInput | $Enums.CompanyFontPreference
+  visualStyle?: Prisma.EnumCompanyVisualStyleFieldUpdateOperationsInput | $Enums.CompanyVisualStyle
+  borderRadius?: Prisma.StringFieldUpdateOperationsInput | string
+  responsibleName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsibleRole?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  document?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  presentationText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  footerText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contactText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultValidityDays?: Prisma.IntFieldUpdateOperationsInput | number
+  defaultDeliveryTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultPaymentConditions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultCurrency?: Prisma.StringFieldUpdateOperationsInput | string
+  defaultBillingType?: Prisma.EnumBillingTypeFieldUpdateOperationsInput | $Enums.BillingType
+  defaultIntroMessage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultClosingMessage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultTerms?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  showDetailedValues?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  showDiscount?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  showContactData?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  showSignature?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  defaultTone?: Prisma.EnumProposalToneFieldUpdateOperationsInput | $Enums.ProposalTone
+  onboardingStep?: Prisma.IntFieldUpdateOperationsInput | number
+  onboardingDone?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  onboardingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+
+/**
+ * Count Type CompanyCountOutputType
+ */
+
+export type CompanyCountOutputType = {
+  proposals: number
+}
+
+export type CompanyCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  proposals?: boolean | CompanyCountOutputTypeCountProposalsArgs
+}
+
+/**
+ * CompanyCountOutputType without action
+ */
+export type CompanyCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CompanyCountOutputType
+   */
+  select?: Prisma.CompanyCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * CompanyCountOutputType without action
+ */
+export type CompanyCountOutputTypeCountProposalsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProposalWhereInput
+}
 
 
 export type CompanySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
+  profileType?: boolean
   name?: boolean
   tradeName?: boolean
   description?: boolean
@@ -1270,16 +1970,33 @@ export type CompanySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   presentationText?: boolean
   footerText?: boolean
   contactText?: boolean
+  defaultValidityDays?: boolean
+  defaultDeliveryTime?: boolean
+  defaultPaymentConditions?: boolean
+  defaultCurrency?: boolean
+  defaultBillingType?: boolean
+  defaultIntroMessage?: boolean
+  defaultClosingMessage?: boolean
+  defaultTerms?: boolean
+  showDetailedValues?: boolean
+  showDiscount?: boolean
+  showContactData?: boolean
+  showSignature?: boolean
+  defaultTone?: boolean
   onboardingStep?: boolean
   onboardingDone?: boolean
+  onboardingCompletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  proposals?: boolean | Prisma.Company$proposalsArgs<ExtArgs>
+  _count?: boolean | Prisma.CompanyCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["company"]>
 
 export type CompanySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
+  profileType?: boolean
   name?: boolean
   tradeName?: boolean
   description?: boolean
@@ -1309,8 +2026,22 @@ export type CompanySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   presentationText?: boolean
   footerText?: boolean
   contactText?: boolean
+  defaultValidityDays?: boolean
+  defaultDeliveryTime?: boolean
+  defaultPaymentConditions?: boolean
+  defaultCurrency?: boolean
+  defaultBillingType?: boolean
+  defaultIntroMessage?: boolean
+  defaultClosingMessage?: boolean
+  defaultTerms?: boolean
+  showDetailedValues?: boolean
+  showDiscount?: boolean
+  showContactData?: boolean
+  showSignature?: boolean
+  defaultTone?: boolean
   onboardingStep?: boolean
   onboardingDone?: boolean
+  onboardingCompletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1319,6 +2050,7 @@ export type CompanySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
 export type CompanySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
+  profileType?: boolean
   name?: boolean
   tradeName?: boolean
   description?: boolean
@@ -1348,8 +2080,22 @@ export type CompanySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   presentationText?: boolean
   footerText?: boolean
   contactText?: boolean
+  defaultValidityDays?: boolean
+  defaultDeliveryTime?: boolean
+  defaultPaymentConditions?: boolean
+  defaultCurrency?: boolean
+  defaultBillingType?: boolean
+  defaultIntroMessage?: boolean
+  defaultClosingMessage?: boolean
+  defaultTerms?: boolean
+  showDetailedValues?: boolean
+  showDiscount?: boolean
+  showContactData?: boolean
+  showSignature?: boolean
+  defaultTone?: boolean
   onboardingStep?: boolean
   onboardingDone?: boolean
+  onboardingCompletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1358,6 +2104,7 @@ export type CompanySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
 export type CompanySelectScalar = {
   id?: boolean
   userId?: boolean
+  profileType?: boolean
   name?: boolean
   tradeName?: boolean
   description?: boolean
@@ -1387,15 +2134,31 @@ export type CompanySelectScalar = {
   presentationText?: boolean
   footerText?: boolean
   contactText?: boolean
+  defaultValidityDays?: boolean
+  defaultDeliveryTime?: boolean
+  defaultPaymentConditions?: boolean
+  defaultCurrency?: boolean
+  defaultBillingType?: boolean
+  defaultIntroMessage?: boolean
+  defaultClosingMessage?: boolean
+  defaultTerms?: boolean
+  showDetailedValues?: boolean
+  showDiscount?: boolean
+  showContactData?: boolean
+  showSignature?: boolean
+  defaultTone?: boolean
   onboardingStep?: boolean
   onboardingDone?: boolean
+  onboardingCompletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type CompanyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "name" | "tradeName" | "description" | "segment" | "website" | "commercialEmail" | "whatsapp" | "instagram" | "city" | "state" | "logoUrl" | "lightLogoUrl" | "primaryColor" | "secondaryColor" | "accentColor" | "backgroundColor" | "surfaceColor" | "textColor" | "visualPreference" | "fontPreference" | "visualStyle" | "borderRadius" | "responsibleName" | "responsibleRole" | "document" | "address" | "presentationText" | "footerText" | "contactText" | "onboardingStep" | "onboardingDone" | "createdAt" | "updatedAt", ExtArgs["result"]["company"]>
+export type CompanyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "profileType" | "name" | "tradeName" | "description" | "segment" | "website" | "commercialEmail" | "whatsapp" | "instagram" | "city" | "state" | "logoUrl" | "lightLogoUrl" | "primaryColor" | "secondaryColor" | "accentColor" | "backgroundColor" | "surfaceColor" | "textColor" | "visualPreference" | "fontPreference" | "visualStyle" | "borderRadius" | "responsibleName" | "responsibleRole" | "document" | "address" | "presentationText" | "footerText" | "contactText" | "defaultValidityDays" | "defaultDeliveryTime" | "defaultPaymentConditions" | "defaultCurrency" | "defaultBillingType" | "defaultIntroMessage" | "defaultClosingMessage" | "defaultTerms" | "showDetailedValues" | "showDiscount" | "showContactData" | "showSignature" | "defaultTone" | "onboardingStep" | "onboardingDone" | "onboardingCompletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["company"]>
 export type CompanyInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  proposals?: boolean | Prisma.Company$proposalsArgs<ExtArgs>
+  _count?: boolean | Prisma.CompanyCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CompanyIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1408,10 +2171,12 @@ export type $CompanyPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   name: "Company"
   objects: {
     user: Prisma.$UserPayload<ExtArgs>
+    proposals: Prisma.$ProposalPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     userId: string
+    profileType: $Enums.ProfileType
     name: string
     tradeName: string | null
     description: string | null
@@ -1441,8 +2206,22 @@ export type $CompanyPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     presentationText: string | null
     footerText: string | null
     contactText: string | null
+    defaultValidityDays: number
+    defaultDeliveryTime: string | null
+    defaultPaymentConditions: string | null
+    defaultCurrency: string
+    defaultBillingType: $Enums.BillingType
+    defaultIntroMessage: string | null
+    defaultClosingMessage: string | null
+    defaultTerms: string | null
+    showDetailedValues: boolean
+    showDiscount: boolean
+    showContactData: boolean
+    showSignature: boolean
+    defaultTone: $Enums.ProposalTone
     onboardingStep: number
     onboardingDone: boolean
+    onboardingCompletedAt: Date | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["company"]>
@@ -1840,6 +2619,7 @@ readonly fields: CompanyFieldRefs;
 export interface Prisma__CompanyClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  proposals<T extends Prisma.Company$proposalsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Company$proposalsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProposalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1871,6 +2651,7 @@ export interface Prisma__CompanyClient<T, Null = never, ExtArgs extends runtime.
 export interface CompanyFieldRefs {
   readonly id: Prisma.FieldRef<"Company", 'String'>
   readonly userId: Prisma.FieldRef<"Company", 'String'>
+  readonly profileType: Prisma.FieldRef<"Company", 'ProfileType'>
   readonly name: Prisma.FieldRef<"Company", 'String'>
   readonly tradeName: Prisma.FieldRef<"Company", 'String'>
   readonly description: Prisma.FieldRef<"Company", 'String'>
@@ -1900,8 +2681,22 @@ export interface CompanyFieldRefs {
   readonly presentationText: Prisma.FieldRef<"Company", 'String'>
   readonly footerText: Prisma.FieldRef<"Company", 'String'>
   readonly contactText: Prisma.FieldRef<"Company", 'String'>
+  readonly defaultValidityDays: Prisma.FieldRef<"Company", 'Int'>
+  readonly defaultDeliveryTime: Prisma.FieldRef<"Company", 'String'>
+  readonly defaultPaymentConditions: Prisma.FieldRef<"Company", 'String'>
+  readonly defaultCurrency: Prisma.FieldRef<"Company", 'String'>
+  readonly defaultBillingType: Prisma.FieldRef<"Company", 'BillingType'>
+  readonly defaultIntroMessage: Prisma.FieldRef<"Company", 'String'>
+  readonly defaultClosingMessage: Prisma.FieldRef<"Company", 'String'>
+  readonly defaultTerms: Prisma.FieldRef<"Company", 'String'>
+  readonly showDetailedValues: Prisma.FieldRef<"Company", 'Boolean'>
+  readonly showDiscount: Prisma.FieldRef<"Company", 'Boolean'>
+  readonly showContactData: Prisma.FieldRef<"Company", 'Boolean'>
+  readonly showSignature: Prisma.FieldRef<"Company", 'Boolean'>
+  readonly defaultTone: Prisma.FieldRef<"Company", 'ProposalTone'>
   readonly onboardingStep: Prisma.FieldRef<"Company", 'Int'>
   readonly onboardingDone: Prisma.FieldRef<"Company", 'Boolean'>
+  readonly onboardingCompletedAt: Prisma.FieldRef<"Company", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"Company", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Company", 'DateTime'>
 }
@@ -2302,6 +3097,30 @@ export type CompanyDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Limit how many Companies to delete.
    */
   limit?: number
+}
+
+/**
+ * Company.proposals
+ */
+export type Company$proposalsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Proposal
+   */
+  select?: Prisma.ProposalSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Proposal
+   */
+  omit?: Prisma.ProposalOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProposalInclude<ExtArgs> | null
+  where?: Prisma.ProposalWhereInput
+  orderBy?: Prisma.ProposalOrderByWithRelationInput | Prisma.ProposalOrderByWithRelationInput[]
+  cursor?: Prisma.ProposalWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProposalScalarFieldEnum | Prisma.ProposalScalarFieldEnum[]
 }
 
 /**

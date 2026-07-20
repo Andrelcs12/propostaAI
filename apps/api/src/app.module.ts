@@ -5,6 +5,7 @@ import { AuthModule } from "./modules/auth/auth.module";
 import { BillingModule } from "./modules/billing/billing.module";
 import { CompanyModule } from "./modules/company/company.module";
 import { HealthModule } from "./modules/health/health.module";
+import { ProposalsModule } from "./modules/proposals/proposals.module";
 import { UsersModule } from "./modules/users/users.module";
 
 @Module({
@@ -17,6 +18,7 @@ import { UsersModule } from "./modules/users/users.module";
     AuthModule,
     UsersModule,
     CompanyModule,
+    ProposalsModule,
     BillingModule,
     HealthModule,
   ],
