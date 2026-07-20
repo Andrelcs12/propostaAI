@@ -21,10 +21,10 @@ export function ToneSelector({ value, disabled, onChange }: ToneSelectorProps) {
             type="button"
             disabled={disabled}
             onClick={() => onChange(option.value)}
-            className={`rounded-md border p-4 text-left transition-colors ${
+            className={`cursor-pointer rounded-xl border p-4 text-left transition-all ${
               isActive
-                ? "border-primary bg-primary/5"
-                : "bg-card hover:border-primary/40"
+                ? "border-primary bg-primary/8 ring-2 ring-primary/20"
+                : "border-border/80 bg-background hover:border-primary/30 hover:bg-muted/30"
             }`}
           >
             <p className="font-medium">{option.label}</p>

@@ -1,11 +1,13 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
 import type { User as SupabaseUser } from "@supabase/supabase-js";
+import type { MultipartFile } from "@fastify/multipart";
 import type { UpdateCompanyBasicDto } from "./dto/update-company-basic.dto";
 import type { UpdateCompanyBrandDto } from "./dto/update-company-brand.dto";
 import type { UpdateCompanyCommercialDto } from "./dto/update-company-commercial.dto";
 import type { UpdateCompanyDefaultsDto } from "./dto/update-company-defaults.dto";
 import type { UpdateCompanyIdentityDto } from "./dto/update-company-identity.dto";
 import type { UpdateProfileTypeDto } from "./dto/update-profile-type.dto";
+import { CompanyLogoStorageService } from "./company-logo-storage.service";
 import { PrismaService } from "../../database/prisma.service";
 import { UsersService } from "../users/users.service";
 
@@ -18,6 +20,7 @@ export class CompanyService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly usersService: UsersService,
+    private readonly logoStorage: CompanyLogoStorageService,
   ) {}
 
   async getMyCompany(authUser: SupabaseUser) {
@@ -87,6 +90,39 @@ export class CompanyService {
     return this.toStatusResponse(company);
   }
 
+  async uploadLogo(
+    authUser: SupabaseUser,
+    file: MultipartFile | undefined,
+    variant: "default" | "light" = "default",
+  ) {
+    if (!file) {
+      throw new BadRequestException("Envie um arquivo de imagem.");
+    }
+
+    const user = await this.usersService.findOrSyncFromSupabase(authUser);
+    await this.ensureCompanyExists(user.id);
+
+    const uploaded = await this.logoStorage.saveLogo({
+      userId: user.id,
+      variant,
+      file,
+    });
+
+    const company = await this.prisma.company.update({
+      where: { userId: user.id },
+      data:
+        variant === "light"
+          ? { lightLogoUrl: uploaded.url }
+          : { logoUrl: uploaded.url },
+    });
+
+    return {
+      url: uploaded.url,
+      variant: uploaded.variant,
+      company: this.toStatusResponse(company).company,
+    };
+  }
+
   async updateIdentity(
     authUser: SupabaseUser,
     dto: UpdateCompanyIdentityDto,
@@ -102,6 +138,9 @@ export class CompanyService {
         responsibleName: this.normalizeOptionalText(dto.responsibleName),
         responsibleRole: this.normalizeOptionalText(dto.responsibleRole),
         contactText: this.normalizeOptionalText(dto.contactText),
+        document: this.normalizeOptionalText(dto.document),
+        address: this.normalizeOptionalText(dto.address),
+        footerText: this.normalizeOptionalText(dto.footerText),
         showContactData: dto.showContactData,
         showSignature: dto.showSignature,
         onboardingStep: { set: 4 },
@@ -259,7 +298,13 @@ export class CompanyService {
     }
 
     return {
-      company,
+      company: {
+        ...company,
+        createdAt: company.createdAt.toISOString(),
+        updatedAt: company.updatedAt.toISOString(),
+        onboardingCompletedAt:
+          company.onboardingCompletedAt?.toISOString() ?? null,
+      },
       onboardingDone: company.onboardingDone,
       onboardingStep: company.onboardingStep,
     };

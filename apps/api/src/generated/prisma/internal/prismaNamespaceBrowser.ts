@@ -52,6 +52,7 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
+  StripeWebhookEvent: 'StripeWebhookEvent',
   Company: 'Company',
   Proposal: 'Proposal'
 } as const
@@ -78,11 +79,29 @@ export const UserScalarFieldEnum = {
   name: 'name',
   email: 'email',
   avatarUrl: 'avatarUrl',
+  plan: 'plan',
+  stripeCustomerId: 'stripeCustomerId',
+  stripeSubscriptionId: 'stripeSubscriptionId',
+  stripePriceId: 'stripePriceId',
+  subscriptionStatus: 'subscriptionStatus',
+  subscriptionCurrentPeriodEnd: 'subscriptionCurrentPeriodEnd',
+  subscriptionCancelAtPeriodEnd: 'subscriptionCancelAtPeriodEnd',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const StripeWebhookEventScalarFieldEnum = {
+  id: 'id',
+  stripeEventId: 'stripeEventId',
+  type: 'type',
+  processedAt: 'processedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type StripeWebhookEventScalarFieldEnum = (typeof StripeWebhookEventScalarFieldEnum)[keyof typeof StripeWebhookEventScalarFieldEnum]
 
 
 export const CompanyScalarFieldEnum = {
@@ -153,8 +172,23 @@ export const ProposalScalarFieldEnum = {
   clientPhone: 'clientPhone',
   clientSegment: 'clientSegment',
   clientWebsite: 'clientWebsite',
+  clientCity: 'clientCity',
+  clientState: 'clientState',
   clientDescription: 'clientDescription',
   clientProblem: 'clientProblem',
+  companyResearchSnapshot: 'companyResearchSnapshot',
+  companyResearchSources: 'companyResearchSources',
+  companyResearchConfirmedAt: 'companyResearchConfirmedAt',
+  referenceProposalIds: 'referenceProposalIds',
+  generationModel: 'generationModel',
+  generationPromptVersion: 'generationPromptVersion',
+  generatedAt: 'generatedAt',
+  quotaConsumedAt: 'quotaConsumedAt',
+  acceptedAt: 'acceptedAt',
+  acceptedByName: 'acceptedByName',
+  acceptedByEmail: 'acceptedByEmail',
+  rejectedAt: 'rejectedAt',
+  rejectionReason: 'rejectionReason',
   title: 'title',
   serviceOffered: 'serviceOffered',
   objective: 'objective',
@@ -171,6 +205,12 @@ export const ProposalScalarFieldEnum = {
   generatedContent: 'generatedContent',
   senderSnapshot: 'senderSnapshot',
   styleSnapshot: 'styleSnapshot',
+  publicToken: 'publicToken',
+  publicEnabled: 'publicEnabled',
+  publishedAt: 'publishedAt',
+  firstViewedAt: 'firstViewedAt',
+  lastViewedAt: 'lastViewedAt',
+  viewCount: 'viewCount',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -186,19 +226,19 @@ export const SortOrder = {
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
-export const JsonNullValueInput = {
-  JsonNull: JsonNull
-} as const
-
-export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
-
-
 export const NullableJsonNullValueInput = {
   DbNull: DbNull,
   JsonNull: JsonNull
 } as const
 
 export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
 export const QueryMode = {

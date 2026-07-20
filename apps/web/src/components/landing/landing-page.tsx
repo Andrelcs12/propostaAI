@@ -1,7 +1,7 @@
 import { AudiencesSection } from "./audiences-section";
 import { BrandingSection } from "./branding-section";
 import { ComparisonSection } from "./comparison-section";
-import { IntegrationsAnimation } from "./cu";
+import { ProposalFlowAnimation } from "./proposal-flow-animation";
 import { EarlyAccessSection } from "./early-access-section";
 import { FaqSection } from "./faq-section";
 import { FeaturesSection } from "./features-section";
@@ -21,16 +21,16 @@ type LandingPageProps = {
 
 export function LandingPage({ isAuthenticated }: LandingPageProps) {
   return (
-    <main className="min-h-screen overflow-x-hidden bg-background text-foreground">
+    <main className="app-gradient-bg min-h-screen overflow-x-hidden text-foreground">
       <LandingHeader isAuthenticated={isAuthenticated} />
       <HeroSection isAuthenticated={isAuthenticated} />
       <ProblemSection />
-      <IntegrationsAnimation />
       <SolutionSection />
       <FeaturesSection />
       <BrandingSection />
       <TemplatesSection />
       <HowItWorksSection />
+      <ProposalFlowAnimation />
       <AudiencesSection />
       <ComparisonSection />
       <PricingSection isAuthenticated={isAuthenticated} />

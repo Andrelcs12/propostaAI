@@ -37,6 +37,24 @@ export class UpdateCompanyIdentityDto {
   contactText?: string;
 
   @IsOptional()
+  @Transform(({ value }) => emptyToUndefined(value))
+  @IsString()
+  @Length(1, 32)
+  document?: string;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToUndefined(value))
+  @IsString()
+  @Length(1, 240)
+  address?: string;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToUndefined(value))
+  @IsString()
+  @Length(1, 600)
+  footerText?: string;
+
+  @IsOptional()
   @IsBoolean()
   showContactData?: boolean;
 

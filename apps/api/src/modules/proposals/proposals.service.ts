@@ -4,7 +4,9 @@ import {
   Injectable,
   NotFoundException,
 } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
 import type { User as SupabaseUser } from "@supabase/supabase-js";
+import { randomBytes } from "node:crypto";
 import type { Prisma } from "../../generated/prisma/client";
 import { ProposalStatus } from "../../generated/prisma/enums";
 import { PrismaService } from "../../database/prisma.service";
@@ -12,18 +14,59 @@ import { UsersService } from "../users/users.service";
 import type { CreateProposalDto } from "./dto/create-proposal.dto";
 import type { GenerateProposalDto } from "./dto/generate-proposal.dto";
 import type { UpdateProposalDto } from "./dto/update-proposal.dto";
+import { EntitlementsService } from "../billing/entitlements.service";
 import {
   GeminiService,
   type GeneratedProposalContent,
 } from "./gemini.service";
+import type { CompanyAnalysis } from "./gemini.schemas";
+import { ProposalReferenceService } from "./proposal-reference.service";
+import { ProposalPdfService } from "./proposal-pdf.service";
+import type { AcceptProposalDto } from "./dto/public-proposal.dto";
+import type { RejectProposalDto } from "./dto/public-proposal.dto";
+import { InMemoryRateLimiter } from "../../common/utils/rate-limiter";
 
 @Injectable()
 export class ProposalsService {
+  private readonly publicActionLimiter = new InMemoryRateLimiter(20, 60_000);
+
   constructor(
     private readonly prisma: PrismaService,
     private readonly usersService: UsersService,
     private readonly geminiService: GeminiService,
+    private readonly proposalPdfService: ProposalPdfService,
+    private readonly configService: ConfigService,
+    private readonly entitlementsService: EntitlementsService,
+    private readonly proposalReferenceService: ProposalReferenceService,
   ) {}
+
+  async getReferences(authUser: SupabaseUser, proposalId?: string) {
+    const user = await this.usersService.findOrSyncFromSupabase(authUser);
+
+    let context = {
+      serviceOffered: null as string | null,
+      clientSegment: null as string | null,
+      tone: null as string | null,
+      template: null as string | null,
+    };
+
+    if (proposalId) {
+      const proposal = await this.getById(authUser, proposalId);
+      const style = proposal.styleSnapshot as { visualStyle?: string } | null;
+      context = {
+        serviceOffered: proposal.serviceOffered,
+        clientSegment: proposal.clientSegment,
+        tone: proposal.tone,
+        template: style?.visualStyle ?? null,
+      };
+    }
+
+    return this.proposalReferenceService.getRecommendations({
+      userId: user.id,
+      excludeProposalId: proposalId,
+      ...context,
+    });
+  }
 
   async list(authUser: SupabaseUser) {
     const user = await this.usersService.findOrSyncFromSupabase(authUser);
@@ -38,6 +81,9 @@ export class ProposalsService {
         status: true,
         tone: true,
         validityDate: true,
+        publicEnabled: true,
+        viewCount: true,
+        publishedAt: true,
         createdAt: true,
         updatedAt: true,
       },
@@ -59,6 +105,302 @@ export class ProposalsService {
     }
 
     return proposal;
+  }
+
+  async publish(authUser: SupabaseUser, proposalId: string) {
+    const proposal = await this.getById(authUser, proposalId);
+
+    if (!proposal.generatedContent) {
+      throw new BadRequestException(
+        "Gere o conteudo da proposta antes de compartilhar.",
+      );
+    }
+
+    if (this.isExpired(proposal.validityDate)) {
+      throw new BadRequestException(
+        "Esta proposta esta expirada. Atualize a validade antes de compartilhar.",
+      );
+    }
+
+    const publicToken =
+      proposal.publicToken ?? this.generatePublicToken();
+
+    const updated = await this.prisma.proposal.update({
+      where: { id: proposalId },
+      data: {
+        publicToken,
+        publicEnabled: true,
+        publishedAt: proposal.publishedAt ?? new Date(),
+        status:
+          proposal.status === ProposalStatus.DRAFT ||
+          proposal.status === ProposalStatus.READY
+            ? ProposalStatus.SENT
+            : proposal.status,
+      },
+    });
+
+    return {
+      proposal: updated,
+      shareUrl: this.buildShareUrl(publicToken),
+    };
+  }
+
+  async unpublish(authUser: SupabaseUser, proposalId: string) {
+    await this.getById(authUser, proposalId);
+
+    const updated = await this.prisma.proposal.update({
+      where: { id: proposalId },
+      data: {
+        publicEnabled: false,
+      },
+    });
+
+    return updated;
+  }
+
+  async exportPdf(authUser: SupabaseUser, proposalId: string) {
+    const proposal = await this.getById(authUser, proposalId);
+
+    if (!proposal.generatedContent) {
+      throw new BadRequestException(
+        "Gere o conteudo da proposta antes de exportar o PDF.",
+      );
+    }
+
+    const publicToken =
+      proposal.publicToken ??
+      (
+        await this.prisma.proposal.update({
+          where: { id: proposalId },
+          data: { publicToken: this.generatePublicToken() },
+        })
+      ).publicToken;
+
+    if (!publicToken) {
+      throw new BadRequestException("Nao foi possivel preparar a exportacao.");
+    }
+
+    const buffer = await this.proposalPdfService.generate({
+      publicToken,
+      clientName: proposal.clientName,
+      title: proposal.title,
+    });
+
+    return {
+      buffer,
+      filename: this.proposalPdfService.buildFilename(
+        proposal.clientName,
+        proposal.title,
+      ),
+    };
+  }
+
+  async getByPublicToken(
+    token: string,
+    options: { allowPrint?: boolean; renderSecret?: string } = {},
+  ) {
+    const proposal = await this.prisma.proposal.findUnique({
+      where: { publicToken: token },
+    });
+
+    if (!proposal) {
+      throw new NotFoundException("Proposta nao encontrada.");
+    }
+
+    const renderSecret =
+      this.configService.get<string>("PDF_RENDER_SECRET")?.trim() ||
+      "dev-render-secret";
+    const isRenderMode =
+      options.allowPrint && options.renderSecret === renderSecret;
+
+    if (!proposal.publicEnabled && !isRenderMode) {
+      throw new NotFoundException("Este link nao esta disponivel.");
+    }
+
+    if (!proposal.generatedContent) {
+      throw new NotFoundException("Proposta indisponivel.");
+    }
+
+    if (this.isExpired(proposal.validityDate)) {
+      if (proposal.status !== ProposalStatus.EXPIRED) {
+        await this.prisma.proposal.update({
+          where: { id: proposal.id },
+          data: { status: ProposalStatus.EXPIRED },
+        });
+      }
+
+      throw new NotFoundException("Esta proposta expirou.");
+    }
+
+    if (!isRenderMode) {
+      await this.recordPublicView(proposal.id, proposal.status);
+    }
+
+    return this.toPublicProposal(proposal);
+  }
+
+  private async recordPublicView(
+    proposalId: string,
+    currentStatus: ProposalStatus,
+  ) {
+    const existing = await this.prisma.proposal.findUnique({
+      where: { id: proposalId },
+      select: { firstViewedAt: true },
+    });
+    const now = new Date();
+
+    await this.prisma.proposal.update({
+      where: { id: proposalId },
+      data: {
+        viewCount: { increment: 1 },
+        firstViewedAt: existing?.firstViewedAt ?? now,
+        lastViewedAt: now,
+        status:
+          currentStatus === ProposalStatus.SENT
+            ? ProposalStatus.VIEWED
+            : currentStatus,
+      },
+    });
+  }
+
+  private toPublicProposal(proposal: {
+    clientName: string;
+    clientContactName: string | null;
+    title: string;
+    validityDate: Date | null;
+    paymentConditions: string | null;
+    terms: string | null;
+    generatedContent: Prisma.JsonValue;
+    senderSnapshot: Prisma.JsonValue;
+    styleSnapshot: Prisma.JsonValue;
+    status: ProposalStatus;
+    acceptedAt?: Date | null;
+    acceptedByName?: string | null;
+    acceptedByEmail?: string | null;
+    rejectedAt?: Date | null;
+    rejectionReason?: string | null;
+    publicEnabled?: boolean;
+  }) {
+    return {
+      clientName: proposal.clientName,
+      clientContactName: proposal.clientContactName,
+      title: proposal.title,
+      validityDate: proposal.validityDate,
+      paymentConditions: proposal.paymentConditions,
+      terms: proposal.terms,
+      generatedContent: proposal.generatedContent,
+      senderSnapshot: proposal.senderSnapshot,
+      styleSnapshot: proposal.styleSnapshot,
+      status: proposal.status,
+      acceptedAt: proposal.acceptedAt ?? null,
+      acceptedByName: proposal.acceptedByName ?? null,
+      acceptedByEmail: proposal.acceptedByEmail ?? null,
+      rejectedAt: proposal.rejectedAt ?? null,
+      rejectionReason: proposal.rejectionReason ?? null,
+      publicEnabled: proposal.publicEnabled ?? true,
+    };
+  }
+
+  async acceptPublic(token: string, dto: AcceptProposalDto) {
+    this.ensurePublicRateLimit(`accept:${token}`);
+    const proposal = await this.getPublicProposalForAction(token);
+
+    if (proposal.status === ProposalStatus.ACCEPTED) {
+      return this.toPublicProposal(proposal);
+    }
+
+    if (
+      proposal.status === ProposalStatus.REJECTED ||
+      proposal.status === ProposalStatus.EXPIRED ||
+      proposal.status === ProposalStatus.ARCHIVED
+    ) {
+      throw new BadRequestException("Esta proposta nao pode mais ser aceita.");
+    }
+
+    const updated = await this.prisma.proposal.update({
+      where: { id: proposal.id },
+      data: {
+        status: ProposalStatus.ACCEPTED,
+        acceptedAt: new Date(),
+        acceptedByName: dto.acceptedByName.trim(),
+        acceptedByEmail: dto.acceptedByEmail?.trim() || null,
+      },
+    });
+
+    return this.toPublicProposal(updated);
+  }
+
+  async rejectPublic(token: string, dto: RejectProposalDto) {
+    this.ensurePublicRateLimit(`reject:${token}`);
+    const proposal = await this.getPublicProposalForAction(token);
+
+    if (proposal.status === ProposalStatus.REJECTED) {
+      return this.toPublicProposal(proposal);
+    }
+
+    if (
+      proposal.status === ProposalStatus.ACCEPTED ||
+      proposal.status === ProposalStatus.EXPIRED ||
+      proposal.status === ProposalStatus.ARCHIVED
+    ) {
+      throw new BadRequestException("Esta proposta nao pode mais ser recusada.");
+    }
+
+    const updated = await this.prisma.proposal.update({
+      where: { id: proposal.id },
+      data: {
+        status: ProposalStatus.REJECTED,
+        rejectedAt: new Date(),
+        rejectionReason: dto.rejectionReason?.trim() || null,
+      },
+    });
+
+    return this.toPublicProposal(updated);
+  }
+
+  private async getPublicProposalForAction(token: string) {
+    const proposal = await this.prisma.proposal.findUnique({
+      where: { publicToken: token },
+    });
+
+    if (!proposal || !proposal.publicEnabled) {
+      throw new NotFoundException("Proposta nao encontrada.");
+    }
+
+    if (!proposal.generatedContent) {
+      throw new NotFoundException("Proposta indisponivel.");
+    }
+
+    if (this.isExpired(proposal.validityDate)) {
+      throw new NotFoundException("Esta proposta expirou.");
+    }
+
+    return proposal;
+  }
+
+  private ensurePublicRateLimit(key: string) {
+    const result = this.publicActionLimiter.consume(key);
+    if (!result.allowed) {
+      throw new BadRequestException(
+        "Muitas tentativas. Aguarde um momento e tente novamente.",
+      );
+    }
+  }
+
+  private generatePublicToken() {
+    return randomBytes(18).toString("base64url");
+  }
+
+  private buildShareUrl(publicToken: string) {
+    const webUrl =
+      this.configService.get<string>("WEB_URL")?.trim() ||
+      "http://localhost:3000";
+    return `${webUrl}/p/${publicToken}`;
+  }
+
+  private isExpired(validityDate: Date | null) {
+    if (!validityDate) return false;
+    return validityDate.getTime() < Date.now();
   }
 
   async create(authUser: SupabaseUser, dto: CreateProposalDto) {
@@ -93,6 +435,8 @@ export class ProposalsService {
         clientPhone: this.normalizeOptionalText(dto.clientPhone),
         clientSegment: this.normalizeOptionalText(dto.clientSegment),
         clientWebsite: this.normalizeOptionalText(dto.clientWebsite),
+        clientCity: this.normalizeOptionalText(dto.clientCity),
+        clientState: this.normalizeOptionalText(dto.clientState),
         clientDescription: this.normalizeOptionalText(dto.clientDescription),
         clientProblem: this.normalizeOptionalText(dto.clientProblem),
         title: dto.title.trim(),
@@ -207,6 +551,19 @@ export class ProposalsService {
         data.status = ProposalStatus.READY;
       }
     }
+    if (dto.companyResearchSnapshot !== undefined) {
+      data.companyResearchSnapshot =
+        dto.companyResearchSnapshot as Prisma.InputJsonValue;
+    }
+    if (dto.companyResearchSources !== undefined) {
+      data.companyResearchSources =
+        dto.companyResearchSources as Prisma.InputJsonValue;
+    }
+    if (dto.companyResearchConfirmedAt !== undefined) {
+      data.companyResearchConfirmedAt = dto.companyResearchConfirmedAt
+        ? new Date(dto.companyResearchConfirmedAt)
+        : null;
+    }
 
     return this.prisma.proposal.update({
       where: { id: proposalId },
@@ -219,10 +576,20 @@ export class ProposalsService {
     proposalId: string,
     dto: GenerateProposalDto,
   ) {
+    const user = await this.usersService.findOrSyncFromSupabase(authUser);
     const proposal = await this.getById(authUser, proposalId);
 
     if (proposal.status === ProposalStatus.GENERATING) {
       throw new BadRequestException("Geracao ja em andamento.");
+    }
+
+    const isFirstGeneration = !proposal.quotaConsumedAt && !dto.section;
+
+    if (isFirstGeneration) {
+      await this.entitlementsService.assertCanGenerate(
+        user.id,
+        proposal.quotaConsumedAt,
+      );
     }
 
     await this.prisma.proposal.update({
@@ -233,6 +600,26 @@ export class ProposalsService {
     const tone = dto.tone ?? proposal.tone;
     const existingContent = proposal.generatedContent as
       | GeneratedProposalContent
+      | null;
+
+    const referenceIds = dto.referenceProposalIds ?? [];
+    let referenceSummary: string | null = null;
+
+    if (referenceIds.length > 0) {
+      const reference = await this.prisma.proposal.findFirst({
+        where: {
+          id: referenceIds[0],
+          userId: user.id,
+          generatedContent: { not: null as never },
+        },
+      });
+
+      referenceSummary =
+        this.proposalReferenceService.buildReferenceSummary(reference);
+    }
+
+    const companyResearch = proposal.companyResearchSnapshot as
+      | CompanyAnalysis
       | null;
 
     try {
@@ -246,6 +633,8 @@ export class ProposalsService {
         clientPhone: proposal.clientPhone,
         clientSegment: proposal.clientSegment,
         clientWebsite: proposal.clientWebsite,
+        clientCity: proposal.clientCity,
+        clientState: proposal.clientState,
         clientDescription: proposal.clientDescription,
         clientProblem: proposal.clientProblem,
         title: proposal.title,
@@ -263,7 +652,16 @@ export class ProposalsService {
         terms: proposal.terms,
         section: dto.section,
         existingContent,
+        companyResearch,
+        referenceSummary,
       });
+
+      if (isFirstGeneration) {
+        await this.entitlementsService.consumeQuotaIfNeeded(
+          user.id,
+          proposalId,
+        );
+      }
 
       return this.prisma.proposal.update({
         where: { id: proposalId },
@@ -271,6 +669,13 @@ export class ProposalsService {
           tone,
           generatedContent: generated as Prisma.InputJsonValue,
           status: ProposalStatus.READY,
+          generatedAt: new Date(),
+          generationModel: this.geminiService.getModelName(),
+          generationPromptVersion: this.geminiService.getPromptVersion(),
+          referenceProposalIds:
+            referenceIds.length > 0
+              ? (referenceIds as Prisma.InputJsonValue)
+              : undefined,
         },
       });
     } catch (error) {
@@ -304,6 +709,9 @@ export class ProposalsService {
     responsibleRole: string | null;
     presentationText: string | null;
     contactText: string | null;
+    document: string | null;
+    address: string | null;
+    footerText: string | null;
     showContactData: boolean;
     showSignature: boolean;
     defaultIntroMessage: string | null;
@@ -340,6 +748,9 @@ export class ProposalsService {
         responsibleRole: company.responsibleRole,
         presentationText: company.presentationText,
         contactText: company.contactText,
+        document: company.document,
+        address: company.address,
+        footerText: company.footerText,
         showContactData: company.showContactData,
         showSignature: company.showSignature,
         defaultIntroMessage: company.defaultIntroMessage,

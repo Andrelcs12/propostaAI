@@ -1424,16 +1424,8 @@ export type EnumBillingTypeFieldUpdateOperationsInput = {
   set?: $Enums.BillingType
 }
 
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
-}
-
 export type EnumProposalToneFieldUpdateOperationsInput = {
   set?: $Enums.ProposalTone
-}
-
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
 }
 
 export type CompanyCreateNestedOneWithoutProposalsInput = {

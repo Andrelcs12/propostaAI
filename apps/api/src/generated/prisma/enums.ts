@@ -80,3 +80,11 @@ export const CompanyVisualStyle = {
 } as const
 
 export type CompanyVisualStyle = (typeof CompanyVisualStyle)[keyof typeof CompanyVisualStyle]
+
+
+export const UserPlan = {
+  FREE: 'FREE',
+  PRO: 'PRO'
+} as const
+
+export type UserPlan = (typeof UserPlan)[keyof typeof UserPlan]

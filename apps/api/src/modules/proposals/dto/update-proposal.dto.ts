@@ -125,4 +125,16 @@ export class UpdateProposalDto {
   @IsOptional()
   @IsObject()
   generatedContent?: Record<string, unknown>;
+
+  @IsOptional()
+  @IsObject()
+  companyResearchSnapshot?: Record<string, unknown>;
+
+  @IsOptional()
+  @IsArray()
+  companyResearchSources?: Array<Record<string, unknown>>;
+
+  @IsOptional()
+  @IsDateString()
+  companyResearchConfirmedAt?: string;
 }

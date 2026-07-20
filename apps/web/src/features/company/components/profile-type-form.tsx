@@ -1,10 +1,10 @@
 "use client";
 
-import { Building2, UserRound } from "lucide-react";
-import { Loader2 } from "lucide-react";
+import { Building2, Check, Loader2, UserRound } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import {
   PROFILE_TYPE_OPTIONS,
   type Company,
@@ -52,10 +52,7 @@ export function ProfileTypeForm({
   }
 
   return (
-    <div className="space-y-5">
-      <p className="text-sm text-muted-foreground">
-        Como voce utiliza o PropostaAI?
-      </p>
+    <div className="space-y-6">
       <div className="grid gap-3 sm:grid-cols-2">
         {PROFILE_TYPE_OPTIONS.map((option) => {
           const Icon = option.value === "COMPANY" ? Building2 : UserRound;
@@ -67,24 +64,48 @@ export function ProfileTypeForm({
               type="button"
               disabled={isSubmitting}
               onClick={() => setSelected(option.value)}
-              className={`rounded-md border p-4 text-left transition-colors ${
-                isActive
-                  ? "border-primary bg-primary/5"
-                  : "bg-card hover:border-primary/40"
-              }`}
+              className={cn(
+                "onboarding-choice group relative rounded-xl p-4 text-left",
+                isActive && "onboarding-choice-active",
+              )}
             >
-              <Icon
-                className={`mb-3 size-5 ${isActive ? "text-primary" : "text-muted-foreground"}`}
-              />
-              <p className="font-medium">{option.label}</p>
-              <p className="mt-1 text-sm text-muted-foreground">
+              <div className="flex items-start justify-between gap-3">
+                <div
+                  className={cn(
+                    "flex size-11 shrink-0 items-center justify-center rounded-xl transition-colors",
+                    isActive
+                      ? "bg-primary text-primary-foreground"
+                      : "bg-muted text-foreground/70 group-hover:text-primary",
+                  )}
+                >
+                  <Icon className="size-5" />
+                </div>
+                {isActive ? (
+                  <span className="flex size-6 items-center justify-center rounded-full bg-primary text-primary-foreground">
+                    <Check className="size-3.5" />
+                  </span>
+                ) : (
+                  <span className="size-6 rounded-full border-2 border-foreground/15" />
+                )}
+              </div>
+
+              <p className="mt-4 text-base font-semibold text-foreground">
+                {option.label}
+              </p>
+              <p className="mt-1.5 text-sm leading-6 text-muted-foreground">
                 {option.description}
               </p>
             </button>
           );
         })}
       </div>
-      <Button type="button" disabled={isSubmitting} onClick={handleSubmit}>
+
+      <Button
+        type="button"
+        disabled={isSubmitting}
+        className="min-w-[140px]"
+        onClick={handleSubmit}
+      >
         {isSubmitting ? <Loader2 className="animate-spin" /> : null}
         {submitLabel}
       </Button>

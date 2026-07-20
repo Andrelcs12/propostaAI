@@ -82,6 +82,9 @@ export type SenderSnapshot = {
   defaultIntroMessage?: string | null;
   defaultClosingMessage?: string | null;
   defaultTerms?: string | null;
+  document?: string | null;
+  address?: string | null;
+  footerText?: string | null;
   showDetailedValues: boolean;
   showDiscount: boolean;
 };
@@ -130,8 +133,32 @@ export type Proposal = {
   generatedContent: GeneratedProposalContent | null;
   senderSnapshot: SenderSnapshot;
   styleSnapshot: StyleSnapshot;
+  publicToken: string | null;
+  publicEnabled: boolean;
+  publishedAt: string | null;
+  firstViewedAt: string | null;
+  lastViewedAt: string | null;
+  viewCount: number;
   createdAt: string;
   updatedAt: string;
+};
+
+export type PublicProposal = {
+  clientName: string;
+  clientContactName: string | null;
+  title: string;
+  validityDate: string | null;
+  paymentConditions: string | null;
+  terms: string | null;
+  generatedContent: GeneratedProposalContent;
+  senderSnapshot: SenderSnapshot;
+  styleSnapshot: StyleSnapshot;
+  status: ProposalStatus;
+};
+
+export type PublishProposalResult = {
+  proposal: Proposal;
+  shareUrl: string;
 };
 
 export type ProposalSummary = {
@@ -141,6 +168,9 @@ export type ProposalSummary = {
   status: ProposalStatus;
   tone: ProposalTone;
   validityDate: string | null;
+  publicEnabled: boolean;
+  viewCount: number;
+  publishedAt: string | null;
   createdAt: string;
   updatedAt: string;
 };

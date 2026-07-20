@@ -20,8 +20,18 @@ export type ProposalModel = runtime.Types.Result.DefaultSelection<Prisma.$Propos
 
 export type AggregateProposal = {
   _count: ProposalCountAggregateOutputType | null
+  _avg: ProposalAvgAggregateOutputType | null
+  _sum: ProposalSumAggregateOutputType | null
   _min: ProposalMinAggregateOutputType | null
   _max: ProposalMaxAggregateOutputType | null
+}
+
+export type ProposalAvgAggregateOutputType = {
+  viewCount: number | null
+}
+
+export type ProposalSumAggregateOutputType = {
+  viewCount: number | null
 }
 
 export type ProposalMinAggregateOutputType = {
@@ -36,8 +46,20 @@ export type ProposalMinAggregateOutputType = {
   clientPhone: string | null
   clientSegment: string | null
   clientWebsite: string | null
+  clientCity: string | null
+  clientState: string | null
   clientDescription: string | null
   clientProblem: string | null
+  companyResearchConfirmedAt: Date | null
+  generationModel: string | null
+  generationPromptVersion: string | null
+  generatedAt: Date | null
+  quotaConsumedAt: Date | null
+  acceptedAt: Date | null
+  acceptedByName: string | null
+  acceptedByEmail: string | null
+  rejectedAt: Date | null
+  rejectionReason: string | null
   title: string | null
   serviceOffered: string | null
   objective: string | null
@@ -46,6 +68,12 @@ export type ProposalMinAggregateOutputType = {
   observations: string | null
   nextSteps: string | null
   terms: string | null
+  publicToken: string | null
+  publicEnabled: boolean | null
+  publishedAt: Date | null
+  firstViewedAt: Date | null
+  lastViewedAt: Date | null
+  viewCount: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -62,8 +90,20 @@ export type ProposalMaxAggregateOutputType = {
   clientPhone: string | null
   clientSegment: string | null
   clientWebsite: string | null
+  clientCity: string | null
+  clientState: string | null
   clientDescription: string | null
   clientProblem: string | null
+  companyResearchConfirmedAt: Date | null
+  generationModel: string | null
+  generationPromptVersion: string | null
+  generatedAt: Date | null
+  quotaConsumedAt: Date | null
+  acceptedAt: Date | null
+  acceptedByName: string | null
+  acceptedByEmail: string | null
+  rejectedAt: Date | null
+  rejectionReason: string | null
   title: string | null
   serviceOffered: string | null
   objective: string | null
@@ -72,6 +112,12 @@ export type ProposalMaxAggregateOutputType = {
   observations: string | null
   nextSteps: string | null
   terms: string | null
+  publicToken: string | null
+  publicEnabled: boolean | null
+  publishedAt: Date | null
+  firstViewedAt: Date | null
+  lastViewedAt: Date | null
+  viewCount: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -88,8 +134,23 @@ export type ProposalCountAggregateOutputType = {
   clientPhone: number
   clientSegment: number
   clientWebsite: number
+  clientCity: number
+  clientState: number
   clientDescription: number
   clientProblem: number
+  companyResearchSnapshot: number
+  companyResearchSources: number
+  companyResearchConfirmedAt: number
+  referenceProposalIds: number
+  generationModel: number
+  generationPromptVersion: number
+  generatedAt: number
+  quotaConsumedAt: number
+  acceptedAt: number
+  acceptedByName: number
+  acceptedByEmail: number
+  rejectedAt: number
+  rejectionReason: number
   title: number
   serviceOffered: number
   objective: number
@@ -106,11 +167,25 @@ export type ProposalCountAggregateOutputType = {
   generatedContent: number
   senderSnapshot: number
   styleSnapshot: number
+  publicToken: number
+  publicEnabled: number
+  publishedAt: number
+  firstViewedAt: number
+  lastViewedAt: number
+  viewCount: number
   createdAt: number
   updatedAt: number
   _all: number
 }
 
+
+export type ProposalAvgAggregateInputType = {
+  viewCount?: true
+}
+
+export type ProposalSumAggregateInputType = {
+  viewCount?: true
+}
 
 export type ProposalMinAggregateInputType = {
   id?: true
@@ -124,8 +199,20 @@ export type ProposalMinAggregateInputType = {
   clientPhone?: true
   clientSegment?: true
   clientWebsite?: true
+  clientCity?: true
+  clientState?: true
   clientDescription?: true
   clientProblem?: true
+  companyResearchConfirmedAt?: true
+  generationModel?: true
+  generationPromptVersion?: true
+  generatedAt?: true
+  quotaConsumedAt?: true
+  acceptedAt?: true
+  acceptedByName?: true
+  acceptedByEmail?: true
+  rejectedAt?: true
+  rejectionReason?: true
   title?: true
   serviceOffered?: true
   objective?: true
@@ -134,6 +221,12 @@ export type ProposalMinAggregateInputType = {
   observations?: true
   nextSteps?: true
   terms?: true
+  publicToken?: true
+  publicEnabled?: true
+  publishedAt?: true
+  firstViewedAt?: true
+  lastViewedAt?: true
+  viewCount?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -150,8 +243,20 @@ export type ProposalMaxAggregateInputType = {
   clientPhone?: true
   clientSegment?: true
   clientWebsite?: true
+  clientCity?: true
+  clientState?: true
   clientDescription?: true
   clientProblem?: true
+  companyResearchConfirmedAt?: true
+  generationModel?: true
+  generationPromptVersion?: true
+  generatedAt?: true
+  quotaConsumedAt?: true
+  acceptedAt?: true
+  acceptedByName?: true
+  acceptedByEmail?: true
+  rejectedAt?: true
+  rejectionReason?: true
   title?: true
   serviceOffered?: true
   objective?: true
@@ -160,6 +265,12 @@ export type ProposalMaxAggregateInputType = {
   observations?: true
   nextSteps?: true
   terms?: true
+  publicToken?: true
+  publicEnabled?: true
+  publishedAt?: true
+  firstViewedAt?: true
+  lastViewedAt?: true
+  viewCount?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -176,8 +287,23 @@ export type ProposalCountAggregateInputType = {
   clientPhone?: true
   clientSegment?: true
   clientWebsite?: true
+  clientCity?: true
+  clientState?: true
   clientDescription?: true
   clientProblem?: true
+  companyResearchSnapshot?: true
+  companyResearchSources?: true
+  companyResearchConfirmedAt?: true
+  referenceProposalIds?: true
+  generationModel?: true
+  generationPromptVersion?: true
+  generatedAt?: true
+  quotaConsumedAt?: true
+  acceptedAt?: true
+  acceptedByName?: true
+  acceptedByEmail?: true
+  rejectedAt?: true
+  rejectionReason?: true
   title?: true
   serviceOffered?: true
   objective?: true
@@ -194,6 +320,12 @@ export type ProposalCountAggregateInputType = {
   generatedContent?: true
   senderSnapshot?: true
   styleSnapshot?: true
+  publicToken?: true
+  publicEnabled?: true
+  publishedAt?: true
+  firstViewedAt?: true
+  lastViewedAt?: true
+  viewCount?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -237,6 +369,18 @@ export type ProposalAggregateArgs<ExtArgs extends runtime.Types.Extensions.Inter
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: ProposalAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: ProposalSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: ProposalMinAggregateInputType
@@ -267,6 +411,8 @@ export type ProposalGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   _count?: ProposalCountAggregateInputType | true
+  _avg?: ProposalAvgAggregateInputType
+  _sum?: ProposalSumAggregateInputType
   _min?: ProposalMinAggregateInputType
   _max?: ProposalMaxAggregateInputType
 }
@@ -283,8 +429,23 @@ export type ProposalGroupByOutputType = {
   clientPhone: string | null
   clientSegment: string | null
   clientWebsite: string | null
+  clientCity: string | null
+  clientState: string | null
   clientDescription: string | null
   clientProblem: string | null
+  companyResearchSnapshot: runtime.JsonValue | null
+  companyResearchSources: runtime.JsonValue | null
+  companyResearchConfirmedAt: Date | null
+  referenceProposalIds: runtime.JsonValue | null
+  generationModel: string | null
+  generationPromptVersion: string | null
+  generatedAt: Date | null
+  quotaConsumedAt: Date | null
+  acceptedAt: Date | null
+  acceptedByName: string | null
+  acceptedByEmail: string | null
+  rejectedAt: Date | null
+  rejectionReason: string | null
   title: string
   serviceOffered: string | null
   objective: string | null
@@ -301,9 +462,17 @@ export type ProposalGroupByOutputType = {
   generatedContent: runtime.JsonValue | null
   senderSnapshot: runtime.JsonValue
   styleSnapshot: runtime.JsonValue
+  publicToken: string | null
+  publicEnabled: boolean
+  publishedAt: Date | null
+  firstViewedAt: Date | null
+  lastViewedAt: Date | null
+  viewCount: number
   createdAt: Date
   updatedAt: Date
   _count: ProposalCountAggregateOutputType | null
+  _avg: ProposalAvgAggregateOutputType | null
+  _sum: ProposalSumAggregateOutputType | null
   _min: ProposalMinAggregateOutputType | null
   _max: ProposalMaxAggregateOutputType | null
 }
@@ -338,8 +507,23 @@ export type ProposalWhereInput = {
   clientPhone?: Prisma.StringNullableFilter<"Proposal"> | string | null
   clientSegment?: Prisma.StringNullableFilter<"Proposal"> | string | null
   clientWebsite?: Prisma.StringNullableFilter<"Proposal"> | string | null
+  clientCity?: Prisma.StringNullableFilter<"Proposal"> | string | null
+  clientState?: Prisma.StringNullableFilter<"Proposal"> | string | null
   clientDescription?: Prisma.StringNullableFilter<"Proposal"> | string | null
   clientProblem?: Prisma.StringNullableFilter<"Proposal"> | string | null
+  companyResearchSnapshot?: Prisma.JsonNullableFilter<"Proposal">
+  companyResearchSources?: Prisma.JsonNullableFilter<"Proposal">
+  companyResearchConfirmedAt?: Prisma.DateTimeNullableFilter<"Proposal"> | Date | string | null
+  referenceProposalIds?: Prisma.JsonNullableFilter<"Proposal">
+  generationModel?: Prisma.StringNullableFilter<"Proposal"> | string | null
+  generationPromptVersion?: Prisma.StringNullableFilter<"Proposal"> | string | null
+  generatedAt?: Prisma.DateTimeNullableFilter<"Proposal"> | Date | string | null
+  quotaConsumedAt?: Prisma.DateTimeNullableFilter<"Proposal"> | Date | string | null
+  acceptedAt?: Prisma.DateTimeNullableFilter<"Proposal"> | Date | string | null
+  acceptedByName?: Prisma.StringNullableFilter<"Proposal"> | string | null
+  acceptedByEmail?: Prisma.StringNullableFilter<"Proposal"> | string | null
+  rejectedAt?: Prisma.DateTimeNullableFilter<"Proposal"> | Date | string | null
+  rejectionReason?: Prisma.StringNullableFilter<"Proposal"> | string | null
   title?: Prisma.StringFilter<"Proposal"> | string
   serviceOffered?: Prisma.StringNullableFilter<"Proposal"> | string | null
   objective?: Prisma.StringNullableFilter<"Proposal"> | string | null
@@ -356,6 +540,12 @@ export type ProposalWhereInput = {
   generatedContent?: Prisma.JsonNullableFilter<"Proposal">
   senderSnapshot?: Prisma.JsonFilter<"Proposal">
   styleSnapshot?: Prisma.JsonFilter<"Proposal">
+  publicToken?: Prisma.StringNullableFilter<"Proposal"> | string | null
+  publicEnabled?: Prisma.BoolFilter<"Proposal"> | boolean
+  publishedAt?: Prisma.DateTimeNullableFilter<"Proposal"> | Date | string | null
+  firstViewedAt?: Prisma.DateTimeNullableFilter<"Proposal"> | Date | string | null
+  lastViewedAt?: Prisma.DateTimeNullableFilter<"Proposal"> | Date | string | null
+  viewCount?: Prisma.IntFilter<"Proposal"> | number
   createdAt?: Prisma.DateTimeFilter<"Proposal"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Proposal"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -374,8 +564,23 @@ export type ProposalOrderByWithRelationInput = {
   clientPhone?: Prisma.SortOrderInput | Prisma.SortOrder
   clientSegment?: Prisma.SortOrderInput | Prisma.SortOrder
   clientWebsite?: Prisma.SortOrderInput | Prisma.SortOrder
+  clientCity?: Prisma.SortOrderInput | Prisma.SortOrder
+  clientState?: Prisma.SortOrderInput | Prisma.SortOrder
   clientDescription?: Prisma.SortOrderInput | Prisma.SortOrder
   clientProblem?: Prisma.SortOrderInput | Prisma.SortOrder
+  companyResearchSnapshot?: Prisma.SortOrderInput | Prisma.SortOrder
+  companyResearchSources?: Prisma.SortOrderInput | Prisma.SortOrder
+  companyResearchConfirmedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  referenceProposalIds?: Prisma.SortOrderInput | Prisma.SortOrder
+  generationModel?: Prisma.SortOrderInput | Prisma.SortOrder
+  generationPromptVersion?: Prisma.SortOrderInput | Prisma.SortOrder
+  generatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  quotaConsumedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  acceptedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  acceptedByName?: Prisma.SortOrderInput | Prisma.SortOrder
+  acceptedByEmail?: Prisma.SortOrderInput | Prisma.SortOrder
+  rejectedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  rejectionReason?: Prisma.SortOrderInput | Prisma.SortOrder
   title?: Prisma.SortOrder
   serviceOffered?: Prisma.SortOrderInput | Prisma.SortOrder
   objective?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -392,6 +597,12 @@ export type ProposalOrderByWithRelationInput = {
   generatedContent?: Prisma.SortOrderInput | Prisma.SortOrder
   senderSnapshot?: Prisma.SortOrder
   styleSnapshot?: Prisma.SortOrder
+  publicToken?: Prisma.SortOrderInput | Prisma.SortOrder
+  publicEnabled?: Prisma.SortOrder
+  publishedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  firstViewedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastViewedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  viewCount?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
@@ -400,6 +611,7 @@ export type ProposalOrderByWithRelationInput = {
 
 export type ProposalWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  publicToken?: string
   AND?: Prisma.ProposalWhereInput | Prisma.ProposalWhereInput[]
   OR?: Prisma.ProposalWhereInput[]
   NOT?: Prisma.ProposalWhereInput | Prisma.ProposalWhereInput[]
@@ -413,8 +625,23 @@ export type ProposalWhereUniqueInput = Prisma.AtLeast<{
   clientPhone?: Prisma.StringNullableFilter<"Proposal"> | string | null
   clientSegment?: Prisma.StringNullableFilter<"Proposal"> | string | null
   clientWebsite?: Prisma.StringNullableFilter<"Proposal"> | string | null
+  clientCity?: Prisma.StringNullableFilter<"Proposal"> | string | null
+  clientState?: Prisma.StringNullableFilter<"Proposal"> | string | null
   clientDescription?: Prisma.StringNullableFilter<"Proposal"> | string | null
   clientProblem?: Prisma.StringNullableFilter<"Proposal"> | string | null
+  companyResearchSnapshot?: Prisma.JsonNullableFilter<"Proposal">
+  companyResearchSources?: Prisma.JsonNullableFilter<"Proposal">
+  companyResearchConfirmedAt?: Prisma.DateTimeNullableFilter<"Proposal"> | Date | string | null
+  referenceProposalIds?: Prisma.JsonNullableFilter<"Proposal">
+  generationModel?: Prisma.StringNullableFilter<"Proposal"> | string | null
+  generationPromptVersion?: Prisma.StringNullableFilter<"Proposal"> | string | null
+  generatedAt?: Prisma.DateTimeNullableFilter<"Proposal"> | Date | string | null
+  quotaConsumedAt?: Prisma.DateTimeNullableFilter<"Proposal"> | Date | string | null
+  acceptedAt?: Prisma.DateTimeNullableFilter<"Proposal"> | Date | string | null
+  acceptedByName?: Prisma.StringNullableFilter<"Proposal"> | string | null
+  acceptedByEmail?: Prisma.StringNullableFilter<"Proposal"> | string | null
+  rejectedAt?: Prisma.DateTimeNullableFilter<"Proposal"> | Date | string | null
+  rejectionReason?: Prisma.StringNullableFilter<"Proposal"> | string | null
   title?: Prisma.StringFilter<"Proposal"> | string
   serviceOffered?: Prisma.StringNullableFilter<"Proposal"> | string | null
   objective?: Prisma.StringNullableFilter<"Proposal"> | string | null
@@ -431,11 +658,16 @@ export type ProposalWhereUniqueInput = Prisma.AtLeast<{
   generatedContent?: Prisma.JsonNullableFilter<"Proposal">
   senderSnapshot?: Prisma.JsonFilter<"Proposal">
   styleSnapshot?: Prisma.JsonFilter<"Proposal">
+  publicEnabled?: Prisma.BoolFilter<"Proposal"> | boolean
+  publishedAt?: Prisma.DateTimeNullableFilter<"Proposal"> | Date | string | null
+  firstViewedAt?: Prisma.DateTimeNullableFilter<"Proposal"> | Date | string | null
+  lastViewedAt?: Prisma.DateTimeNullableFilter<"Proposal"> | Date | string | null
+  viewCount?: Prisma.IntFilter<"Proposal"> | number
   createdAt?: Prisma.DateTimeFilter<"Proposal"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Proposal"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   company?: Prisma.XOR<Prisma.CompanyScalarRelationFilter, Prisma.CompanyWhereInput>
-}, "id">
+}, "id" | "publicToken">
 
 export type ProposalOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -449,8 +681,23 @@ export type ProposalOrderByWithAggregationInput = {
   clientPhone?: Prisma.SortOrderInput | Prisma.SortOrder
   clientSegment?: Prisma.SortOrderInput | Prisma.SortOrder
   clientWebsite?: Prisma.SortOrderInput | Prisma.SortOrder
+  clientCity?: Prisma.SortOrderInput | Prisma.SortOrder
+  clientState?: Prisma.SortOrderInput | Prisma.SortOrder
   clientDescription?: Prisma.SortOrderInput | Prisma.SortOrder
   clientProblem?: Prisma.SortOrderInput | Prisma.SortOrder
+  companyResearchSnapshot?: Prisma.SortOrderInput | Prisma.SortOrder
+  companyResearchSources?: Prisma.SortOrderInput | Prisma.SortOrder
+  companyResearchConfirmedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  referenceProposalIds?: Prisma.SortOrderInput | Prisma.SortOrder
+  generationModel?: Prisma.SortOrderInput | Prisma.SortOrder
+  generationPromptVersion?: Prisma.SortOrderInput | Prisma.SortOrder
+  generatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  quotaConsumedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  acceptedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  acceptedByName?: Prisma.SortOrderInput | Prisma.SortOrder
+  acceptedByEmail?: Prisma.SortOrderInput | Prisma.SortOrder
+  rejectedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  rejectionReason?: Prisma.SortOrderInput | Prisma.SortOrder
   title?: Prisma.SortOrder
   serviceOffered?: Prisma.SortOrderInput | Prisma.SortOrder
   objective?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -467,11 +714,19 @@ export type ProposalOrderByWithAggregationInput = {
   generatedContent?: Prisma.SortOrderInput | Prisma.SortOrder
   senderSnapshot?: Prisma.SortOrder
   styleSnapshot?: Prisma.SortOrder
+  publicToken?: Prisma.SortOrderInput | Prisma.SortOrder
+  publicEnabled?: Prisma.SortOrder
+  publishedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  firstViewedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastViewedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  viewCount?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.ProposalCountOrderByAggregateInput
+  _avg?: Prisma.ProposalAvgOrderByAggregateInput
   _max?: Prisma.ProposalMaxOrderByAggregateInput
   _min?: Prisma.ProposalMinOrderByAggregateInput
+  _sum?: Prisma.ProposalSumOrderByAggregateInput
 }
 
 export type ProposalScalarWhereWithAggregatesInput = {
@@ -489,8 +744,23 @@ export type ProposalScalarWhereWithAggregatesInput = {
   clientPhone?: Prisma.StringNullableWithAggregatesFilter<"Proposal"> | string | null
   clientSegment?: Prisma.StringNullableWithAggregatesFilter<"Proposal"> | string | null
   clientWebsite?: Prisma.StringNullableWithAggregatesFilter<"Proposal"> | string | null
+  clientCity?: Prisma.StringNullableWithAggregatesFilter<"Proposal"> | string | null
+  clientState?: Prisma.StringNullableWithAggregatesFilter<"Proposal"> | string | null
   clientDescription?: Prisma.StringNullableWithAggregatesFilter<"Proposal"> | string | null
   clientProblem?: Prisma.StringNullableWithAggregatesFilter<"Proposal"> | string | null
+  companyResearchSnapshot?: Prisma.JsonNullableWithAggregatesFilter<"Proposal">
+  companyResearchSources?: Prisma.JsonNullableWithAggregatesFilter<"Proposal">
+  companyResearchConfirmedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Proposal"> | Date | string | null
+  referenceProposalIds?: Prisma.JsonNullableWithAggregatesFilter<"Proposal">
+  generationModel?: Prisma.StringNullableWithAggregatesFilter<"Proposal"> | string | null
+  generationPromptVersion?: Prisma.StringNullableWithAggregatesFilter<"Proposal"> | string | null
+  generatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Proposal"> | Date | string | null
+  quotaConsumedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Proposal"> | Date | string | null
+  acceptedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Proposal"> | Date | string | null
+  acceptedByName?: Prisma.StringNullableWithAggregatesFilter<"Proposal"> | string | null
+  acceptedByEmail?: Prisma.StringNullableWithAggregatesFilter<"Proposal"> | string | null
+  rejectedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Proposal"> | Date | string | null
+  rejectionReason?: Prisma.StringNullableWithAggregatesFilter<"Proposal"> | string | null
   title?: Prisma.StringWithAggregatesFilter<"Proposal"> | string
   serviceOffered?: Prisma.StringNullableWithAggregatesFilter<"Proposal"> | string | null
   objective?: Prisma.StringNullableWithAggregatesFilter<"Proposal"> | string | null
@@ -507,6 +777,12 @@ export type ProposalScalarWhereWithAggregatesInput = {
   generatedContent?: Prisma.JsonNullableWithAggregatesFilter<"Proposal">
   senderSnapshot?: Prisma.JsonWithAggregatesFilter<"Proposal">
   styleSnapshot?: Prisma.JsonWithAggregatesFilter<"Proposal">
+  publicToken?: Prisma.StringNullableWithAggregatesFilter<"Proposal"> | string | null
+  publicEnabled?: Prisma.BoolWithAggregatesFilter<"Proposal"> | boolean
+  publishedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Proposal"> | Date | string | null
+  firstViewedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Proposal"> | Date | string | null
+  lastViewedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Proposal"> | Date | string | null
+  viewCount?: Prisma.IntWithAggregatesFilter<"Proposal"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Proposal"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Proposal"> | Date | string
 }
@@ -521,8 +797,23 @@ export type ProposalCreateInput = {
   clientPhone?: string | null
   clientSegment?: string | null
   clientWebsite?: string | null
+  clientCity?: string | null
+  clientState?: string | null
   clientDescription?: string | null
   clientProblem?: string | null
+  companyResearchSnapshot?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  companyResearchSources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  companyResearchConfirmedAt?: Date | string | null
+  referenceProposalIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generationModel?: string | null
+  generationPromptVersion?: string | null
+  generatedAt?: Date | string | null
+  quotaConsumedAt?: Date | string | null
+  acceptedAt?: Date | string | null
+  acceptedByName?: string | null
+  acceptedByEmail?: string | null
+  rejectedAt?: Date | string | null
+  rejectionReason?: string | null
   title: string
   serviceOffered?: string | null
   objective?: string | null
@@ -539,6 +830,12 @@ export type ProposalCreateInput = {
   generatedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   senderSnapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
   styleSnapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  publicToken?: string | null
+  publicEnabled?: boolean
+  publishedAt?: Date | string | null
+  firstViewedAt?: Date | string | null
+  lastViewedAt?: Date | string | null
+  viewCount?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutProposalsInput
@@ -557,8 +854,23 @@ export type ProposalUncheckedCreateInput = {
   clientPhone?: string | null
   clientSegment?: string | null
   clientWebsite?: string | null
+  clientCity?: string | null
+  clientState?: string | null
   clientDescription?: string | null
   clientProblem?: string | null
+  companyResearchSnapshot?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  companyResearchSources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  companyResearchConfirmedAt?: Date | string | null
+  referenceProposalIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generationModel?: string | null
+  generationPromptVersion?: string | null
+  generatedAt?: Date | string | null
+  quotaConsumedAt?: Date | string | null
+  acceptedAt?: Date | string | null
+  acceptedByName?: string | null
+  acceptedByEmail?: string | null
+  rejectedAt?: Date | string | null
+  rejectionReason?: string | null
   title: string
   serviceOffered?: string | null
   objective?: string | null
@@ -575,6 +887,12 @@ export type ProposalUncheckedCreateInput = {
   generatedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   senderSnapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
   styleSnapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  publicToken?: string | null
+  publicEnabled?: boolean
+  publishedAt?: Date | string | null
+  firstViewedAt?: Date | string | null
+  lastViewedAt?: Date | string | null
+  viewCount?: number
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -589,8 +907,23 @@ export type ProposalUpdateInput = {
   clientPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientSegment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clientCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clientState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientProblem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyResearchSnapshot?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  companyResearchSources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  companyResearchConfirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referenceProposalIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generationModel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  generationPromptVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  generatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  quotaConsumedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedByName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedByEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   serviceOffered?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   objective?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -607,6 +940,12 @@ export type ProposalUpdateInput = {
   generatedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   senderSnapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   styleSnapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  publicToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publicEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstViewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastViewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutProposalsNestedInput
@@ -625,8 +964,23 @@ export type ProposalUncheckedUpdateInput = {
   clientPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientSegment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clientCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clientState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientProblem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyResearchSnapshot?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  companyResearchSources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  companyResearchConfirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referenceProposalIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generationModel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  generationPromptVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  generatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  quotaConsumedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedByName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedByEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   serviceOffered?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   objective?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -643,6 +997,12 @@ export type ProposalUncheckedUpdateInput = {
   generatedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   senderSnapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   styleSnapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  publicToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publicEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstViewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastViewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -659,8 +1019,23 @@ export type ProposalCreateManyInput = {
   clientPhone?: string | null
   clientSegment?: string | null
   clientWebsite?: string | null
+  clientCity?: string | null
+  clientState?: string | null
   clientDescription?: string | null
   clientProblem?: string | null
+  companyResearchSnapshot?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  companyResearchSources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  companyResearchConfirmedAt?: Date | string | null
+  referenceProposalIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generationModel?: string | null
+  generationPromptVersion?: string | null
+  generatedAt?: Date | string | null
+  quotaConsumedAt?: Date | string | null
+  acceptedAt?: Date | string | null
+  acceptedByName?: string | null
+  acceptedByEmail?: string | null
+  rejectedAt?: Date | string | null
+  rejectionReason?: string | null
   title: string
   serviceOffered?: string | null
   objective?: string | null
@@ -677,6 +1052,12 @@ export type ProposalCreateManyInput = {
   generatedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   senderSnapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
   styleSnapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  publicToken?: string | null
+  publicEnabled?: boolean
+  publishedAt?: Date | string | null
+  firstViewedAt?: Date | string | null
+  lastViewedAt?: Date | string | null
+  viewCount?: number
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -691,8 +1072,23 @@ export type ProposalUpdateManyMutationInput = {
   clientPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientSegment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clientCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clientState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientProblem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyResearchSnapshot?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  companyResearchSources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  companyResearchConfirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referenceProposalIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generationModel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  generationPromptVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  generatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  quotaConsumedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedByName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedByEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   serviceOffered?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   objective?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -709,6 +1105,12 @@ export type ProposalUpdateManyMutationInput = {
   generatedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   senderSnapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   styleSnapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  publicToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publicEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstViewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastViewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -725,8 +1127,23 @@ export type ProposalUncheckedUpdateManyInput = {
   clientPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientSegment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clientCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clientState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientProblem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyResearchSnapshot?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  companyResearchSources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  companyResearchConfirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referenceProposalIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generationModel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  generationPromptVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  generatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  quotaConsumedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedByName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedByEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   serviceOffered?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   objective?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -743,6 +1160,12 @@ export type ProposalUncheckedUpdateManyInput = {
   generatedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   senderSnapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   styleSnapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  publicToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publicEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstViewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastViewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -769,8 +1192,23 @@ export type ProposalCountOrderByAggregateInput = {
   clientPhone?: Prisma.SortOrder
   clientSegment?: Prisma.SortOrder
   clientWebsite?: Prisma.SortOrder
+  clientCity?: Prisma.SortOrder
+  clientState?: Prisma.SortOrder
   clientDescription?: Prisma.SortOrder
   clientProblem?: Prisma.SortOrder
+  companyResearchSnapshot?: Prisma.SortOrder
+  companyResearchSources?: Prisma.SortOrder
+  companyResearchConfirmedAt?: Prisma.SortOrder
+  referenceProposalIds?: Prisma.SortOrder
+  generationModel?: Prisma.SortOrder
+  generationPromptVersion?: Prisma.SortOrder
+  generatedAt?: Prisma.SortOrder
+  quotaConsumedAt?: Prisma.SortOrder
+  acceptedAt?: Prisma.SortOrder
+  acceptedByName?: Prisma.SortOrder
+  acceptedByEmail?: Prisma.SortOrder
+  rejectedAt?: Prisma.SortOrder
+  rejectionReason?: Prisma.SortOrder
   title?: Prisma.SortOrder
   serviceOffered?: Prisma.SortOrder
   objective?: Prisma.SortOrder
@@ -787,8 +1225,18 @@ export type ProposalCountOrderByAggregateInput = {
   generatedContent?: Prisma.SortOrder
   senderSnapshot?: Prisma.SortOrder
   styleSnapshot?: Prisma.SortOrder
+  publicToken?: Prisma.SortOrder
+  publicEnabled?: Prisma.SortOrder
+  publishedAt?: Prisma.SortOrder
+  firstViewedAt?: Prisma.SortOrder
+  lastViewedAt?: Prisma.SortOrder
+  viewCount?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type ProposalAvgOrderByAggregateInput = {
+  viewCount?: Prisma.SortOrder
 }
 
 export type ProposalMaxOrderByAggregateInput = {
@@ -803,8 +1251,20 @@ export type ProposalMaxOrderByAggregateInput = {
   clientPhone?: Prisma.SortOrder
   clientSegment?: Prisma.SortOrder
   clientWebsite?: Prisma.SortOrder
+  clientCity?: Prisma.SortOrder
+  clientState?: Prisma.SortOrder
   clientDescription?: Prisma.SortOrder
   clientProblem?: Prisma.SortOrder
+  companyResearchConfirmedAt?: Prisma.SortOrder
+  generationModel?: Prisma.SortOrder
+  generationPromptVersion?: Prisma.SortOrder
+  generatedAt?: Prisma.SortOrder
+  quotaConsumedAt?: Prisma.SortOrder
+  acceptedAt?: Prisma.SortOrder
+  acceptedByName?: Prisma.SortOrder
+  acceptedByEmail?: Prisma.SortOrder
+  rejectedAt?: Prisma.SortOrder
+  rejectionReason?: Prisma.SortOrder
   title?: Prisma.SortOrder
   serviceOffered?: Prisma.SortOrder
   objective?: Prisma.SortOrder
@@ -813,6 +1273,12 @@ export type ProposalMaxOrderByAggregateInput = {
   observations?: Prisma.SortOrder
   nextSteps?: Prisma.SortOrder
   terms?: Prisma.SortOrder
+  publicToken?: Prisma.SortOrder
+  publicEnabled?: Prisma.SortOrder
+  publishedAt?: Prisma.SortOrder
+  firstViewedAt?: Prisma.SortOrder
+  lastViewedAt?: Prisma.SortOrder
+  viewCount?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -829,8 +1295,20 @@ export type ProposalMinOrderByAggregateInput = {
   clientPhone?: Prisma.SortOrder
   clientSegment?: Prisma.SortOrder
   clientWebsite?: Prisma.SortOrder
+  clientCity?: Prisma.SortOrder
+  clientState?: Prisma.SortOrder
   clientDescription?: Prisma.SortOrder
   clientProblem?: Prisma.SortOrder
+  companyResearchConfirmedAt?: Prisma.SortOrder
+  generationModel?: Prisma.SortOrder
+  generationPromptVersion?: Prisma.SortOrder
+  generatedAt?: Prisma.SortOrder
+  quotaConsumedAt?: Prisma.SortOrder
+  acceptedAt?: Prisma.SortOrder
+  acceptedByName?: Prisma.SortOrder
+  acceptedByEmail?: Prisma.SortOrder
+  rejectedAt?: Prisma.SortOrder
+  rejectionReason?: Prisma.SortOrder
   title?: Prisma.SortOrder
   serviceOffered?: Prisma.SortOrder
   objective?: Prisma.SortOrder
@@ -839,8 +1317,18 @@ export type ProposalMinOrderByAggregateInput = {
   observations?: Prisma.SortOrder
   nextSteps?: Prisma.SortOrder
   terms?: Prisma.SortOrder
+  publicToken?: Prisma.SortOrder
+  publicEnabled?: Prisma.SortOrder
+  publishedAt?: Prisma.SortOrder
+  firstViewedAt?: Prisma.SortOrder
+  lastViewedAt?: Prisma.SortOrder
+  viewCount?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type ProposalSumOrderByAggregateInput = {
+  viewCount?: Prisma.SortOrder
 }
 
 export type ProposalCreateNestedManyWithoutUserInput = {
@@ -941,8 +1429,23 @@ export type ProposalCreateWithoutUserInput = {
   clientPhone?: string | null
   clientSegment?: string | null
   clientWebsite?: string | null
+  clientCity?: string | null
+  clientState?: string | null
   clientDescription?: string | null
   clientProblem?: string | null
+  companyResearchSnapshot?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  companyResearchSources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  companyResearchConfirmedAt?: Date | string | null
+  referenceProposalIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generationModel?: string | null
+  generationPromptVersion?: string | null
+  generatedAt?: Date | string | null
+  quotaConsumedAt?: Date | string | null
+  acceptedAt?: Date | string | null
+  acceptedByName?: string | null
+  acceptedByEmail?: string | null
+  rejectedAt?: Date | string | null
+  rejectionReason?: string | null
   title: string
   serviceOffered?: string | null
   objective?: string | null
@@ -959,6 +1462,12 @@ export type ProposalCreateWithoutUserInput = {
   generatedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   senderSnapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
   styleSnapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  publicToken?: string | null
+  publicEnabled?: boolean
+  publishedAt?: Date | string | null
+  firstViewedAt?: Date | string | null
+  lastViewedAt?: Date | string | null
+  viewCount?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   company: Prisma.CompanyCreateNestedOneWithoutProposalsInput
@@ -975,8 +1484,23 @@ export type ProposalUncheckedCreateWithoutUserInput = {
   clientPhone?: string | null
   clientSegment?: string | null
   clientWebsite?: string | null
+  clientCity?: string | null
+  clientState?: string | null
   clientDescription?: string | null
   clientProblem?: string | null
+  companyResearchSnapshot?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  companyResearchSources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  companyResearchConfirmedAt?: Date | string | null
+  referenceProposalIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generationModel?: string | null
+  generationPromptVersion?: string | null
+  generatedAt?: Date | string | null
+  quotaConsumedAt?: Date | string | null
+  acceptedAt?: Date | string | null
+  acceptedByName?: string | null
+  acceptedByEmail?: string | null
+  rejectedAt?: Date | string | null
+  rejectionReason?: string | null
   title: string
   serviceOffered?: string | null
   objective?: string | null
@@ -993,6 +1517,12 @@ export type ProposalUncheckedCreateWithoutUserInput = {
   generatedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   senderSnapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
   styleSnapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  publicToken?: string | null
+  publicEnabled?: boolean
+  publishedAt?: Date | string | null
+  firstViewedAt?: Date | string | null
+  lastViewedAt?: Date | string | null
+  viewCount?: number
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1038,8 +1568,23 @@ export type ProposalScalarWhereInput = {
   clientPhone?: Prisma.StringNullableFilter<"Proposal"> | string | null
   clientSegment?: Prisma.StringNullableFilter<"Proposal"> | string | null
   clientWebsite?: Prisma.StringNullableFilter<"Proposal"> | string | null
+  clientCity?: Prisma.StringNullableFilter<"Proposal"> | string | null
+  clientState?: Prisma.StringNullableFilter<"Proposal"> | string | null
   clientDescription?: Prisma.StringNullableFilter<"Proposal"> | string | null
   clientProblem?: Prisma.StringNullableFilter<"Proposal"> | string | null
+  companyResearchSnapshot?: Prisma.JsonNullableFilter<"Proposal">
+  companyResearchSources?: Prisma.JsonNullableFilter<"Proposal">
+  companyResearchConfirmedAt?: Prisma.DateTimeNullableFilter<"Proposal"> | Date | string | null
+  referenceProposalIds?: Prisma.JsonNullableFilter<"Proposal">
+  generationModel?: Prisma.StringNullableFilter<"Proposal"> | string | null
+  generationPromptVersion?: Prisma.StringNullableFilter<"Proposal"> | string | null
+  generatedAt?: Prisma.DateTimeNullableFilter<"Proposal"> | Date | string | null
+  quotaConsumedAt?: Prisma.DateTimeNullableFilter<"Proposal"> | Date | string | null
+  acceptedAt?: Prisma.DateTimeNullableFilter<"Proposal"> | Date | string | null
+  acceptedByName?: Prisma.StringNullableFilter<"Proposal"> | string | null
+  acceptedByEmail?: Prisma.StringNullableFilter<"Proposal"> | string | null
+  rejectedAt?: Prisma.DateTimeNullableFilter<"Proposal"> | Date | string | null
+  rejectionReason?: Prisma.StringNullableFilter<"Proposal"> | string | null
   title?: Prisma.StringFilter<"Proposal"> | string
   serviceOffered?: Prisma.StringNullableFilter<"Proposal"> | string | null
   objective?: Prisma.StringNullableFilter<"Proposal"> | string | null
@@ -1056,6 +1601,12 @@ export type ProposalScalarWhereInput = {
   generatedContent?: Prisma.JsonNullableFilter<"Proposal">
   senderSnapshot?: Prisma.JsonFilter<"Proposal">
   styleSnapshot?: Prisma.JsonFilter<"Proposal">
+  publicToken?: Prisma.StringNullableFilter<"Proposal"> | string | null
+  publicEnabled?: Prisma.BoolFilter<"Proposal"> | boolean
+  publishedAt?: Prisma.DateTimeNullableFilter<"Proposal"> | Date | string | null
+  firstViewedAt?: Prisma.DateTimeNullableFilter<"Proposal"> | Date | string | null
+  lastViewedAt?: Prisma.DateTimeNullableFilter<"Proposal"> | Date | string | null
+  viewCount?: Prisma.IntFilter<"Proposal"> | number
   createdAt?: Prisma.DateTimeFilter<"Proposal"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Proposal"> | Date | string
 }
@@ -1070,8 +1621,23 @@ export type ProposalCreateWithoutCompanyInput = {
   clientPhone?: string | null
   clientSegment?: string | null
   clientWebsite?: string | null
+  clientCity?: string | null
+  clientState?: string | null
   clientDescription?: string | null
   clientProblem?: string | null
+  companyResearchSnapshot?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  companyResearchSources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  companyResearchConfirmedAt?: Date | string | null
+  referenceProposalIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generationModel?: string | null
+  generationPromptVersion?: string | null
+  generatedAt?: Date | string | null
+  quotaConsumedAt?: Date | string | null
+  acceptedAt?: Date | string | null
+  acceptedByName?: string | null
+  acceptedByEmail?: string | null
+  rejectedAt?: Date | string | null
+  rejectionReason?: string | null
   title: string
   serviceOffered?: string | null
   objective?: string | null
@@ -1088,6 +1654,12 @@ export type ProposalCreateWithoutCompanyInput = {
   generatedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   senderSnapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
   styleSnapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  publicToken?: string | null
+  publicEnabled?: boolean
+  publishedAt?: Date | string | null
+  firstViewedAt?: Date | string | null
+  lastViewedAt?: Date | string | null
+  viewCount?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutProposalsInput
@@ -1104,8 +1676,23 @@ export type ProposalUncheckedCreateWithoutCompanyInput = {
   clientPhone?: string | null
   clientSegment?: string | null
   clientWebsite?: string | null
+  clientCity?: string | null
+  clientState?: string | null
   clientDescription?: string | null
   clientProblem?: string | null
+  companyResearchSnapshot?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  companyResearchSources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  companyResearchConfirmedAt?: Date | string | null
+  referenceProposalIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generationModel?: string | null
+  generationPromptVersion?: string | null
+  generatedAt?: Date | string | null
+  quotaConsumedAt?: Date | string | null
+  acceptedAt?: Date | string | null
+  acceptedByName?: string | null
+  acceptedByEmail?: string | null
+  rejectedAt?: Date | string | null
+  rejectionReason?: string | null
   title: string
   serviceOffered?: string | null
   objective?: string | null
@@ -1122,6 +1709,12 @@ export type ProposalUncheckedCreateWithoutCompanyInput = {
   generatedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   senderSnapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
   styleSnapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  publicToken?: string | null
+  publicEnabled?: boolean
+  publishedAt?: Date | string | null
+  firstViewedAt?: Date | string | null
+  lastViewedAt?: Date | string | null
+  viewCount?: number
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1163,8 +1756,23 @@ export type ProposalCreateManyUserInput = {
   clientPhone?: string | null
   clientSegment?: string | null
   clientWebsite?: string | null
+  clientCity?: string | null
+  clientState?: string | null
   clientDescription?: string | null
   clientProblem?: string | null
+  companyResearchSnapshot?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  companyResearchSources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  companyResearchConfirmedAt?: Date | string | null
+  referenceProposalIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generationModel?: string | null
+  generationPromptVersion?: string | null
+  generatedAt?: Date | string | null
+  quotaConsumedAt?: Date | string | null
+  acceptedAt?: Date | string | null
+  acceptedByName?: string | null
+  acceptedByEmail?: string | null
+  rejectedAt?: Date | string | null
+  rejectionReason?: string | null
   title: string
   serviceOffered?: string | null
   objective?: string | null
@@ -1181,6 +1789,12 @@ export type ProposalCreateManyUserInput = {
   generatedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   senderSnapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
   styleSnapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  publicToken?: string | null
+  publicEnabled?: boolean
+  publishedAt?: Date | string | null
+  firstViewedAt?: Date | string | null
+  lastViewedAt?: Date | string | null
+  viewCount?: number
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1195,8 +1809,23 @@ export type ProposalUpdateWithoutUserInput = {
   clientPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientSegment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clientCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clientState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientProblem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyResearchSnapshot?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  companyResearchSources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  companyResearchConfirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referenceProposalIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generationModel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  generationPromptVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  generatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  quotaConsumedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedByName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedByEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   serviceOffered?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   objective?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1213,6 +1842,12 @@ export type ProposalUpdateWithoutUserInput = {
   generatedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   senderSnapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   styleSnapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  publicToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publicEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstViewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastViewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   company?: Prisma.CompanyUpdateOneRequiredWithoutProposalsNestedInput
@@ -1229,8 +1864,23 @@ export type ProposalUncheckedUpdateWithoutUserInput = {
   clientPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientSegment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clientCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clientState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientProblem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyResearchSnapshot?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  companyResearchSources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  companyResearchConfirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referenceProposalIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generationModel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  generationPromptVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  generatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  quotaConsumedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedByName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedByEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   serviceOffered?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   objective?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1247,6 +1897,12 @@ export type ProposalUncheckedUpdateWithoutUserInput = {
   generatedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   senderSnapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   styleSnapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  publicToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publicEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstViewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastViewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1262,8 +1918,23 @@ export type ProposalUncheckedUpdateManyWithoutUserInput = {
   clientPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientSegment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clientCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clientState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientProblem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyResearchSnapshot?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  companyResearchSources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  companyResearchConfirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referenceProposalIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generationModel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  generationPromptVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  generatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  quotaConsumedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedByName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedByEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   serviceOffered?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   objective?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1280,6 +1951,12 @@ export type ProposalUncheckedUpdateManyWithoutUserInput = {
   generatedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   senderSnapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   styleSnapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  publicToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publicEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstViewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastViewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1295,8 +1972,23 @@ export type ProposalCreateManyCompanyInput = {
   clientPhone?: string | null
   clientSegment?: string | null
   clientWebsite?: string | null
+  clientCity?: string | null
+  clientState?: string | null
   clientDescription?: string | null
   clientProblem?: string | null
+  companyResearchSnapshot?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  companyResearchSources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  companyResearchConfirmedAt?: Date | string | null
+  referenceProposalIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generationModel?: string | null
+  generationPromptVersion?: string | null
+  generatedAt?: Date | string | null
+  quotaConsumedAt?: Date | string | null
+  acceptedAt?: Date | string | null
+  acceptedByName?: string | null
+  acceptedByEmail?: string | null
+  rejectedAt?: Date | string | null
+  rejectionReason?: string | null
   title: string
   serviceOffered?: string | null
   objective?: string | null
@@ -1313,6 +2005,12 @@ export type ProposalCreateManyCompanyInput = {
   generatedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   senderSnapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
   styleSnapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  publicToken?: string | null
+  publicEnabled?: boolean
+  publishedAt?: Date | string | null
+  firstViewedAt?: Date | string | null
+  lastViewedAt?: Date | string | null
+  viewCount?: number
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1327,8 +2025,23 @@ export type ProposalUpdateWithoutCompanyInput = {
   clientPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientSegment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clientCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clientState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientProblem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyResearchSnapshot?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  companyResearchSources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  companyResearchConfirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referenceProposalIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generationModel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  generationPromptVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  generatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  quotaConsumedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedByName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedByEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   serviceOffered?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   objective?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1345,6 +2058,12 @@ export type ProposalUpdateWithoutCompanyInput = {
   generatedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   senderSnapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   styleSnapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  publicToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publicEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstViewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastViewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutProposalsNestedInput
@@ -1361,8 +2080,23 @@ export type ProposalUncheckedUpdateWithoutCompanyInput = {
   clientPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientSegment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clientCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clientState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientProblem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyResearchSnapshot?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  companyResearchSources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  companyResearchConfirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referenceProposalIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generationModel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  generationPromptVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  generatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  quotaConsumedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedByName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedByEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   serviceOffered?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   objective?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1379,6 +2113,12 @@ export type ProposalUncheckedUpdateWithoutCompanyInput = {
   generatedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   senderSnapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   styleSnapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  publicToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publicEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstViewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastViewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1394,8 +2134,23 @@ export type ProposalUncheckedUpdateManyWithoutCompanyInput = {
   clientPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientSegment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clientCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clientState?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientProblem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyResearchSnapshot?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  companyResearchSources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  companyResearchConfirmedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referenceProposalIds?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generationModel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  generationPromptVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  generatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  quotaConsumedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedByName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedByEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rejectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   serviceOffered?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   objective?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1412,6 +2167,12 @@ export type ProposalUncheckedUpdateManyWithoutCompanyInput = {
   generatedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   senderSnapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   styleSnapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  publicToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publicEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstViewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastViewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1430,8 +2191,23 @@ export type ProposalSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   clientPhone?: boolean
   clientSegment?: boolean
   clientWebsite?: boolean
+  clientCity?: boolean
+  clientState?: boolean
   clientDescription?: boolean
   clientProblem?: boolean
+  companyResearchSnapshot?: boolean
+  companyResearchSources?: boolean
+  companyResearchConfirmedAt?: boolean
+  referenceProposalIds?: boolean
+  generationModel?: boolean
+  generationPromptVersion?: boolean
+  generatedAt?: boolean
+  quotaConsumedAt?: boolean
+  acceptedAt?: boolean
+  acceptedByName?: boolean
+  acceptedByEmail?: boolean
+  rejectedAt?: boolean
+  rejectionReason?: boolean
   title?: boolean
   serviceOffered?: boolean
   objective?: boolean
@@ -1448,6 +2224,12 @@ export type ProposalSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   generatedContent?: boolean
   senderSnapshot?: boolean
   styleSnapshot?: boolean
+  publicToken?: boolean
+  publicEnabled?: boolean
+  publishedAt?: boolean
+  firstViewedAt?: boolean
+  lastViewedAt?: boolean
+  viewCount?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1466,8 +2248,23 @@ export type ProposalSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   clientPhone?: boolean
   clientSegment?: boolean
   clientWebsite?: boolean
+  clientCity?: boolean
+  clientState?: boolean
   clientDescription?: boolean
   clientProblem?: boolean
+  companyResearchSnapshot?: boolean
+  companyResearchSources?: boolean
+  companyResearchConfirmedAt?: boolean
+  referenceProposalIds?: boolean
+  generationModel?: boolean
+  generationPromptVersion?: boolean
+  generatedAt?: boolean
+  quotaConsumedAt?: boolean
+  acceptedAt?: boolean
+  acceptedByName?: boolean
+  acceptedByEmail?: boolean
+  rejectedAt?: boolean
+  rejectionReason?: boolean
   title?: boolean
   serviceOffered?: boolean
   objective?: boolean
@@ -1484,6 +2281,12 @@ export type ProposalSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   generatedContent?: boolean
   senderSnapshot?: boolean
   styleSnapshot?: boolean
+  publicToken?: boolean
+  publicEnabled?: boolean
+  publishedAt?: boolean
+  firstViewedAt?: boolean
+  lastViewedAt?: boolean
+  viewCount?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1502,8 +2305,23 @@ export type ProposalSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   clientPhone?: boolean
   clientSegment?: boolean
   clientWebsite?: boolean
+  clientCity?: boolean
+  clientState?: boolean
   clientDescription?: boolean
   clientProblem?: boolean
+  companyResearchSnapshot?: boolean
+  companyResearchSources?: boolean
+  companyResearchConfirmedAt?: boolean
+  referenceProposalIds?: boolean
+  generationModel?: boolean
+  generationPromptVersion?: boolean
+  generatedAt?: boolean
+  quotaConsumedAt?: boolean
+  acceptedAt?: boolean
+  acceptedByName?: boolean
+  acceptedByEmail?: boolean
+  rejectedAt?: boolean
+  rejectionReason?: boolean
   title?: boolean
   serviceOffered?: boolean
   objective?: boolean
@@ -1520,6 +2338,12 @@ export type ProposalSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   generatedContent?: boolean
   senderSnapshot?: boolean
   styleSnapshot?: boolean
+  publicToken?: boolean
+  publicEnabled?: boolean
+  publishedAt?: boolean
+  firstViewedAt?: boolean
+  lastViewedAt?: boolean
+  viewCount?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1538,8 +2362,23 @@ export type ProposalSelectScalar = {
   clientPhone?: boolean
   clientSegment?: boolean
   clientWebsite?: boolean
+  clientCity?: boolean
+  clientState?: boolean
   clientDescription?: boolean
   clientProblem?: boolean
+  companyResearchSnapshot?: boolean
+  companyResearchSources?: boolean
+  companyResearchConfirmedAt?: boolean
+  referenceProposalIds?: boolean
+  generationModel?: boolean
+  generationPromptVersion?: boolean
+  generatedAt?: boolean
+  quotaConsumedAt?: boolean
+  acceptedAt?: boolean
+  acceptedByName?: boolean
+  acceptedByEmail?: boolean
+  rejectedAt?: boolean
+  rejectionReason?: boolean
   title?: boolean
   serviceOffered?: boolean
   objective?: boolean
@@ -1556,11 +2395,17 @@ export type ProposalSelectScalar = {
   generatedContent?: boolean
   senderSnapshot?: boolean
   styleSnapshot?: boolean
+  publicToken?: boolean
+  publicEnabled?: boolean
+  publishedAt?: boolean
+  firstViewedAt?: boolean
+  lastViewedAt?: boolean
+  viewCount?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ProposalOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "companyId" | "status" | "tone" | "clientName" | "clientContactName" | "clientEmail" | "clientPhone" | "clientSegment" | "clientWebsite" | "clientDescription" | "clientProblem" | "title" | "serviceOffered" | "objective" | "scope" | "deliverables" | "timeline" | "investment" | "paymentConditions" | "validityDate" | "observations" | "differentials" | "nextSteps" | "terms" | "generatedContent" | "senderSnapshot" | "styleSnapshot" | "createdAt" | "updatedAt", ExtArgs["result"]["proposal"]>
+export type ProposalOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "companyId" | "status" | "tone" | "clientName" | "clientContactName" | "clientEmail" | "clientPhone" | "clientSegment" | "clientWebsite" | "clientCity" | "clientState" | "clientDescription" | "clientProblem" | "companyResearchSnapshot" | "companyResearchSources" | "companyResearchConfirmedAt" | "referenceProposalIds" | "generationModel" | "generationPromptVersion" | "generatedAt" | "quotaConsumedAt" | "acceptedAt" | "acceptedByName" | "acceptedByEmail" | "rejectedAt" | "rejectionReason" | "title" | "serviceOffered" | "objective" | "scope" | "deliverables" | "timeline" | "investment" | "paymentConditions" | "validityDate" | "observations" | "differentials" | "nextSteps" | "terms" | "generatedContent" | "senderSnapshot" | "styleSnapshot" | "publicToken" | "publicEnabled" | "publishedAt" | "firstViewedAt" | "lastViewedAt" | "viewCount" | "createdAt" | "updatedAt", ExtArgs["result"]["proposal"]>
 export type ProposalInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   company?: boolean | Prisma.CompanyDefaultArgs<ExtArgs>
@@ -1592,8 +2437,23 @@ export type $ProposalPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     clientPhone: string | null
     clientSegment: string | null
     clientWebsite: string | null
+    clientCity: string | null
+    clientState: string | null
     clientDescription: string | null
     clientProblem: string | null
+    companyResearchSnapshot: runtime.JsonValue | null
+    companyResearchSources: runtime.JsonValue | null
+    companyResearchConfirmedAt: Date | null
+    referenceProposalIds: runtime.JsonValue | null
+    generationModel: string | null
+    generationPromptVersion: string | null
+    generatedAt: Date | null
+    quotaConsumedAt: Date | null
+    acceptedAt: Date | null
+    acceptedByName: string | null
+    acceptedByEmail: string | null
+    rejectedAt: Date | null
+    rejectionReason: string | null
     title: string
     serviceOffered: string | null
     objective: string | null
@@ -1610,6 +2470,12 @@ export type $ProposalPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     generatedContent: runtime.JsonValue | null
     senderSnapshot: runtime.JsonValue
     styleSnapshot: runtime.JsonValue
+    publicToken: string | null
+    publicEnabled: boolean
+    publishedAt: Date | null
+    firstViewedAt: Date | null
+    lastViewedAt: Date | null
+    viewCount: number
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["proposal"]>
@@ -2048,8 +2914,23 @@ export interface ProposalFieldRefs {
   readonly clientPhone: Prisma.FieldRef<"Proposal", 'String'>
   readonly clientSegment: Prisma.FieldRef<"Proposal", 'String'>
   readonly clientWebsite: Prisma.FieldRef<"Proposal", 'String'>
+  readonly clientCity: Prisma.FieldRef<"Proposal", 'String'>
+  readonly clientState: Prisma.FieldRef<"Proposal", 'String'>
   readonly clientDescription: Prisma.FieldRef<"Proposal", 'String'>
   readonly clientProblem: Prisma.FieldRef<"Proposal", 'String'>
+  readonly companyResearchSnapshot: Prisma.FieldRef<"Proposal", 'Json'>
+  readonly companyResearchSources: Prisma.FieldRef<"Proposal", 'Json'>
+  readonly companyResearchConfirmedAt: Prisma.FieldRef<"Proposal", 'DateTime'>
+  readonly referenceProposalIds: Prisma.FieldRef<"Proposal", 'Json'>
+  readonly generationModel: Prisma.FieldRef<"Proposal", 'String'>
+  readonly generationPromptVersion: Prisma.FieldRef<"Proposal", 'String'>
+  readonly generatedAt: Prisma.FieldRef<"Proposal", 'DateTime'>
+  readonly quotaConsumedAt: Prisma.FieldRef<"Proposal", 'DateTime'>
+  readonly acceptedAt: Prisma.FieldRef<"Proposal", 'DateTime'>
+  readonly acceptedByName: Prisma.FieldRef<"Proposal", 'String'>
+  readonly acceptedByEmail: Prisma.FieldRef<"Proposal", 'String'>
+  readonly rejectedAt: Prisma.FieldRef<"Proposal", 'DateTime'>
+  readonly rejectionReason: Prisma.FieldRef<"Proposal", 'String'>
   readonly title: Prisma.FieldRef<"Proposal", 'String'>
   readonly serviceOffered: Prisma.FieldRef<"Proposal", 'String'>
   readonly objective: Prisma.FieldRef<"Proposal", 'String'>
@@ -2066,6 +2947,12 @@ export interface ProposalFieldRefs {
   readonly generatedContent: Prisma.FieldRef<"Proposal", 'Json'>
   readonly senderSnapshot: Prisma.FieldRef<"Proposal", 'Json'>
   readonly styleSnapshot: Prisma.FieldRef<"Proposal", 'Json'>
+  readonly publicToken: Prisma.FieldRef<"Proposal", 'String'>
+  readonly publicEnabled: Prisma.FieldRef<"Proposal", 'Boolean'>
+  readonly publishedAt: Prisma.FieldRef<"Proposal", 'DateTime'>
+  readonly firstViewedAt: Prisma.FieldRef<"Proposal", 'DateTime'>
+  readonly lastViewedAt: Prisma.FieldRef<"Proposal", 'DateTime'>
+  readonly viewCount: Prisma.FieldRef<"Proposal", 'Int'>
   readonly createdAt: Prisma.FieldRef<"Proposal", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Proposal", 'DateTime'>
 }

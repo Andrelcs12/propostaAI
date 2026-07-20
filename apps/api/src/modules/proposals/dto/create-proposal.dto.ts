@@ -113,6 +113,18 @@ export class CreateProposalDto {
   @IsOptional()
   @Transform(({ value }) => emptyToUndefined(value))
   @IsString()
+  @Length(1, 120)
+  clientCity?: string;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToUndefined(value))
+  @IsString()
+  @Length(2, 2)
+  clientState?: string;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToUndefined(value))
+  @IsString()
   @Length(1, 1200)
   clientDescription?: string;
 

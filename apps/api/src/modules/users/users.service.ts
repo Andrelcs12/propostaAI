@@ -19,32 +19,67 @@ export class UsersService {
         ? metadata.name
         : typeof metadata.full_name === "string"
           ? metadata.full_name
-          : email.split("@")[0] ?? "Usuario";
+          : (email.split("@")[0] ?? "Usuario");
     const avatarUrl =
       typeof metadata.avatar_url === "string" ? metadata.avatar_url : null;
 
-    const user = await this.prisma.user.upsert({
+    const existingBySupabase = await this.prisma.user.findUnique({
       where: { supabaseUserId: authUser.id },
-      update: {
-        name,
-        email,
-        avatarUrl
-      },
-      create: {
+    });
+
+    if (existingBySupabase) {
+      const user = await this.prisma.user.update({
+        where: { id: existingBySupabase.id },
+        data: { name, email, avatarUrl },
+      });
+
+      return this.toPublicUser(user);
+    }
+
+    const existingByEmail = await this.prisma.user.findUnique({
+      where: { email },
+    });
+
+    if (existingByEmail) {
+      const user = await this.prisma.user.update({
+        where: { id: existingByEmail.id },
+        data: {
+          supabaseUserId: authUser.id,
+          name,
+          avatarUrl,
+        },
+      });
+
+      return this.toPublicUser(user);
+    }
+
+    const user = await this.prisma.user.create({
+      data: {
         supabaseUserId: authUser.id,
         name,
         email,
-        avatarUrl
-      }
+        avatarUrl,
+      },
     });
 
+    return this.toPublicUser(user);
+  }
+
+  private toPublicUser(user: {
+    id: string;
+    supabaseUserId: string;
+    name: string;
+    email: string;
+    avatarUrl: string | null;
+    createdAt: Date;
+  }) {
     return {
       id: user.id,
       supabaseUserId: user.supabaseUserId,
       name: user.name,
       email: user.email,
       avatarUrl: user.avatarUrl,
-      createdAt: user.createdAt.toISOString()
+      createdAt: user.createdAt.toISOString(),
     };
   }
 }

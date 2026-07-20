@@ -31,12 +31,18 @@ function createService() {
     }),
   };
 
+  const logoStorage = {
+    saveLogo: vi.fn(),
+  };
+
   return {
     prisma,
     usersService,
+    logoStorage,
     service: new CompanyService(
       prisma as unknown as PrismaService,
       usersService as unknown as UsersService,
+      logoStorage as never,
     ),
   };
 }
@@ -61,6 +67,8 @@ describe("CompanyService", () => {
       name: "Proposta AI",
       onboardingDone: false,
       onboardingStep: 3,
+      createdAt: new Date("2026-01-01T00:00:00.000Z"),
+      updatedAt: new Date("2026-01-01T00:00:00.000Z"),
     });
 
     await service.updateBasic(authUser, { name: "Proposta AI" });
@@ -130,6 +138,8 @@ describe("CompanyService", () => {
       name: "Proposta AI",
       onboardingDone: true,
       onboardingStep: 5,
+      createdAt: new Date("2026-01-01T00:00:00.000Z"),
+      updatedAt: new Date("2026-01-01T00:00:00.000Z"),
     });
 
     await service.completeOnboarding(authUser);

@@ -23,6 +23,11 @@ export * from './enums';
  */
 export type User = Prisma.UserModel
 /**
+ * Model StripeWebhookEvent
+ * 
+ */
+export type StripeWebhookEvent = Prisma.StripeWebhookEventModel
+/**
  * Model Company
  * 
  */

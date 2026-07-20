@@ -385,6 +385,7 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   User: 'User',
+  StripeWebhookEvent: 'StripeWebhookEvent',
   Company: 'Company',
   Proposal: 'Proposal'
 } as const
@@ -402,7 +403,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "company" | "proposal"
+    modelProps: "user" | "stripeWebhookEvent" | "company" | "proposal"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -477,6 +478,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.UserCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.UserCountAggregateOutputType> | number
+        }
+      }
+    }
+    StripeWebhookEvent: {
+      payload: Prisma.$StripeWebhookEventPayload<ExtArgs>
+      fields: Prisma.StripeWebhookEventFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.StripeWebhookEventFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StripeWebhookEventPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.StripeWebhookEventFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StripeWebhookEventPayload>
+        }
+        findFirst: {
+          args: Prisma.StripeWebhookEventFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StripeWebhookEventPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.StripeWebhookEventFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StripeWebhookEventPayload>
+        }
+        findMany: {
+          args: Prisma.StripeWebhookEventFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StripeWebhookEventPayload>[]
+        }
+        create: {
+          args: Prisma.StripeWebhookEventCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StripeWebhookEventPayload>
+        }
+        createMany: {
+          args: Prisma.StripeWebhookEventCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.StripeWebhookEventCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StripeWebhookEventPayload>[]
+        }
+        delete: {
+          args: Prisma.StripeWebhookEventDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StripeWebhookEventPayload>
+        }
+        update: {
+          args: Prisma.StripeWebhookEventUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StripeWebhookEventPayload>
+        }
+        deleteMany: {
+          args: Prisma.StripeWebhookEventDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.StripeWebhookEventUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.StripeWebhookEventUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StripeWebhookEventPayload>[]
+        }
+        upsert: {
+          args: Prisma.StripeWebhookEventUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StripeWebhookEventPayload>
+        }
+        aggregate: {
+          args: Prisma.StripeWebhookEventAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateStripeWebhookEvent>
+        }
+        groupBy: {
+          args: Prisma.StripeWebhookEventGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.StripeWebhookEventGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.StripeWebhookEventCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.StripeWebhookEventCountAggregateOutputType> | number
         }
       }
     }
@@ -673,11 +748,29 @@ export const UserScalarFieldEnum = {
   name: 'name',
   email: 'email',
   avatarUrl: 'avatarUrl',
+  plan: 'plan',
+  stripeCustomerId: 'stripeCustomerId',
+  stripeSubscriptionId: 'stripeSubscriptionId',
+  stripePriceId: 'stripePriceId',
+  subscriptionStatus: 'subscriptionStatus',
+  subscriptionCurrentPeriodEnd: 'subscriptionCurrentPeriodEnd',
+  subscriptionCancelAtPeriodEnd: 'subscriptionCancelAtPeriodEnd',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const StripeWebhookEventScalarFieldEnum = {
+  id: 'id',
+  stripeEventId: 'stripeEventId',
+  type: 'type',
+  processedAt: 'processedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type StripeWebhookEventScalarFieldEnum = (typeof StripeWebhookEventScalarFieldEnum)[keyof typeof StripeWebhookEventScalarFieldEnum]
 
 
 export const CompanyScalarFieldEnum = {
@@ -748,8 +841,23 @@ export const ProposalScalarFieldEnum = {
   clientPhone: 'clientPhone',
   clientSegment: 'clientSegment',
   clientWebsite: 'clientWebsite',
+  clientCity: 'clientCity',
+  clientState: 'clientState',
   clientDescription: 'clientDescription',
   clientProblem: 'clientProblem',
+  companyResearchSnapshot: 'companyResearchSnapshot',
+  companyResearchSources: 'companyResearchSources',
+  companyResearchConfirmedAt: 'companyResearchConfirmedAt',
+  referenceProposalIds: 'referenceProposalIds',
+  generationModel: 'generationModel',
+  generationPromptVersion: 'generationPromptVersion',
+  generatedAt: 'generatedAt',
+  quotaConsumedAt: 'quotaConsumedAt',
+  acceptedAt: 'acceptedAt',
+  acceptedByName: 'acceptedByName',
+  acceptedByEmail: 'acceptedByEmail',
+  rejectedAt: 'rejectedAt',
+  rejectionReason: 'rejectionReason',
   title: 'title',
   serviceOffered: 'serviceOffered',
   objective: 'objective',
@@ -766,6 +874,12 @@ export const ProposalScalarFieldEnum = {
   generatedContent: 'generatedContent',
   senderSnapshot: 'senderSnapshot',
   styleSnapshot: 'styleSnapshot',
+  publicToken: 'publicToken',
+  publicEnabled: 'publicEnabled',
+  publishedAt: 'publishedAt',
+  firstViewedAt: 'firstViewedAt',
+  lastViewedAt: 'lastViewedAt',
+  viewCount: 'viewCount',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -781,19 +895,19 @@ export const SortOrder = {
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
-export const JsonNullValueInput = {
-  JsonNull: JsonNull
-} as const
-
-export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
-
-
 export const NullableJsonNullValueInput = {
   DbNull: DbNull,
   JsonNull: JsonNull
 } as const
 
 export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
 export const QueryMode = {
@@ -842,6 +956,20 @@ export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaMod
 
 
 /**
+ * Reference to a field of type 'UserPlan'
+ */
+export type EnumUserPlanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserPlan'>
+    
+
+
+/**
+ * Reference to a field of type 'UserPlan[]'
+ */
+export type ListEnumUserPlanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserPlan[]'>
+    
+
+
+/**
  * Reference to a field of type 'DateTime'
  */
 export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -852,6 +980,13 @@ export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
  * Reference to a field of type 'DateTime[]'
  */
 export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -936,13 +1071,6 @@ export type EnumBillingTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$Pris
  * Reference to a field of type 'BillingType[]'
  */
 export type ListEnumBillingTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BillingType[]'>
-    
-
-
-/**
- * Reference to a field of type 'Boolean'
- */
-export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -1112,6 +1240,7 @@ export type PrismaClientOptions = ({
 }
 export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
+  stripeWebhookEvent?: Prisma.StripeWebhookEventOmit
   company?: Prisma.CompanyOmit
   proposal?: Prisma.ProposalOmit
 }

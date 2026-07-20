@@ -1,4 +1,4 @@
-import { IsEnum, IsOptional, IsString, Length } from "class-validator";
+import { IsEnum, IsOptional, IsString, Length, IsArray } from "class-validator";
 import { ProposalTone } from "../../../generated/prisma/enums";
 
 export class GenerateProposalDto {
@@ -10,4 +10,9 @@ export class GenerateProposalDto {
   @IsString()
   @Length(1, 80)
   section?: string;
+
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  referenceProposalIds?: string[];
 }

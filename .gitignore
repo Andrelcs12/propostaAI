@@ -9,3 +9,5 @@ coverage
 *.log
 *.tsbuildinfo
 apps/api/prisma/generated
+apps/api/uploads
+tools/stripe-cli

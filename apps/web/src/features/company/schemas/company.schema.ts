@@ -82,6 +82,9 @@ export const companyIdentitySchema = z.object({
   responsibleName: optionalText(120),
   responsibleRole: optionalText(120),
   contactText: optionalText(600),
+  document: optionalText(32),
+  address: optionalText(240),
+  footerText: optionalText(600),
   showContactData: z.boolean(),
   showSignature: z.boolean(),
 });

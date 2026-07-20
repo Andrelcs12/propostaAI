@@ -1,6 +1,7 @@
-import { Body, Controller, Get, Patch, Post, UseGuards } from "@nestjs/common";
-import { ApiBearerAuth, ApiOkResponse, ApiTags } from "@nestjs/swagger";
+import { Body, Controller, Get, Patch, Post, Query, Req, UseGuards } from "@nestjs/common";
+import { ApiBearerAuth, ApiConsumes, ApiOkResponse, ApiTags } from "@nestjs/swagger";
 import type { User as SupabaseUser } from "@supabase/supabase-js";
+import type { FastifyRequest } from "fastify";
 import { CurrentUser } from "../../common/decorators/current-user.decorator";
 import { SupabaseAuthGuard } from "../auth/supabase-auth.guard";
 import { CompanyService } from "./company.service";
@@ -40,6 +41,22 @@ export class CompanyController {
     @Body() dto: UpdateCompanyBasicDto,
   ) {
     return this.companyService.updateBasic(authUser, dto);
+  }
+
+  @Post("me/logo")
+  @ApiConsumes("multipart/form-data")
+  @ApiOkResponse({ description: "Envia logo da empresa" })
+  async uploadLogo(
+    @CurrentUser() authUser: SupabaseUser,
+    @Req() request: FastifyRequest,
+    @Query("variant") variant?: "default" | "light",
+  ) {
+    const file = await request.file();
+    return this.companyService.uploadLogo(
+      authUser,
+      file,
+      variant === "light" ? "light" : "default",
+    );
   }
 
   @Patch("me/brand")

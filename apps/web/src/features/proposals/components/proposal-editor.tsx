@@ -1,6 +1,6 @@
 "use client";
 
-import { Loader2, Sparkles } from "lucide-react";
+import { Loader2, Sparkles, Wand2 } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -11,9 +11,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { PROPOSAL_SECTION_LABELS } from "@/config/templates";
 import type { ProposalTone } from "@/features/company/types/company";
+import {
+  getFontPreferenceLabel,
+  getVisualStyleLabel,
+} from "@/features/company/utils/labels";
 import { getCurrentAccessToken } from "@/features/company/services/session-token.service";
 import { ProposalDocumentPreview } from "./proposal-document-preview";
+import { ProposalSharePanel } from "./proposal-share-panel";
 import { ToneSelector } from "./tone-selector";
 import {
   generateProposalContent,
@@ -161,16 +167,44 @@ export function ProposalEditor({ initialProposal }: ProposalEditorProps) {
             type="button"
             disabled={isGenerating}
             onClick={() => handleGenerate()}
+            className="hidden md:inline-flex"
           >
             {isGenerating ? (
               <Loader2 className="animate-spin" />
             ) : (
               <Sparkles />
             )}
-            {content ? "Regenerar proposta" : "Gerar proposta"}
+            {content ? "Regenerar" : "Gerar"}
           </Button>
         </div>
       </div>
+
+      <Card className="border-primary/20 bg-primary/5">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Sparkles className="size-4 text-primary" />
+            Assistente de IA
+          </CardTitle>
+          <CardDescription>
+            Gere a proposta completa ou refine secoes especificas com o tom
+            selecionado. O preview ao lado reflete o template da sua empresa.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="flex flex-wrap gap-2">
+          <Button
+            type="button"
+            disabled={isGenerating}
+            onClick={() => handleGenerate()}
+          >
+            {isGenerating ? (
+              <Loader2 className="animate-spin" />
+            ) : (
+              <Wand2 />
+            )}
+            {content ? "Regenerar proposta inteira" : "Gerar proposta com IA"}
+          </Button>
+        </CardContent>
+      </Card>
 
       <Card>
         <CardHeader>
@@ -190,6 +224,12 @@ export function ProposalEditor({ initialProposal }: ProposalEditorProps) {
           />
         </CardContent>
       </Card>
+
+      <ProposalSharePanel
+        proposal={proposal}
+        hasContent={Boolean(content)}
+        onUpdated={setProposal}
+      />
 
       {isGenerating ? (
         <div className="rounded-md border bg-card px-6 py-16 text-center">
@@ -252,32 +292,54 @@ export function ProposalEditor({ initialProposal }: ProposalEditorProps) {
                   multiline
                   onChange={(value) => updateContent({ closing: value })}
                 />
-                <div className="flex flex-wrap gap-2">
-                  {[
-                    "introduction",
-                    "clientContext",
-                    "problem",
-                    "proposedSolution",
-                    "nextSteps",
-                    "closing",
-                  ].map((section) => (
-                    <Button
-                      key={section}
-                      type="button"
-                      variant="outline"
-                      size="sm"
-                      disabled={isGenerating}
-                      onClick={() => handleGenerate(section)}
-                    >
-                      Regenerar {section}
-                    </Button>
-                  ))}
-                </div>
+                <Card>
+                  <CardHeader className="pb-3">
+                    <CardTitle className="text-base">
+                      Regenerar secoes com IA
+                    </CardTitle>
+                    <CardDescription>
+                      Mantenha o restante intacto e refine apenas o trecho
+                      desejado.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="grid gap-2 sm:grid-cols-2">
+                    {(
+                      [
+                        "introduction",
+                        "clientContext",
+                        "problem",
+                        "proposedSolution",
+                        "nextSteps",
+                        "closing",
+                      ] as const
+                    ).map((section) => (
+                      <Button
+                        key={section}
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        disabled={isGenerating}
+                        className="justify-start"
+                        onClick={() => handleGenerate(section)}
+                      >
+                        <Sparkles className="size-3.5" />
+                        {PROPOSAL_SECTION_LABELS[section]}
+                      </Button>
+                    ))}
+                  </CardContent>
+                </Card>
               </div>
             )}
           </div>
 
-          <div className={viewMode === "editor" ? "hidden md:block" : ""}>
+          <div className={viewMode === "editor" ? "hidden md:block xl:sticky xl:top-6 xl:self-start" : ""}>
+            <div className="mb-3">
+              <p className="text-sm font-medium">Preview do documento</p>
+              <p className="text-xs text-muted-foreground">
+                {getVisualStyleLabel(proposal.styleSnapshot.visualStyle)} ·{" "}
+                {getFontPreferenceLabel(proposal.styleSnapshot.fontPreference)}
+              </p>
+            </div>
             <ProposalDocumentPreview
               proposal={proposal}
               content={content}

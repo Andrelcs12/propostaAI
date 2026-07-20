@@ -1,15 +1,27 @@
 import Link from "next/link";
+import { PropostaLogo } from "@/components/brand/proposta-logo";
 
-export function Logo() {
+type LogoProps = {
+  href?: string;
+  showWordmark?: boolean;
+};
+
+export function Logo({ href = "/", showWordmark = true }: LogoProps) {
+  const content = (
+    <PropostaLogo
+      className="size-8"
+      showWordmark={showWordmark}
+      wordmarkClassName="text-base font-semibold tracking-tight text-foreground"
+    />
+  );
+
+  if (!href) {
+    return content;
+  }
+
   return (
-    <Link
-      href="/"
-      className="inline-flex items-center gap-2 text-base font-semibold tracking-normal text-foreground"
-    >
-      <span className="flex size-8 items-center justify-center rounded-md bg-primary text-sm font-semibold text-primary-foreground">
-        P
-      </span>
-      Proposta AI
+    <Link href={href} className="inline-flex cursor-pointer transition-opacity hover:opacity-90">
+      {content}
     </Link>
   );
 }

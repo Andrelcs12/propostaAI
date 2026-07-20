@@ -59,17 +59,41 @@ enum CompanyVisualStyle {
   BOLD
 }
 
+enum UserPlan {
+  FREE
+  PRO
+}
+
 model User {
-  id             String   @id @default(cuid())
-  supabaseUserId String   @unique
-  name           String
-  email          String   @unique
-  avatarUrl      String?
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  id                              String    @id @default(cuid())
+  supabaseUserId                  String    @unique
+  name                            String
+  email                           String    @unique
+  avatarUrl                       String?
+  plan                            UserPlan  @default(FREE)
+  stripeCustomerId                String?   @unique
+  stripeSubscriptionId            String?   @unique
+  stripePriceId                   String?
+  subscriptionStatus              String?
+  subscriptionCurrentPeriodEnd    DateTime?
+  subscriptionCancelAtPeriodEnd   Boolean   @default(false)
+  createdAt                       DateTime  @default(now())
+  updatedAt                       DateTime  @updatedAt
 
   company   Company?
   proposals Proposal[]
+
+  @@index([stripeCustomerId])
+}
+
+model StripeWebhookEvent {
+  id            String   @id @default(cuid())
+  stripeEventId String   @unique
+  type          String
+  processedAt   DateTime @default(now())
+  createdAt     DateTime @default(now())
+
+  @@index([type])
 }
 
 model Company {
@@ -140,8 +164,23 @@ model Proposal {
   clientPhone        String?
   clientSegment      String?
   clientWebsite      String?
+  clientCity         String?
+  clientState        String?
   clientDescription  String?
   clientProblem      String?
+  companyResearchSnapshot   Json?
+  companyResearchSources    Json?
+  companyResearchConfirmedAt DateTime?
+  referenceProposalIds      Json?
+  generationModel           String?
+  generationPromptVersion   String?
+  generatedAt               DateTime?
+  quotaConsumedAt           DateTime?
+  acceptedAt                DateTime?
+  acceptedByName            String?
+  acceptedByEmail           String?
+  rejectedAt                DateTime?
+  rejectionReason           String?
   title              String
   serviceOffered     String?
   objective          String?
@@ -158,6 +197,12 @@ model Proposal {
   generatedContent   Json?
   senderSnapshot     Json
   styleSnapshot      Json
+  publicToken        String?        @unique
+  publicEnabled      Boolean        @default(false)
+  publishedAt        DateTime?
+  firstViewedAt      DateTime?
+  lastViewedAt       DateTime?
+  viewCount          Int            @default(0)
   createdAt          DateTime       @default(now())
   updatedAt          DateTime       @updatedAt
 
@@ -167,4 +212,5 @@ model Proposal {
   @@index([userId])
   @@index([companyId])
   @@index([status])
+  @@index([publicToken])
 }

@@ -9,6 +9,7 @@
  * 🟢 You can import this file directly.
  */
 export type * from './models/User'
+export type * from './models/StripeWebhookEvent'
 export type * from './models/Company'
 export type * from './models/Proposal'
 export type * from './commonInputTypes'

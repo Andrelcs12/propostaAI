@@ -12,6 +12,7 @@ export const config = {
     "/minha-empresa/:path*",
     "/configuracoes/:path*",
     "/propostas/:path*",
+    "/billing/:path*",
     "/login",
     "/cadastro",
     "/recuperar-senha",

@@ -122,8 +122,8 @@ function ReviewSection({
   children: React.ReactNode;
 }) {
   return (
-    <div className="rounded-md border bg-card p-4">
-      <h3 className="mb-3 font-medium">{title}</h3>
+    <div className="border-b border-border/60 pb-4 last:border-b-0">
+      <h3 className="mb-3 text-sm font-semibold text-foreground">{title}</h3>
       <dl className="space-y-2 text-sm">{children}</dl>
     </div>
   );

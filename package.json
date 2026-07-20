@@ -18,10 +18,12 @@
     "db:down": "docker compose down",
     "db:logs": "docker compose logs -f postgres",
     "db:admin": "docker compose --profile tools up -d adminer",
+    "db:check": "npm run db:check --workspace api",
     "db:generate": "npm run db:generate --workspace api",
     "db:migrate": "npm run db:migrate --workspace api",
     "db:deploy": "npm run db:deploy --workspace api",
-    "db:studio": "npm run db:studio --workspace api"
+    "db:studio": "npm run db:studio --workspace api",
+    "stripe:listen": "tools\\\\stripe-cli\\\\stripe.exe listen --forward-to localhost:4000/api/billing/webhook"
   },
   "devDependencies": {
     "@novely/eslint-config": "*",

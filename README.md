@@ -2,7 +2,7 @@
 
 MicroSaaS para freelancers, agencias, desenvolvedores, designers, consultores e pequenos prestadores B2B criarem propostas comerciais profissionais.
 
-Esta base entrega monorepo, landing page, cadastro, login, login com Google, Supabase Auth, usuario persistido com Prisma, onboarding de empresa, painel inicial, API NestJS e estrutura inicial do Stripe sem cobranca real.
+Esta base entrega monorepo, landing page, cadastro, login, login com Google, Supabase Auth, onboarding de empresa, painel, propostas com IA, billing Stripe, pesquisa de empresas e aceite online.
 
 ## Stack
 
@@ -62,15 +62,58 @@ Backend:
 - `SUPABASE_SERVICE_ROLE_KEY`
 - `STRIPE_SECRET_KEY`
 - `STRIPE_WEBHOOK_SECRET`
+- `STRIPE_PRICE_PRO_MONTHLY_ID`
+- `STRIPE_API_VERSION`
 - `GEMINI_API_KEY`
-- `GEMINI_MODEL`
-- `PROPOSAL_PRICE_IN_CENTS`
+- `GEMINI_MODEL=gemini-3.5-flash`
+- `GEMINI_SEARCH_ENABLED=true`
+- `FREE_PROPOSAL_LIMIT=3`
+- `PROPOSAL_PRICE_IN_CENTS=4900`
+- `PDF_RENDER_SECRET`
 
 O banco da API vem de `DATABASE_URL`. Em desenvolvimento, use Docker local. Em producao ou staging, pode usar Neon, Supabase Postgres ou outro PostgreSQL gerenciado.
 
 No Supabase, use apenas as variaveis de Auth quando quiser login real. Encontre URL e chaves em Project Settings > API. A `SUPABASE_SERVICE_ROLE_KEY` nunca pode ser exposta no frontend ou em variaveis `NEXT_PUBLIC_*`.
 
-As chaves Stripe podem ficar vazias ate a integracao real ser ativada.
+As chaves Stripe e Gemini sao obrigatorias para billing e geracao com IA. Nunca exponha segredos no frontend.
+
+## Stripe (configuracao manual)
+
+1. Crie o produto **PropostaAI Pro** no [Stripe Dashboard](https://dashboard.stripe.com/products).
+2. Crie um preco recorrente mensal de **R$ 49,00** e copie o ID `price_...`.
+3. Configure o **Customer Portal** (Settings > Billing > Customer portal).
+4. Ative os metodos de pagamento desejados no Dashboard.
+5. Crie um endpoint de webhook apontando para `https://sua-api.com/api/billing/webhook`.
+6. Selecione os eventos: `checkout.session.completed`, `customer.subscription.*`, `invoice.paid`, `invoice.payment_failed`.
+7. Copie o signing secret `whsec_...` para `STRIPE_WEBHOOK_SECRET`.
+8. Em desenvolvimento, teste com [Stripe CLI](https://stripe.com/docs/stripe-cli): `stripe listen --forward-to localhost:4000/api/billing/webhook`.
+9. Use chaves de teste (`sk_test_...`) localmente; troque por producao apenas no deploy.
+
+Variaveis:
+
+```env
+STRIPE_SECRET_KEY=sk_test_...
+STRIPE_WEBHOOK_SECRET=whsec_...
+STRIPE_PRICE_PRO_MONTHLY_ID=price_...
+STRIPE_API_VERSION=2025-08-27.basil
+```
+
+O plano Pro so e ativado pelo webhook — a pagina `/billing/sucesso` apenas consulta o status.
+
+## Gemini (configuracao manual)
+
+1. Gere uma API key em [Google AI Studio](https://aistudio.google.com/apikey).
+2. Ative billing no Google Cloud se necessario para pesquisa com grounding.
+3. Configure:
+
+```env
+GEMINI_API_KEY=
+GEMINI_MODEL=gemini-3.5-flash
+GEMINI_SEARCH_ENABLED=true
+```
+
+4. Com `GEMINI_SEARCH_ENABLED=false` ou sem billing, a pesquisa de empresas fica indisponivel — o usuario pode preencher manualmente.
+5. Teste criando uma proposta em `/propostas/nova` e usando "Pesquisar empresa".
 
 ## Docker local
 
@@ -79,6 +122,8 @@ Suba o PostgreSQL local:
 ```bash
 npm run db:up
 ```
+
+Se aparecer `failed to connect to the docker API` ou `dockerDesktopLinuxEngine`, o **Docker Desktop nao esta aberto**. Abra o app Docker Desktop no Windows, espere iniciar completamente e rode `npm run db:up` de novo.
 
 Dados padrao:
 
@@ -99,6 +144,30 @@ npm run db:admin
 ```
 
 O `db:admin` sobe o Adminer em `http://localhost:8080`. No Adminer, use servidor `postgres`, usuario `postgres`, senha `postgres` e database `proposta_ai`.
+
+## Banco sem Docker (Supabase Postgres)
+
+Se nao quiser usar Docker local, use o PostgreSQL do projeto Supabase `propostaAI`:
+
+1. Abra [Supabase Database Settings](https://supabase.com/dashboard/project/auukxuxuwysgjmgewhhi/settings/database).
+2. Copie a **Database password** (ou redefina em *Reset database password*).
+3. Em **Connection string**, escolha **URI** e copie a string **Session pooler** ou **Direct connection**.
+4. Cole em `apps/api/.env`:
+
+```env
+DATABASE_URL=postgresql://postgres.auukxuxuwysgjmgewhhi:[SUA-SENHA]@aws-0-us-west-2.pooler.supabase.com:6543/postgres?pgbouncer=true
+DIRECT_DATABASE_URL=postgresql://postgres.auukxuxuwysgjmgewhhi:[SUA-SENHA]@aws-0-us-west-2.pooler.supabase.com:5432/postgres
+```
+
+5. Aplique as migrations:
+
+```bash
+npm run db:migrate
+```
+
+6. Reinicie a API e acesse `/onboarding` novamente.
+
+Para testar a conexao: `http://localhost:4000/api/health` deve retornar `{ "status": "ok", "database": "ok" }`.
 
 ## Supabase
 

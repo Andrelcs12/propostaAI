@@ -24,6 +24,7 @@
 }
 
 :root {
+  color-scheme: light;
   --background: #f8fafc;
   --foreground: #0f172a;
   --card: #ffffff;
@@ -33,7 +34,7 @@
   --secondary: #f1f5f9;
   --secondary-foreground: #0f172a;
   --muted: #f1f5f9;
-  --muted-foreground: #64748b;
+  --muted-foreground: #475569;
   --border: #e2e8f0;
   --input: #e2e8f0;
   --ring: #14b8a6;
@@ -42,19 +43,20 @@
 }
 
 .dark {
-  --background: oklch(0.16 0.016 255);
-  --foreground: oklch(0.97 0.006 95);
-  --card: oklch(0.2 0.018 255);
-  --card-foreground: oklch(0.97 0.006 95);
-  --primary: oklch(0.68 0.12 175);
-  --primary-foreground: oklch(0.12 0.018 255);
-  --secondary: oklch(0.25 0.02 255);
-  --secondary-foreground: oklch(0.97 0.006 95);
-  --muted: oklch(0.25 0.02 255);
-  --muted-foreground: oklch(0.74 0.02 255);
-  --border: oklch(0.3 0.024 255);
-  --input: oklch(0.3 0.024 255);
-  --ring: oklch(0.68 0.12 175);
+  color-scheme: dark;
+  --background: #070b10;
+  --foreground: #eef2f7;
+  --card: #0d1319;
+  --card-foreground: #eef2f7;
+  --primary: #14b8a6;
+  --primary-foreground: #042f2e;
+  --secondary: #111820;
+  --secondary-foreground: #eef2f7;
+  --muted: #151c24;
+  --muted-foreground: #a8b4c4;
+  --border: #1f2937;
+  --input: #1f2937;
+  --ring: #2dd4bf;
   --destructive: oklch(0.64 0.18 28);
 }
 
@@ -116,8 +118,104 @@ body {
   box-shadow: 0 18px 40px rgb(15 23 42 / 0.06);
 }
 
+.dark .landing-card:hover {
+  box-shadow: 0 18px 40px rgb(0 0 0 / 0.28);
+}
+
+.app-gradient-bg {
+  background:
+    radial-gradient(
+      circle at top,
+      color-mix(in oklch, var(--primary) 16%, transparent),
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at 85% 15%,
+      color-mix(in oklch, var(--primary) 12%, transparent),
+      transparent 24%
+    ),
+    var(--background);
+}
+
+.app-panel {
+  border: 1px solid color-mix(in oklch, var(--border) 88%, transparent);
+  background: color-mix(in oklch, var(--card) 92%, transparent);
+  box-shadow: 0 24px 80px rgb(0 0 0 / 0.12);
+}
+
+.dark .app-panel {
+  box-shadow: 0 24px 80px rgb(0 0 0 / 0.35);
+}
+
+a,
+button,
+summary,
+label[for],
+[role="button"] {
+  cursor: pointer;
+}
+
+input,
+textarea,
+select {
+  cursor: text;
+}
+
+button:disabled,
+[disabled] {
+  cursor: not-allowed;
+}
+
 .landing-float {
   animation: landing-float 7s ease-in-out infinite;
+}
+
+.landing-cta-glow {
+  box-shadow:
+    0 24px 80px rgb(15 118 110 / 0.08),
+    inset 0 1px 0 rgb(255 255 255 / 0.04);
+}
+
+.dark .landing-cta-glow {
+  box-shadow:
+    0 24px 80px rgb(0 0 0 / 0.35),
+    inset 0 1px 0 rgb(255 255 255 / 0.04);
+}
+
+.onboarding-step-track {
+  background: color-mix(in oklch, var(--foreground) 12%, var(--border));
+}
+
+.onboarding-step-pending {
+  border-color: color-mix(in oklch, var(--foreground) 18%, var(--border));
+  background: color-mix(in oklch, var(--card) 88%, var(--muted));
+  color: color-mix(in oklch, var(--foreground) 72%, var(--muted-foreground));
+}
+
+.onboarding-step-label-pending {
+  color: color-mix(in oklch, var(--foreground) 68%, var(--muted-foreground));
+}
+
+.onboarding-choice {
+  border: 1.5px solid color-mix(in oklch, var(--foreground) 14%, var(--border));
+  background: var(--card);
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.onboarding-choice:hover:not(:disabled) {
+  border-color: color-mix(in oklch, var(--primary) 40%, var(--border));
+  background: color-mix(in oklch, var(--primary) 4%, var(--card));
+}
+
+.onboarding-choice-active {
+  border-color: var(--primary);
+  background: color-mix(in oklch, var(--primary) 10%, var(--card));
+  box-shadow:
+    0 0 0 1px color-mix(in oklch, var(--primary) 28%, transparent),
+    0 10px 30px color-mix(in oklch, var(--primary) 12%, transparent);
 }
 
 @keyframes landing-float {
@@ -131,9 +229,50 @@ body {
   }
 }
 
+@keyframes proposal-flow-dash {
+  to {
+    stroke-dashoffset: -28;
+  }
+}
+
+@keyframes proposal-flow-pulse {
+  0%,
+  100% {
+    opacity: 0.18;
+  }
+
+  50% {
+    opacity: 0.45;
+  }
+}
+
+.proposal-flow-line {
+  animation:
+    proposal-flow-dash 1.2s linear infinite,
+    proposal-flow-pulse 2.4s ease-in-out infinite;
+}
+
+.proposal-flow-glow {
+  animation: proposal-flow-glow 2s ease-out infinite;
+}
+
+@keyframes proposal-flow-glow {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.45;
+  }
+
+  100% {
+    transform: scale(1.45);
+    opacity: 0;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .landing-card,
-  .landing-float {
+  .landing-float,
+  .proposal-flow-line,
+  .proposal-flow-glow {
     animation: none;
     transition: none;
   }
