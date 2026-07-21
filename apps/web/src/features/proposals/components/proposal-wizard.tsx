@@ -23,7 +23,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import type { Company } from "@/features/company/types/company";
+import { SegmentSelect } from "@/features/company/components/segment-select";
 import { getCurrentAccessToken } from "@/features/company/services/session-token.service";
+import { resolveBusinessSegment } from "@novely/shared";
 import { ToneSelector } from "./tone-selector";
 import {
   createEmptyInvestmentItem,
@@ -172,7 +174,8 @@ export function ProposalWizard({ company }: ProposalWizardProps) {
   async function handleSelectCandidate(candidate: CompanyCandidate) {
     updateField("clientName", candidate.name);
     if (candidate.website) updateField("clientWebsite", candidate.website);
-    if (candidate.segment) updateField("clientSegment", candidate.segment);
+    if (candidate.segment)
+      updateField("clientSegment", resolveBusinessSegment(candidate.segment));
     if (candidate.description)
       updateField("clientDescription", candidate.description);
 
@@ -185,7 +188,8 @@ export function ProposalWizard({ company }: ProposalWizardProps) {
         ...(candidate.sourceUrl ? { sourceUrls: [candidate.sourceUrl] } : {}),
       });
       setResearch(analysis);
-      if (analysis.segment) updateField("clientSegment", analysis.segment);
+      if (analysis.segment)
+        updateField("clientSegment", resolveBusinessSegment(analysis.segment));
       if (analysis.summary)
         updateField("clientDescription", analysis.summary);
       toast.success("Dados da empresa carregados.");
@@ -404,6 +408,12 @@ export function ProposalWizard({ company }: ProposalWizardProps) {
                 onChange={(e) => updateField("clientPhone", e.target.value)}
               />
             </div>
+            <SegmentSelect
+              id="clientSegment"
+              label="Segmento do cliente"
+              value={form.clientSegment}
+              onChange={(value) => updateField("clientSegment", value)}
+            />
             <div className="md:col-span-2 flex flex-wrap gap-2">
               <Button
                 type="button"

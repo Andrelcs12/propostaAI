@@ -1,4 +1,7 @@
 import { z } from "zod";
+import {
+  isValidBusinessSegment,
+} from "@novely/shared";
 
 const optionalText = (max: number) =>
   z
@@ -47,7 +50,11 @@ export const companyBasicSchema = z.object({
     .max(120, "Use no maximo 120 caracteres."),
   tradeName: optionalText(120),
   description: optionalText(300),
-  segment: optionalText(80),
+  segment: z
+    .string()
+    .trim()
+    .min(1, "Selecione um segmento.")
+    .refine(isValidBusinessSegment, "Selecione um segmento valido."),
   website: optionalUrl,
   commercialEmail: optionalEmail,
   whatsapp: optionalText(40),

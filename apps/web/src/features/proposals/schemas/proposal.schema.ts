@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { isValidBusinessSegment } from "@novely/shared";
 
 const optionalText = (max: number) =>
   z
@@ -55,7 +56,15 @@ export const createProposalSchema = z.object({
   clientContactName: optionalText(120),
   clientEmail: optionalEmail,
   clientPhone: optionalText(40),
-  clientSegment: optionalText(80),
+  clientSegment: z
+    .string()
+    .trim()
+    .optional()
+    .or(z.literal(""))
+    .refine(
+      (value) => !value || isValidBusinessSegment(value),
+      "Selecione um segmento valido.",
+    ),
   clientWebsite: optionalUrl,
   clientDescription: optionalText(1200),
   clientProblem: optionalText(1200),

@@ -3,6 +3,7 @@ import {
   IsDateString,
   IsEmail,
   IsEnum,
+  IsIn,
   IsObject,
   IsOptional,
   IsString,
@@ -12,6 +13,7 @@ import {
 } from "class-validator";
 import { Type } from "class-transformer";
 import { ProposalTone } from "../../../generated/prisma/enums";
+import { BUSINESS_SEGMENT_VALUES } from "../../../common/constants/business-segments";
 import {
   ProposalInvestmentItemDto,
   ProposalListItemDto,
@@ -42,6 +44,7 @@ export class UpdateProposalDto {
 
   @IsOptional()
   @IsString()
+  @IsIn(BUSINESS_SEGMENT_VALUES as unknown as string[])
   clientSegment?: string;
 
   @IsOptional()

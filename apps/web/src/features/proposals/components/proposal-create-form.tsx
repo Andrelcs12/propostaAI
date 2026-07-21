@@ -16,6 +16,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { SegmentSelectField } from "@/features/company/components/segment-select-field";
 import type { Company, ProposalTone } from "@/features/company/types/company";
 import { getCurrentAccessToken } from "@/features/company/services/session-token.service";
 import {
@@ -110,7 +111,12 @@ export function ProposalCreateForm({ company }: ProposalCreateFormProps) {
             />
             <TextField form={form} name="clientEmail" label="E-mail" />
             <TextField form={form} name="clientPhone" label="Telefone" />
-            <TextField form={form} name="clientSegment" label="Segmento" />
+            <SegmentSelectField
+              control={form.control}
+              name="clientSegment"
+              label="Segmento do cliente"
+              disabled={form.formState.isSubmitting}
+            />
             <TextField form={form} name="clientWebsite" label="Site ou rede social" />
           </div>
           <TextAreaField

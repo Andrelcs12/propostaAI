@@ -1,5 +1,6 @@
 import { Transform } from "class-transformer";
-import { IsEmail, IsOptional, IsString, IsUrl, Length } from "class-validator";
+import { IsEmail, IsIn, IsOptional, IsString, IsUrl, Length } from "class-validator";
+import { BUSINESS_SEGMENT_VALUES } from "../../common/constants/business-segments";
 
 function emptyToUndefined(value: unknown) {
   return typeof value === "string" && value.trim() === "" ? undefined : value;
@@ -22,11 +23,9 @@ export class UpdateCompanyBasicDto {
   @Length(1, 300)
   description?: string;
 
-  @IsOptional()
-  @Transform(({ value }) => emptyToUndefined(value))
   @IsString()
-  @Length(1, 80)
-  segment?: string;
+  @IsIn(BUSINESS_SEGMENT_VALUES as unknown as string[])
+  segment!: string;
 
   @IsOptional()
   @Transform(({ value }) => emptyToUndefined(value))

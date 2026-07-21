@@ -13,7 +13,9 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { resolveBusinessSegment } from "@novely/shared";
 import { Input } from "@/components/ui/input";
+import { SegmentSelectField } from "./segment-select-field";
 import {
   companyBasicSchema,
   type CompanyBasicInput,
@@ -41,7 +43,7 @@ export function CompanyBasicForm({
         tradeName: "Nome completo",
         tradeNamePlaceholder: "Ex: Lucas Almeida",
         segment: "Area de atuacao",
-        segmentPlaceholder: "Ex: Design UX/UI",
+        segmentPlaceholder: "Selecione um segmento",
         email: "E-mail profissional",
         emailPlaceholder: "contato@seudominio.com",
         website: "Site ou portfolio",
@@ -54,7 +56,7 @@ export function CompanyBasicForm({
         tradeName: "Nome comercial",
         tradeNamePlaceholder: "Ex: Proposta AI",
         segment: "Segmento de atuacao",
-        segmentPlaceholder: "Ex: Desenvolvimento de software",
+        segmentPlaceholder: "Selecione um segmento",
         email: "E-mail comercial",
         emailPlaceholder: "comercial@suaempresa.com",
         website: "Site",
@@ -68,7 +70,7 @@ export function CompanyBasicForm({
       name: company?.name ?? "",
       tradeName: company?.tradeName ?? "",
       description: company?.description ?? "",
-      segment: company?.segment ?? "",
+      segment: resolveBusinessSegment(company?.segment ?? ""),
       website: company?.website ?? "",
       commercialEmail: company?.commercialEmail ?? "",
       whatsapp: company?.whatsapp ?? "",
@@ -134,22 +136,12 @@ export function CompanyBasicForm({
               </FormItem>
             )}
           />
-          <FormField
+          <SegmentSelectField
             control={form.control}
             name="segment"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{labels.segment}</FormLabel>
-                <FormControl>
-                  <Input
-                    disabled={form.formState.isSubmitting}
-                    placeholder={labels.segmentPlaceholder}
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
+            label={labels.segment}
+            disabled={form.formState.isSubmitting}
+            required
           />
           <FormField
             control={form.control}

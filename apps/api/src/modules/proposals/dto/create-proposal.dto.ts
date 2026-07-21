@@ -4,6 +4,7 @@ import {
   IsDateString,
   IsEmail,
   IsEnum,
+  IsIn,
   IsNumber,
   IsOptional,
   IsString,
@@ -13,6 +14,7 @@ import {
   ValidateNested,
 } from "class-validator";
 import { ProposalTone } from "../../../generated/prisma/enums";
+import { BUSINESS_SEGMENT_VALUES } from "../../../common/constants/business-segments";
 
 function emptyToUndefined(value: unknown) {
   return typeof value === "string" && value.trim() === "" ? undefined : value;
@@ -102,7 +104,7 @@ export class CreateProposalDto {
   @IsOptional()
   @Transform(({ value }) => emptyToUndefined(value))
   @IsString()
-  @Length(1, 80)
+  @IsIn(BUSINESS_SEGMENT_VALUES as unknown as string[])
   clientSegment?: string;
 
   @IsOptional()

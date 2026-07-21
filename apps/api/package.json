@@ -22,6 +22,7 @@
     "@fastify/multipart": "^10.1.0",
     "@fastify/static": "^9.3.0",
     "@google/genai": "^2.12.0",
+    "@novely/shared": "*",
     "@nestjs/common": "^11.1.5",
     "@nestjs/config": "^4.0.2",
     "@nestjs/core": "^11.1.5",
